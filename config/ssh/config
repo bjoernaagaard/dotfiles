@@ -1,0 +1,26 @@
+# Shared SSH routing managed by mise.
+# Private keys, resident credentials, and machine-specific overrides stay out
+# of the repository.
+Include ~/.ssh/config.local
+
+Host ws
+  HostName workstation
+  HostKeyAlias 100.101.5.114
+  User bsaa
+  ForwardX11 yes
+
+Host router
+  HostName 192.168.1.1
+  User root
+
+Host nas
+  HostName dunewest
+  HostKeyAlias 192.168.1.209
+  User bsaa
+
+Host *
+  AddKeysToAgent yes
+  IdentityFile ~/.ssh/id_ed25519
+  IdentitiesOnly yes
+  ServerAliveInterval 60
+  ServerAliveCountMax 5

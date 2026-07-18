@@ -1,0 +1,34 @@
+{
+  "assetNodeOrError": {
+    "__typename": "AssetNode",
+    "id": "asset-1",
+    "assetKey": { "path": ["orders", "daily"] },
+    "description": "Daily orders rollup",
+    "groupName": "analytics",
+    "jobNames": ["analytics_job"],
+    "kinds": ["dbt"],
+    "isPartitioned": true,
+    "isMaterializable": true,
+    "isObservable": false,
+    "computeKind": "dbt",
+    "owners": [
+      { "__typename": "UserAssetOwner", "email": "data@example.com" },
+      { "__typename": "TeamAssetOwner", "team": "analytics" }
+    ],
+    "dependencyKeys": [{ "path": ["orders", "raw"] }],
+    "dependedByKeys": [{ "path": ["orders", "weekly"] }],
+    "repository": {
+      "name": "__repository__",
+      "location": { "name": "local" }
+    },
+    "assetMaterializations": [
+      {
+        "runId": "run-abc",
+        "timestamp": "1710000000.0",
+        "partition": "2024-01-01",
+        "stepKey": "orders_daily"
+      }
+    ],
+    "freshnessStatusInfo": { "freshnessStatus": "HEALTHY" }
+  }
+}

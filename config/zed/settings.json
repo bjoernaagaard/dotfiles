@@ -1,0 +1,119 @@
+{
+  "icon_theme": "Warm Charmed Icons",
+  "theme": "Everforest Dark Hard (material)",
+  "cli_default_open_behavior": "new_window",
+  "proxy": "",
+  "colorize_brackets": true,
+  "code_lens": "on",
+  "toolbar": {"code_actions": true, "quick_actions": false},
+  "show_signature_help_after_edits": true,
+  "auto_signature_help": true,
+  "redact_private_values": true,
+  "session": {"trust_all_worktrees": true},
+  "status_bar": {"experimental.show": true},
+  "gutter": {"min_line_number_digits": 0, "folds": false, "runnables": false},
+  "multi_cursor_modifier": "cmd_or_ctrl",
+  "cursor_shape": "bar",
+  "cursor_blink": true,
+  "use_system_window_tabs": true,
+  "buffer_font_fallbacks": ["Maple Mono NF", "MesloLGS NF", "CaskaydiaMono Nerd Font Mono"],
+  "show_whitespaces": "all",
+  "show_edit_predictions": false,
+  "hard_tabs": true,
+  "git_panel": {"tree_view": true, "dock": "right"},
+  "hover_popover_enabled": true,
+  "selection_highlight": false,
+  "drag_and_drop_selection": {"enabled": false},
+  "seed_search_query_from_cursor": "never",
+  "current_line_highlight": "none",
+  "base_keymap": "VSCode",
+  "ui_font_size": 14,
+  "buffer_font_size": 14.5,
+  "file_finder": {"modal_max_width": "large"},
+  "buffer_font_family": "Maple Mono NF",
+  "relative_line_numbers": "enabled",
+  "tab_bar": {"show": true},
+  "scrollbar": {"show": "never"},
+  "tabs": {"show_diagnostics": "errors"},
+  "indent_guides": {"enabled": true, "coloring": "indent_aware"},
+  "centered_layout": {"left_padding": 0.15, "right_padding": 0.15},
+  "agent": {
+    "sidebar_side"    : "right",
+    "default_profile" : "write",
+    "dock"            : "right",
+    "tool_permissions": {
+      "tools": { "fetch": {"default": "allow"}, "terminal": {"default": "allow"} }
+    },
+    "model_parameters": []
+  },
+  "inlay_hints": {"enabled": true},
+  "lsp": {
+    "fractured-json"             : { "settings": {"AllowTrailingCommas": true} },
+    "tailwindcss-language-server": {
+      "settings": { "classAttributes": ["class", "className", "ngClass", "styles"] }
+    }
+  },
+  "languages": {
+    "XML"       : {"format_on_save": "on"},
+    "TOML"      : {"format_on_save": "on"},
+    "JSON"      : {"format_on_save": "on", "formatter": "language_server"},
+    "JSONC"     : {"format_on_save": "on", "formatter": "language_server"},
+    "YAML"      : {"format_on_save": "on"},
+    "TypeScript": {
+      "show_whitespaces"     : "all",
+      "show_edit_predictions": false,
+      "hard_tabs"            : true,
+      "inlay_hints"          : {
+        "enabled"             : true,
+        "show_parameter_hints": false,
+        "show_other_hints"    : true,
+        "show_type_hints"     : true
+      }
+    },
+    "Python"    : {
+      "show_whitespaces"     : "all",
+      "show_edit_predictions": false,
+      "hard_tabs"            : true,
+      "format_on_save"       : "on",
+      "formatter"            : { "language_server": {"name": "ruff"} },
+      "language_servers"     : ["ty", "ruff", "!basedpyright", "!pyrefly", "!pyright", "!pylsp"]
+    }
+  },
+  "terminal": {
+    "show_count_badge": true,
+    "font_size"       : 14,
+    "font_family"     : "Maple Mono NF",
+    "env"             : {"EDITOR": "zed --wait"}
+  },
+  "file_types": { "Dockerfile": ["Dockerfile", "Dockerfile.*"], "JSON": ["json", "jsonc", "*.code-snippets"] },
+  "telemetry": {"diagnostics": true, "metrics": false},
+  "project_panel": {
+    "dock"          : "right",
+    "default_width" : 300,
+    "hide_root"     : false,
+    "auto_fold_dirs": true,
+    "starts_open"   : false,
+    "git_status"    : false,
+    "sticky_scroll" : false,
+    "scrollbar"     : {"show": "never"},
+    "indent_guides" : {"show": "never"}
+  },
+  "outline_panel": { "default_width": 300, "indent_guides": {"show": "never"} },
+  "collaboration_panel": {"dock": "right"},
+  "autosave": { "after_delay": {"milliseconds": 1000} },
+  "title_bar": {
+    "show_onboarding_banner": false,
+    "show_project_items"    : false,
+    "show_branch_name"      : false,
+    "show_user_menu"        : false
+  },
+  "file_scan_exclusions": [
+    "**/.git",            "**/.svn",            "**/.hg",             "**/.jj",             "**/CVS",
+    "**/.DS_Store",       "**/Thumbs.db",       "**/.classpath",      "**/.settings",       "Library",
+    ".Trash",             ".cache",             ".bun",               ".cargo",             ".npm",
+    ".rustup",            ".vscode/extensions", ".copilot",           "**/node_modules",    "**/.venv",
+    "**/venv",            "**/__pycache__",     "**/.pytest_cache",   "**/.ruff_cache",     "**/*.egg-info",
+    "**/dist",            "**/out",             "**/.next",           "**/.turbo",          "**/.nyc_output",
+    "**/report",          "**/.husky",          "**/.vscode-test",    "**/.storybook",      "**/.tap"
+  ]
+}

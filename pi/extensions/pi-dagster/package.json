@@ -1,0 +1,43 @@
+{
+  "name": "pi-dagster",
+  "version": "0.1.0",
+  "type": "module",
+  "keywords": ["pi-package", "dagster"],
+  "peerDependencies": {
+    "@earendil-works/pi-ai": "*",
+    "@earendil-works/pi-agent-core": "*",
+    "@earendil-works/pi-coding-agent": "*",
+    "@earendil-works/pi-tui": "*",
+    "typebox": "*"
+  },
+  "dependencies": {
+    "graphql": "^16.0.0",
+    "graphql-ws": "^6.0.0"
+  },
+  "devDependencies": {
+    "@earendil-works/pi-ai": "0.80.8",
+    "@earendil-works/pi-agent-core": "0.80.8",
+    "@earendil-works/pi-coding-agent": "0.80.8",
+    "@earendil-works/pi-tui": "0.80.8",
+    "@types/node": "^24.0.0",
+    "typebox": "1.1.38",
+    "typescript": "^5.9.0",
+    "vitest": "^4.0.0"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "schema:check": "node --experimental-strip-types scripts/check-schema.ts",
+    "check": "npm run typecheck && npm test && npm run schema:check"
+  },
+  "pi": {
+    "extensions": [
+      "./extensions/core.ts",
+      "./extensions/remote.ts",
+      "./extensions/provider.ts"
+    ],
+    "prompts": ["./prompts"],
+    "themes": ["./themes"]
+  }
+}

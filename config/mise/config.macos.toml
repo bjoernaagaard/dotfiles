@@ -1,0 +1,53 @@
+[bootstrap.packages]
+"brew:git" = "latest"
+"brew:gnu-getopt" = "latest"
+"brew:gnu-tar" = "latest"
+"brew:htop" = "latest"
+"brew:mosh" = "latest"
+"brew:openssh" = "latest"
+"brew:pinentry-mac" = "latest"
+"brew:wakeonlan" = "latest"
+"brew:yubico-piv-tool" = "latest"
+"brew:tailscale" = "latest"
+"brew:mole" = "latest"
+"brew:glow" = "latest"
+"brew:git-delta" = "latest"
+"brew:zsh" = "latest"
+"brew:cloudflared" = "latest"
+"brew:rage" = "latest"
+
+"brew-cask:font-maple-mono-nf" = "latest"
+"brew-cask:font-maple-mono" = "latest"
+"brew-cask:ghostty" = "latest"
+"brew-cask:bitwarden" = "latest"
+"brew-cask:alacritty" = "latest"
+"brew-cask:visual-studio-code" = "latest"
+"brew-cask:telegram" = "latest"
+"brew-cask:signal" = "latest"
+"brew-cask:spotify" = "latest"
+"brew-cask:stats" = "latest"
+"brew-cask:handy" = "latest"
+"brew-cask:alt-tab" = "latest"
+"brew-cask:bettermouse" = "latest"
+"brew-cask:chatgpt" = "latest"
+"brew-cask:rectangle-pro" = "latest"
+"brew-cask:karabiner-elements" = "latest"
+"brew-cask:zed" = "latest"
+"brew-cask:zen" = "latest"
+
+
+[bootstrap.macos.keyboard]
+key_repeat = 1
+initial_key_repeat = 10
+press_and_hold = false
+
+[bootstrap.macos.launchd.agents.caps-lock-delay]
+program = "/usr/bin/hidutil"
+args = ["property", "--set", '{"CapsLockDelayOverride":0}']
+run_at_load = true
+kickstart = true
+
+[dotfiles]
+"~/.config/karabiner/karabiner.json" = { source = "~/.dotfiles/config/karabiner/karabiner.json", mode = "symlink" }
+"~/Library/Application Support/Code/User/settings.json" = { source = "~/.dotfiles/Library/Application Support/Code/User/settings.json", mode = "symlink" }
+"~/Library/Application Support/Code/User/keybindings.json" = { source = "~/.dotfiles/Library/Application Support/Code/User/keybindings.json", mode = "symlink" }

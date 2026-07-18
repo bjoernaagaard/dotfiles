@@ -1,0 +1,1 @@
+# ~/.zprofile — runs once per login shell

@@ -1,0 +1,18 @@
+[
+  {"context": "Workspace", "bindings": {}},
+  {
+    "context" : "Editor",
+    "bindings": {
+      "secondary-1"         : [ "editor::ToggleComments", {"advance_downwards": false} ],
+      "cmd-/"               : null,
+      "ctrl-/"              : null,
+      "cmd-shift-7"         : null,
+      "secondary-up"        : [ "editor::MoveUpByLines", {"lines": 15} ],
+      "secondary-down"      : [ "editor::MoveDownByLines", {"lines": 15} ],
+      "secondary-shift-up"  : [ "editor::SelectUpByLines", {"lines": 15} ],
+      "secondary-shift-down": [ "editor::SelectDownByLines", {"lines": 15} ],
+      "ctrl-<"              : "debugger::EvaluateSelectedText",
+      "cmd-<"               : "debugger::EvaluateSelectedText"
+    }
+  }
+]

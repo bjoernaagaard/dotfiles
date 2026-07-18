@@ -1,0 +1,8 @@
+# Linux packages: add as needed, e.g.
+# [bootstrap.packages]
+# "apt:build-essential" = "latest"
+# "apt:libssl-dev" = "latest"
+
+[dotfiles]
+"~/.config/Code/User/settings.json" = { source = "~/.dotfiles/Library/Application Support/Code/User/settings.json", mode = "symlink" }
+"~/.config/Code/User/keybindings.json" = { source = "~/.dotfiles/Library/Application Support/Code/User/keybindings.json", mode = "symlink" }

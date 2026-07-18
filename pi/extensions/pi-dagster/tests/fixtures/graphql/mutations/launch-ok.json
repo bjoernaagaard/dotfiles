@@ -1,0 +1,14 @@
+{
+  "data": {
+    "launchRun": {
+      "__typename": "LaunchRunSuccess",
+      "run": {
+        "id": "Run:abc",
+        "runId": "abc-123",
+        "status": "STARTING",
+        "pipelineName": "my_job",
+        "jobName": "my_job"
+      }
+    }
+  }
+}

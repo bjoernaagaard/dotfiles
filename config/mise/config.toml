@@ -1,0 +1,118 @@
+[settings]
+experimental = true
+python.uv_venv_auto = "create|source"
+env_shell_expand = true
+minimum_release_age = "0s"
+dotfiles.root = "~/.dotfiles"
+dotfiles.default_mode = "symlink"
+
+
+[bootstrap.user]
+login_shell = "/bin/zsh"
+
+[bootstrap.packages]
+
+[tools]
+bat = "latest"
+fzf = "latest"
+fd = "latest"
+rg = "latest"
+go = "latest"
+sheldon = "latest"
+zoxide = "latest"
+neovim = "latest"
+gh = "latest"
+glab = "latest"
+jq = "latest"
+yq = "latest"
+lazygit = "latest"
+difftastic = "latest"
+shellcheck = "latest"
+fastfetch = "latest"
+yazi = "latest"
+bun = "latest"
+uv = "latest"
+ast-grep = "latest"
+yamlfmt = "latest"
+starship = "latest"
+ffmpeg = "latest"
+usage = "latest"
+portless = "latest"
+pitchfork = "latest"
+fnox = "latest"
+resvg = "latest"
+caddy = "latest"
+"cargo:mergiraf" = "latest"
+deno = "latest"
+doggo = "latest"
+node = "lts"
+oha = "latest"
+pnpm = "latest"
+rust = "latest"
+scooter = "latest"
+yt-dlp = "latest"
+rclone = "latest"
+age-plugin-yubikey = "latest"
+coreutils = "latest"
+imagemagick = "latest"
+pandoc = "latest"
+protobuf = "latest"
+redis = "latest"
+rtk = "latest"
+"aqua:gastownhall/beads" = "latest"
+"npm:@bitwarden/cli" = "latest"
+"npm:@llamaindex/liteparse" = "latest"
+"npm:beautiful-mermaid-cli" = "latest"
+"npm:pi-acp" = "latest"
+"npm:vscode-langservers-extracted" = "latest"
+"npm:localtunnel" = "latest"
+"npm:@tobilu/qmd" = "latest"
+"npm:@openai/codex" = { version = "latest", npm_args = "--ignore-scripts=true" }
+"npm:droid" = { version = "latest", npm_args = "--ignore-scripts=true" }
+"npm:wrangler" = { version = "latest", npm_args = "--ignore-scripts=true" }
+"cargo:eza" = "latest"
+"npm:@inkeep/open-knowledge" = "latest"
+"npm:@colbymchenry/codegraph" = "latest"
+"pipx:pyrefly" = "latest"
+"pipx:ty" = "latest"
+"pipx:ruff" = "latest"
+"npm:oxlint" = "latest"
+"npm:oxfmt" = "latest"
+"npm:fjson-fmt" = "latest"
+carapace = "latest"
+
+[dotfiles]
+# mise self-config
+"~/.config/mise/miserc.toml" = { source = "~/.dotfiles/config/mise/miserc.toml", mode = "symlink" }
+"~/.config/mise/config.toml" = { source = "~/.dotfiles/config/mise/config.toml", mode = "symlink" }
+"~/.config/mise/config.macos.toml" = { source = "~/.dotfiles/config/mise/config.macos.toml", mode = "symlink" }
+"~/.config/mise/config.linux.toml" = { source = "~/.dotfiles/config/mise/config.linux.toml", mode = "symlink" }
+
+# shell
+"~/.zshrc" = { source = "~/.dotfiles/.zshrc", mode = "symlink" }
+"~/.zshenv" = { source = "~/.dotfiles/.zshenv", mode = "symlink" }
+"~/.zprofile" = { source = "~/.dotfiles/.zprofile", mode = "symlink" }
+"~/.config/zsh" = { source = "~/.dotfiles/config/zsh", mode = "symlink" }
+
+# shared apps
+"~/.ssh/config" = { source = "~/.dotfiles/config/ssh/config", mode = "symlink" }
+"~/.gitconfig" = { source = "~/.dotfiles/.gitconfig", mode = "symlink" }
+"~/.config/starship.toml" = { source = "~/.dotfiles/config/starship.toml", mode = "symlink" }
+"~/.config/alacritty/alacritty.toml" = { source = "~/.dotfiles/config/alacritty/alacritty.toml", mode = "symlink" }
+"~/.config/sheldon/plugins.toml" = { source = "~/.dotfiles/config/sheldon/plugins.toml", mode = "symlink" }
+"~/.config/zed/settings.json" = { source = "~/.dotfiles/config/zed/settings.json", mode = "symlink" }
+"~/.config/zed/keymap.json" = { source = "~/.dotfiles/config/zed/keymap.json", mode = "symlink" }
+"~/.config/fnox/config.toml" = { source = "~/.dotfiles/config/fnox/config.toml", mode = "symlink" }
+"~/.config/herdr/config.toml" = { source = "~/.dotfiles/config/herdr/config.toml", mode = "symlink" }
+"~/.config/ghostty/config" = { source = "~/.dotfiles/config/ghostty/config", mode = "symlink" }
+
+# agent skills (one source, many targets)
+"~/.agents/skills" = { source = "~/.dotfiles/skills", mode = "symlink" }
+"~/.claude/skills" = { source = "~/.dotfiles/skills", mode = "symlink" }
+"~/.omp/agent/skills" = { source = "~/.dotfiles/skills", mode = "symlink" }
+"~/.factory/skills" = { source = "~/.dotfiles/skills", mode = "symlink" }
+"~/.pi/agent/skills" = { source = "~/.dotfiles/skills", mode = "symlink" }
+"~/.pi/agent/prompts" = { source = "~/.dotfiles/pi/prompts", mode = "symlink" }
+"~/.pi/agent/extensions" = { source = "~/.dotfiles/pi/extensions", mode = "symlink" }
+"~/.pi/agent/settings.json" = { source = "~/.dotfiles/pi/settings.json", mode = "symlink" }
+"~/.pi/agent/pi-lsp.json" = { source = "~/.dotfiles/pi/pi-lsp.json", mode = "symlink" }

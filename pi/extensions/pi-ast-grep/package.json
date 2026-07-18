@@ -1,0 +1,36 @@
+{
+  "name": "pi-ast-grep-private",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Private ast-grep structural tools and one-process native codemod apply for Pi",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "pi": {
+    "extensions": [
+      "./extensions/ast-grep/index.ts"
+    ]
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "test": "node --import tsx --test tests/*.test.ts",
+    "test:integration": "node --import tsx --test tests/integration.test.ts",
+    "benchmark": "node --import tsx bench/apply-core.bench.ts",
+    "check": "npm run typecheck && npm test"
+  },
+  "dependencies": {
+    "@earendil-works/pi-ai": "0.80.9",
+    "@earendil-works/pi-coding-agent": "0.80.9",
+    "@earendil-works/pi-tui": "0.80.9",
+    "typebox": "1.1.38"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.0",
+    "tsx": "^4.20.0",
+    "typescript": "^5.9.0"
+  },
+  "engines": {
+    "node": ">=22.5 <25"
+  }
+}

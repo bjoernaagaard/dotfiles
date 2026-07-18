@@ -1,0 +1,27 @@
+shell = "zsh"
+
+[plugins.zsh-autosuggestions]
+github = "zsh-users/zsh-autosuggestions"
+profiles = ["post-compinit"]
+
+[plugins.zsh-completions]
+github = "zsh-users/zsh-completions"
+profiles = ["pre-compinit"]
+
+[plugins.zsh-history-substring-search]
+github = "zsh-users/zsh-history-substring-search"
+profiles = ["post-compinit"]
+
+[plugins.zsh-abbr]
+github = "olets/zsh-abbr"
+profiles = ["post-compinit"]
+
+[plugins.forgit]
+github = "wfxr/forgit"
+use = ["forgit.plugin.zsh"]
+apply = ["source"]
+profiles = ["post-compinit"]
+
+[plugins.zsh-syntax-highlighting]
+github = "zsh-users/zsh-syntax-highlighting"
+profiles = ["post-compinit"]

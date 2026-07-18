@@ -1,0 +1,16 @@
+{
+  "version": "1.9.0",
+  "permissions": [
+    { "permission": "launch_pipeline_execution", "value": true, "disabledReason": null },
+    { "permission": "terminate_pipeline_execution", "value": true, "disabledReason": null },
+    { "permission": "wipe_assets", "value": false, "disabledReason": "Viewer role" }
+  ],
+  "canBulkTerminate": true,
+  "locationStatusesOrError": {
+    "__typename": "WorkspaceLocationStatusEntries",
+    "entries": [
+      { "name": "local", "loadStatus": "LOADED" },
+      { "name": "broken", "loadStatus": "LOADING" }
+    ]
+  }
+}

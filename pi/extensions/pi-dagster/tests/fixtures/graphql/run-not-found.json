@@ -1,0 +1,7 @@
+{
+  "runOrError": {
+    "__typename": "RunNotFoundError",
+    "message": "Run xyz not found",
+    "runId": "xyz"
+  }
+}

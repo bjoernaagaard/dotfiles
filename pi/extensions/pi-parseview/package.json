@@ -1,0 +1,78 @@
+{
+  "name": "@juvio15/pi-parseview",
+  "version": "0.1.0",
+  "description": "Lazy Pi tools for cache-backed document parsing, bounded retrieval, canonical Mermaid diagrams, and rendered previews.",
+  "keywords": [
+    "diagram",
+    "extension",
+    "liteparse",
+    "markdown",
+    "mermaid",
+    "parser",
+    "pdf",
+    "pi",
+    "pi-coding-agent",
+    "pi-package",
+    "preview"
+  ],
+  "homepage": "https://gitlab.com/juvio/pi-parseview#readme",
+  "bugs": {
+    "url": "https://gitlab.com/juvio/pi-parseview/issues"
+  },
+  "license": "MIT",
+  "author": "Bjørn Aagaard",
+  "repository": {
+    "type": "git",
+    "url": "git+https://gitlab.com/juvio/pi-parseview.git"
+  },
+  "files": [
+    "index.ts",
+    "src",
+    "types.ts",
+    "README.md",
+    "REFERENCE.md"
+  ],
+  "type": "module",
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "test": "vp test run",
+    "test:watch": "vp test watch",
+    "check": "vp check",
+    "lint": "vp lint",
+    "fmt": "vp fmt",
+    "pack": "vp pack index.ts"
+  },
+  "dependencies": {
+    "@llamaindex/liteparse": "2.6.0",
+    "beautiful-mermaid": "^1.0.0",
+    "marked": "^15.0.12",
+    "marked-katex-extension": "^5.1.10",
+    "puppeteer-core": "^24.0.0"
+  },
+  "devDependencies": {
+    "@earendil-works/pi-ai": "0.80.8",
+    "@earendil-works/pi-coding-agent": "0.80.8",
+    "@earendil-works/pi-tui": "0.80.8",
+    "@types/node": "^26.1.0",
+    "@voidzero-dev/vite-plus-core": "^0.2.1",
+    "typebox": "1.1.38",
+    "typescript": "^5.6.0",
+    "vite-plus": "^0.2.1"
+  },
+  "peerDependencies": {
+    "@earendil-works/pi-ai": "*",
+    "@earendil-works/pi-coding-agent": "*",
+    "@earendil-works/pi-tui": "*",
+    "typebox": "*"
+  },
+  "engines": {
+    "node": ">=22.19.0"
+  },
+  "pi": {
+    "extensions": [
+      "./index.ts"
+    ]
+  }
+}

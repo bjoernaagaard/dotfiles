@@ -1,0 +1,18 @@
+{
+  "pyrefly": { "command": ["pyrefly", "lsp"], "extensions": [".py", ".pyi"] },
+  "ruff"   : { "command": ["ruff", "server"], "extensions": [".py", ".pyi"] },
+  "oxlint" : {
+    "command"   : ["oxlint", "--lsp"],
+    "extensions": [
+      ".astro",   ".css",     ".graphql", ".gql",     ".html",    ".js",      ".jsx",     ".json",    ".jsonc",
+      ".ts",      ".tsx",     ".vue"
+    ]
+  },
+  "oxfmt"  : {
+    "command"   : ["oxfmt", "--lsp"],
+    "extensions": [
+      ".astro",   ".css",     ".graphql", ".gql",     ".html",    ".js",      ".jsx",     ".json",    ".jsonc",
+      ".ts",      ".tsx",     ".vue"
+    ]
+  }
+}

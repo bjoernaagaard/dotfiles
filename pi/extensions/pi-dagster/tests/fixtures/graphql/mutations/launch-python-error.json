@@ -1,0 +1,9 @@
+{
+  "data": {
+    "launchRun": {
+      "__typename": "PythonError",
+      "message": "boom",
+      "stack": ["line1"]
+    }
+  }
+}

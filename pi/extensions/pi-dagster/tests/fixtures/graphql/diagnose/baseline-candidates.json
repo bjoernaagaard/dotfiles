@@ -1,0 +1,35 @@
+{
+  "runsOrError": {
+    "__typename": "Runs",
+    "results": [
+      {
+        "__typename": "Run",
+        "runId": "success-old",
+        "status": "SUCCESS",
+        "jobName": "daily_job",
+        "pipelineName": "daily_job",
+        "startTime": 100,
+        "endTime": 110,
+        "rootRunId": "success-old",
+        "parentRunId": null,
+        "repositoryOrigin": { "repositoryName": "repo", "repositoryLocationName": "loc" },
+        "tags": [{ "key": "dagster/partition", "value": "2026-01-01" }],
+        "assetSelection": [{ "path": ["warehouse", "orders"] }]
+      },
+      {
+        "__typename": "Run",
+        "runId": "retry-same-family",
+        "status": "SUCCESS",
+        "jobName": "daily_job",
+        "pipelineName": "daily_job",
+        "startTime": 205,
+        "endTime": 215,
+        "rootRunId": "failed-1",
+        "parentRunId": "failed-1",
+        "repositoryOrigin": { "repositoryName": "repo", "repositoryLocationName": "loc" },
+        "tags": [{ "key": "dagster/partition", "value": "2026-01-01" }],
+        "assetSelection": [{ "path": ["warehouse", "orders"] }]
+      }
+    ]
+  }
+}

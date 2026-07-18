@@ -1,0 +1,47 @@
+{
+  "name": "pi-codegraph",
+  "version": "0.2.0",
+  "description": "Embedded CodeGraph tools for the Pi coding agent",
+  "type": "module",
+  "license": "MIT",
+  "keywords": [
+    "pi-package",
+    "pi",
+    "codegraph",
+    "static-analysis"
+  ],
+  "files": [
+    "extensions",
+    "scripts",
+    "docs",
+    "README.md",
+    "LICENSE"
+  ],
+  "pi": {
+    "extensions": [
+      "./extensions/index.ts"
+    ]
+  },
+  "engines": {
+    "node": ">=22.5 <25"
+  },
+  "dependencies": {
+    "@colbymchenry/codegraph": "1.4.1"
+  },
+  "peerDependencies": {
+    "@earendil-works/pi-coding-agent": ">=0.80.8 <0.81",
+    "typebox": ">=1.0.0 <2"
+  },
+  "devDependencies": {
+    "@earendil-works/pi-coding-agent": "0.80.9",
+    "@types/node": "^24.0.0",
+    "typebox": "^1.0.0",
+    "typescript": "^5.8.0"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "test": "node --test __tests__/**/*.test.ts",
+    "smoke": "node ./scripts/smoke.mjs",
+    "bench": "node ./scripts/bench/embedded.mjs"
+  }
+}

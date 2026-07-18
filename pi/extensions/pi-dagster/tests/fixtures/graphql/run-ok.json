@@ -1,0 +1,28 @@
+{
+  "runOrError": {
+    "__typename": "Run",
+    "runId": "run-123",
+    "status": "FAILURE",
+    "jobName": "analytics_job",
+    "pipelineName": "analytics_job",
+    "startTime": 1710000000,
+    "endTime": 1710000100,
+    "creationTime": 1709999990,
+    "mode": "default",
+    "canTerminate": false,
+    "hasReExecutePermission": true,
+    "hasTerminatePermission": true,
+    "hasDeletePermission": false,
+    "rootRunId": null,
+    "parentRunId": null,
+    "tags": [
+      { "key": "dagster/solid_selection", "value": "*" },
+      { "key": "password", "value": "should-not-matter-for-tags" }
+    ],
+    "assetSelection": [{ "path": ["orders", "daily"] }],
+    "runConfigYaml": "ops:\n  my_op:\n    config:\n      password: s3cret\n      api_key: abc123\n      table: orders\n",
+    "stepStats": [
+      { "stepKey": "orders_daily", "status": "FAILURE", "startTime": 1710000001, "endTime": 1710000099 }
+    ]
+  }
+}

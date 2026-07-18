@@ -1,0 +1,120 @@
+# Dagster OSS GraphQL root surface
+
+Source: `schema.graphql`
+
+## Query (65)
+
+- `version`
+- `repositoriesOrError`
+- `repositoryOrError`
+- `workspaceOrError`
+- `locationStatusesOrError`
+- `workspaceLocationEntryOrError`
+- `pipelineOrError`
+- `resourcesOrError`
+- `pipelineSnapshotOrError`
+- `graphOrError`
+- `scheduler`
+- `scheduleOrError`
+- `schedulesOrError`
+- `topLevelResourceDetailsOrError`
+- `allTopLevelResourceDetailsOrError`
+- `utilizedEnvVarsOrError`
+- `sensorOrError`
+- `sensorsOrError`
+- `instigationStateOrError`
+- `instigationStatesOrError`
+- `partitionSetsOrError`
+- `partitionSetOrError`
+- `pipelineRunsOrError`
+- `pipelineRunOrError`
+- `runsOrError`
+- `runOrError`
+- `runsFeedOrError`
+- `runsFeedCountOrError`
+- `runTagKeysOrError`
+- `runTagsOrError`
+- `runIdsOrError`
+- `runGroupOrError`
+- `isPipelineConfigValid`
+- `executionPlanOrError`
+- `runConfigSchemaOrError`
+- `instance`
+- `assetsOrError`
+- `assetRecordsOrError`
+- `assetOrError`
+- `assetNodes`
+- `assetNodeOrError`
+- `assetNodeAdditionalRequiredKeys`
+- `assetNodeDefinitionCollisions`
+- `partitionBackfillOrError`
+- `assetBackfillPreview`
+- `partitionBackfillsOrError`
+- `permissions`
+- `canBulkTerminate`
+- `assetsLatestInfo`
+- `logsForRun`
+- `capturedLogsMetadata`
+- `capturedLogs`
+- `shouldShowNux`
+- `test`
+- `autoMaterializeAssetEvaluationsOrError`
+- `truePartitionsForAutomationConditionEvaluationNode`
+- `autoMaterializeEvaluationsForEvaluationId`
+- `assetConditionEvaluationForPartition`
+- `assetConditionEvaluationRecordsOrError`
+- `assetConditionEvaluationsForEvaluationId`
+- `autoMaterializeTicks`
+- `assetCheckExecutions`
+- `latestDefsStateInfo`
+- `appManagedComponentsForLocationOrError`
+- `componentTypesForLocationOrError`
+
+## Mutation (40)
+
+- `launchPipelineExecution`
+- `launchRun`
+- `launchMultipleRuns`
+- `launchPipelineReexecution`
+- `launchRunReexecution`
+- `startSchedule`
+- `stopRunningSchedule`
+- `resetSchedule`
+- `startSensor`
+- `setSensorCursor`
+- `stopSensor`
+- `resetSensor`
+- `sensorDryRun`
+- `scheduleDryRun`
+- `terminatePipelineExecution`
+- `terminateRun`
+- `terminateRuns`
+- `deletePipelineRun`
+- `deleteRun`
+- `reloadRepositoryLocation`
+- `reloadWorkspace`
+- `shutdownRepositoryLocation`
+- `wipeAssets`
+- `reportRunlessAssetEvents`
+- `reportAssetCheckEvaluations`
+- `launchPartitionBackfill`
+- `resumePartitionBackfill`
+- `reexecutePartitionBackfill`
+- `cancelPartitionBackfill`
+- `logTelemetry`
+- `setNuxSeen`
+- `addDynamicPartition`
+- `deleteDynamicPartitions`
+- `setAppManagedComponent`
+- `deleteAppManagedComponent`
+- `setAutoMaterializePaused`
+- `setConcurrencyLimit`
+- `deleteConcurrencyLimit`
+- `freeConcurrencySlotsForRun`
+- `freeConcurrencySlots`
+
+## Subscription (3)
+
+- `pipelineRunLogs`
+- `capturedLogs`
+- `locationStateChangeEvents`

@@ -1,0 +1,116 @@
+[general]
+live_config_reload = true
+
+[window]
+title = "Alacritty"
+decorations = "Full"
+option_as_alt = "None"
+blur = true
+opacity = 0.94
+padding.x = 10
+padding.y = 10
+dynamic_padding = true
+startup_mode = "Windowed"
+dynamic_title = true
+resize_increments = true
+
+[scrolling]
+history = 100000
+multiplier = 3
+
+[window.dimensions]
+columns = 160
+lines = 80
+
+[cursor.style]
+shape = "Beam"
+blinking = "Never"
+
+[colors]
+transparent_background_colors = true
+draw_bold_text_with_bright_colors = false
+
+[terminal]
+osc52 = "CopyPaste"
+
+[font]
+size = 14.0
+
+[font.normal]
+family = "MesloLGS NF"
+
+
+[mouse]
+hide_when_typing = false
+bindings = [{ mouse = "Right", mods = "Control", action = "Paste" }]
+
+[selection]
+semantic_escape_chars = ",│`|:\"' ()[]{}<>\t"
+save_to_clipboard = true
+
+[keyboard]
+bindings = [
+    { key = "Back", mods = "Control", chars = "\u001B\u007F" },
+    { key = "Back", mods = "Command", chars = "\u0015" },
+    # { key = "Return", mods = "Shift", chars = "\u001B\r" },
+    { key = "Return", mods = "Control", action = "ToggleFullscreen" },
+    # { key = "V", mods = "Control", action = "Paste" },  # disabled so Pi can receive Ctrl+V for image paste
+    { key = "Plus", mods = "Control", action = "IncreaseFontSize" },
+    { key = "Minus", mods = "Control", action = "DecreaseFontSize" },
+    { key = "F11", action = "ToggleFullscreen" },
+    { key = "Numpad0", chars = "0" },
+    { key = "Numpad1", chars = "1" },
+    { key = "Numpad2", chars = "2" },
+    { key = "Numpad3", chars = "3" },
+    { key = "Numpad4", chars = "4" },
+    { key = "Numpad5", chars = "5" },
+    { key = "Numpad6", chars = "6" },
+    { key = "Numpad7", chars = "7" },
+    { key = "Numpad8", chars = "8" },
+    { key = "Numpad9", chars = "9" },
+    { key = "NumpadAdd", chars = "+" },
+    { key = "NumpadSubtract", chars = "-" },
+    { key = "NumpadMultiply", chars = "*" },
+    { key = "NumpadDivide", chars = "/" },
+    { key = "D", mods = "Alt|Shift", chars = "\u0002d" },
+    { key = "C", mods = "Alt|Shift", chars = "\u0002c" },
+    { key = "X", mods = "Alt|Shift", chars = "\u0002x" },
+    { key = "T", mods = "Alt|Shift", chars = "\u0002t" },
+    { key = "W", mods = "Alt|Shift", chars = "\u0002w" },
+    { key = "K", mods = "Control", action = "ClearHistory" },
+    # { key = "N", mods = "Control", chars = "\u0002\u0022" },
+    { key = "N", mods = "Control|Shift", chars = "\u0002%" },
+    { key = "Key0", mods = "Control", chars = "\u00020" },
+    { key = "Key1", mods = "Control", chars = "\u00021" },
+    { key = "Key2", mods = "Control", chars = "\u00022" },
+    { key = "Key3", mods = "Control", chars = "\u00023" },
+    { key = "Key4", mods = "Control", chars = "\u00024" },
+    { key = "Key5", mods = "Control", chars = "\u00025" },
+    { key = "Key6", mods = "Control", chars = "\u00026" },
+    { key = "Key7", mods = "Control", chars = "\u00027" },
+    { key = "Key8", mods = "Control", chars = "\u00028" },
+    { key = "Key9", mods = "Control", chars = "\u00029" },
+    { key = "Right", mods = "Alt", chars = "\u001BF" },
+    { key = "Left", mods = "Alt", chars = "\u001BB" },
+    { key = "A", mods = "Command", chars = "\u0001" },
+    { key = "Z", mods = "Command", chars = "\u001F" },
+    # Karabiner maps physical Ctrl to Command. Preserve terminal Ctrl+Arrow semantics.
+    { key = "Left", mods = "Command", chars = "\u001B[1;5D" },
+    { key = "Right", mods = "Command", chars = "\u001B[1;5C" },
+    { key = "Up", mods = "Command", chars = "\u001B[1;5A" },
+    { key = "Down", mods = "Command", chars = "\u001B[1;5B" },
+    { key = "Left", mods = "Command|Shift", chars = "\u001B[1;2H" },
+    { key = "Right", mods = "Command|Shift", chars = "\u001B[1;2F" },
+    # Let physical Ctrl+B enter Herdr's Ctrl+B prefix mode.
+    { key = "B", mods = "Command", chars = "\u0002" },
+]
+
+
+[[hints.enabled]]
+command = "open"
+hyperlinks = true
+post_processing = true
+persist = false
+mouse.enabled = true
+binding = { key = "O", mods = "Control|Shift" }
+regex = "(ipfs:|ipns:|magnet:|mailto:|gemini://|gopher://|https?://|news:|file:|git://|ssh:|ftp://)[^\u0000-\u001F\u007F-\u009F<>\"\\s{-}\\^⟨⟩`\\\\]+"

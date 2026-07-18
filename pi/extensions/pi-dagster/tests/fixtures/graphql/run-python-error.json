@@ -1,0 +1,7 @@
+{
+  "runOrError": {
+    "__typename": "PythonError",
+    "message": "boom: storage unavailable",
+    "stack": ["Traceback...", "  File \"x.py\", line 1"]
+  }
+}

@@ -1,0 +1,77 @@
+{
+  "runOrError": {
+    "__typename": "Run",
+    "runId": "failed-1",
+    "status": "FAILURE",
+    "jobName": "daily_job",
+    "pipelineName": "daily_job",
+    "startTime": 200,
+    "endTime": 210,
+    "rootRunId": "failed-1",
+    "parentRunId": null,
+    "repositoryOrigin": { "repositoryName": "repo", "repositoryLocationName": "loc" },
+    "tags": [
+      { "key": "dagster/partition", "value": "2026-01-01" },
+      { "key": "api_token", "value": "fixture-super-secret" }
+    ],
+    "runConfig": { "ops": { "load": { "config": { "password": "fixture-super-secret", "batch": 2 } } } },
+    "assetSelection": [{ "path": ["warehouse", "orders"] }],
+    "assetChecks": [{ "name": "row_count", "assetKey": { "path": ["warehouse", "orders"] } }],
+    "stepStats": [{ "stepKey": "load", "status": "FAILURE", "startTime": 201, "endTime": 209 }],
+    "eventConnection": {
+      "cursor": "c1",
+      "hasMore": false,
+      "events": [
+        {
+          "__typename": "ExecutionStepStartEvent",
+          "message": "Started load",
+          "timestamp": "201",
+          "stepKey": "load",
+          "eventType": "STEP_START"
+        },
+        {
+          "__typename": "ExecutionStepFailureEvent",
+          "message": "password=fixture-super-secret connection failed",
+          "timestamp": "209",
+          "stepKey": "load",
+          "eventType": "STEP_FAILURE",
+          "error": {
+            "message": "Authorization: Bearer fixture.token.value",
+            "stack": ["token=fixture-super-secret"],
+            "errorChain": [{
+              "message": "caused by",
+              "isExplicitLink": true,
+              "error": { "message": "database unavailable", "stack": ["db.py:1"] }
+            }],
+            "causes": []
+          }
+        },
+        {
+          "__typename": "LogsCapturedEvent",
+          "message": "Captured logs",
+          "timestamp": "202",
+          "stepKey": "load",
+          "eventType": "LOGS_CAPTURED",
+          "fileKey": "load-file",
+          "logKey": "load-log",
+          "stepKeys": ["load"],
+          "externalUrl": null,
+          "externalStdoutUrl": null,
+          "externalStderrUrl": null
+        },
+        {
+          "__typename": "AssetCheckEvaluationEvent",
+          "message": "Check failed",
+          "timestamp": "208",
+          "stepKey": "load",
+          "eventType": "ASSET_CHECK_EVALUATION",
+          "evaluation": {
+            "checkName": "row_count",
+            "assetKey": { "path": ["warehouse", "orders"] },
+            "success": false
+          }
+        }
+      ]
+    }
+  }
+}

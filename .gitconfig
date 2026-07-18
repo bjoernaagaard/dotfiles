@@ -1,0 +1,22 @@
+[init]
+    defaultBranch = main
+
+[user]
+    name = Bjørn Aagaard
+    email = aagaardbs@gmail.com
+    signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOBc1KWo4iBvD7dDrDGSfs6Y8JDfJjiy0Urh6xp+bg80 aagaardbs@gmail.com
+
+[gpg]
+    format = ssh
+
+[commit]
+    gpgsign = true
+
+[url "git@github.com:"]
+    insteadOf = https://github.com/
+    insteadOf = https://gist.github.com/
+
+[url "git@gitlab.com:"]
+    insteadOf = https://gitlab.com/
+
+

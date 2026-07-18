@@ -1,0 +1,102 @@
+onboarding = false
+
+[terminal]
+shell_mode = "auto"
+new_cwd = "follow"
+
+[keys]
+prefix = "ctrl+b"
+
+# Karabiner maps physical Ctrl to Command and physical Windows to Control.
+# Keep both logical modifiers so either physical key works for Herdr controls.
+focus_pane_left = ["cmd+left", "ctrl+left", "prefix+h", "ctrl+alt+h"]
+focus_pane_down = ["cmd+down", "ctrl+down", "prefix+j", "ctrl+alt+j"]
+focus_pane_up = ["cmd+up", "ctrl+up", "prefix+k", "ctrl+alt+k"]
+focus_pane_right = ["cmd+right", "ctrl+right", "prefix+l", "ctrl+alt+l"]
+
+split_vertical = ["cmd+shift+d", "ctrl+shift+d", "prefix+v", "ctrl+alt+d"]
+split_horizontal = [
+    "cmd+shift+c",
+    "ctrl+shift+c",
+    "prefix+minus",
+    "ctrl+alt+shift+d",
+]
+close_pane = ["cmd+shift+x", "ctrl+shift+x", "prefix+x"]
+zoom = ["prefix+z", "cmd+alt+z", "ctrl+alt+z"]
+resize_mode = "prefix+r"
+
+new_tab = ["cmd+shift+t", "ctrl+shift+t", "prefix+c", "ctrl+alt+c"]
+previous_tab = ["prefix+p", "cmd+comma", "ctrl+comma"]
+next_tab = ["prefix+n", "cmd+period", "ctrl+period"]
+switch_tab = "prefix+1..9"
+close_tab = ["cmd+shift+w", "ctrl+shift+w", "prefix+shift+x"]
+
+workspace_picker = "prefix+w"
+new_workspace = "prefix+shift+n"
+rename_workspace = "prefix+shift+w"
+close_workspace = "prefix+shift+d"
+previous_workspace = "prefix+shift+left"
+next_workspace = "prefix+shift+right"
+last_pane = "prefix+tab"
+
+toggle_sidebar = "prefix+b"
+detach = "prefix+q"
+reload_config = "prefix+shift+r"
+remote_image_paste = "ctrl+v"
+
+[[keys.command]] # open in a split beside your work
+key = "prefix+f"
+type = "shell"
+command = "herdr plugin action invoke open-file-viewer --plugin herdr-file-viewer"
+
+[[keys.command]] # …or in its own tab
+key = "prefix+shift+f"
+type = "shell"
+command = "herdr plugin action invoke open-file-viewer-tab --plugin herdr-file-viewer"
+
+[theme]
+name = "nord"
+auto_switch = true
+
+[ui]
+sidebar_width = 24
+sidebar_min_width = 18
+sidebar_max_width = 36
+sidebar_collapsed_mode = "compact"
+confirm_close = true
+prompt_new_tab_name = false
+mouse_capture = true
+right_click_passthrough_modifier = "ctrl"
+redraw_on_focus_gained = true
+mouse_scroll_lines = 3
+pane_borders = true
+pane_gaps = true
+show_agent_labels_on_pane_borders = true
+hide_tab_bar_when_single_tab = false
+agent_panel_scope = "all"
+agent_panel_sort = "priority"
+
+[ui.toast]
+delivery = "herdr"
+delay_seconds = 1
+
+[ui.toast.clipboard]
+enabled = true
+position = "bottom-center"
+
+[ui.sound]
+enabled = true
+
+[remote]
+manage_ssh_config = true
+
+[advanced]
+allow_nested = false
+scrollback_limit_bytes = 10000000
+
+[experimental]
+switch_ascii_input_source_in_prefix = true
+pane_history = false
+
+[session]
+resume_agents_on_restore = true

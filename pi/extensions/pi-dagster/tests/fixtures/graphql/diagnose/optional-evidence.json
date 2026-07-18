@@ -1,0 +1,55 @@
+{
+  "captured": {
+    "runOrError": {
+      "__typename": "Run",
+      "runId": "failed-1",
+      "capturedLogs": {
+        "logKey": ["failed-1", "compute_logs", "load-file"],
+        "stdout": "token=log-super-secret\nloading",
+        "stderr": "database unavailable",
+        "cursor": "2"
+      }
+    }
+  },
+  "dependencyKeys": {
+    "assetNodes": [{
+      "assetKey": { "path": ["warehouse", "orders"] },
+      "dependencyKeys": [{ "path": ["raw", "orders"] }]
+    }]
+  },
+  "upstream": {
+    "assetNodes": [{
+      "assetKey": { "path": ["raw", "orders"] },
+      "assetMaterializations": [{ "runId": "up-1", "timestamp": "99", "partition": "2026-01-01" }],
+      "assetChecksOrError": {
+        "__typename": "AssetChecks",
+        "checks": [{
+          "name": "freshness",
+          "executionForLatestMaterialization": {
+            "status": "FAILED",
+            "evaluation": { "description": "password=check-super-secret stale", "success": false }
+          }
+        }]
+      }
+    }]
+  },
+  "locations": {
+    "workspaceOrError": {
+      "__typename": "Workspace",
+      "locationEntries": [{
+        "name": "loc",
+        "loadStatus": "LOADED",
+        "locationOrLoadError": { "__typename": "PythonError", "message": "token=location-super-secret load error", "stack": [] }
+      }]
+    }
+  },
+  "collisions": {
+    "assetNodeDefinitionCollisions": [{
+      "assetKey": { "path": ["warehouse", "orders"] },
+      "repositories": [
+        { "name": "repo", "location": { "name": "loc" } },
+        { "name": "repo2", "location": { "name": "loc2" } }
+      ]
+    }]
+  }
+}
