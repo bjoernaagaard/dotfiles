@@ -33,7 +33,7 @@
     "editor.codeActionsOnSave": {"source.fixAll": "always"}
   },
   "[toml]": {
-    "editor.defaultFormatter" : "tamasfe.even-better-toml",
+    "editor.defaultFormatter" : "tombi-toml.tombi",
     "editor.formatOnSave"     : true,
     "editor.codeActionsOnSave": {"source.fixAll": "always"}
   },

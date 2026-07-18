@@ -35,7 +35,6 @@
 "brew-cask:zed" = "latest"
 "brew-cask:zen" = "latest"
 
-
 [bootstrap.macos.keyboard]
 key_repeat = 1
 initial_key_repeat = 10
@@ -47,7 +46,15 @@ args = ["property", "--set", '{"CapsLockDelayOverride":0}']
 run_at_load = true
 kickstart = true
 
+[bootstrap.brew.taps]
+"nikitabobko/tap" = "https://github.com/nikitabobko/homebrew-tap.git"
+
+[tasks.bootstrap]
+description = "Install AeroSpace from its Homebrew tap"
+run = "brew list --cask aerospace >/dev/null 2>&1 || brew install --cask nikitabobko/tap/aerospace"
+
 [dotfiles]
+"~/.config/aerospace/aerospace.toml" = { source = "~/.dotfiles/config/aerospace/aerospace.toml", mode = "symlink" }
 "~/.config/karabiner/karabiner.json" = { source = "~/.dotfiles/config/karabiner/karabiner.json", mode = "symlink" }
 "~/Library/Application Support/Code/User/settings.json" = { source = "~/.dotfiles/Library/Application Support/Code/User/settings.json", mode = "symlink" }
 "~/Library/Application Support/Code/User/keybindings.json" = { source = "~/.dotfiles/Library/Application Support/Code/User/keybindings.json", mode = "symlink" }

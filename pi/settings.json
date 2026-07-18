@@ -5,30 +5,49 @@
   "defaultProvider": "openai-codex",
   "defaultThinkingLevel": "xhigh",
   "enabledModels": [
-    "openai-codex/gpt-5.3-codex-spark", "openai-codex/gpt-5.6-sol",         "xai/grok-4.5",
+    "openai-codex/gpt-5.3-codex-spark",
+    "openai-codex/gpt-5.6-sol",
+    "xai/grok-4.5",
     "openai-codex/gpt-5.6-luna"
   ],
   "extensions": [],
-  "hideThinkingBlock": true,
+  "hideThinkingBlock": false,
   "lastChangelogVersion": "0.80.10",
   "packages": [
     "npm:@ogulcancelik/pi-ssh-tools",
-    { "source": "npm:@llblab/pi-telegram", "extensions": ["-index.ts"] },
+    {
+      "source": "npm:@llblab/pi-telegram",
+      "extensions": [
+        "-index.ts"
+      ]
+    },
     "npm:@narumitw/pi-chrome-devtools",
     "npm:@narumitw/pi-lsp",
     "npm:@howaboua/pi-ask",
     "npm:@howaboua/pi-codex-conversion",
     "npm:@howaboua/pi-explore-subagents",
-    "npm:@narumitw/pi-statusline"
+    "npm:@narumitw/pi-statusline",
+    "npm:@howaboua/pi-cache-hit-predictor",
+    "npm:@plannotator/pi-extension"
   ],
   "quietStartup": true,
   "showHardwareCursor": true,
   "theme": "dark/dark",
   "transport": "auto",
-  "warnings": {"anthropicExtraUsage": true},
+  "warnings": {
+    "anthropicExtraUsage": true
+  },
   "showCacheMissNotices": true,
   "collapseChangelog": true,
-  "skills": ["-skills/ast-grep/SKILL.md", "-skills/ast-grep-outline/SKILL.md", "-skills/codegraph-ast-grep/SKILL.md"],
-  "compaction": {"enabled": true},
-  "retry": {"enabled": true}
+  "skills": [
+    "-skills/ast-grep/SKILL.md",
+    "-skills/ast-grep-outline/SKILL.md",
+    "-skills/codegraph-ast-grep/SKILL.md"
+  ],
+  "compaction": {
+    "enabled": true
+  },
+  "retry": {
+    "enabled": true
+  }
 }

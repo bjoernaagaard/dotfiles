@@ -1,6 +1,7 @@
 {
   "pyrefly": { "command": ["pyrefly", "lsp"], "extensions": [".py", ".pyi"] },
   "ruff"   : { "command": ["ruff", "server"], "extensions": [".py", ".pyi"] },
+  "tombi"  : { "command": ["tombi", "lsp"], "extensions": [".toml"] },
   "oxlint" : {
     "command"   : ["oxlint", "--lsp"],
     "extensions": [

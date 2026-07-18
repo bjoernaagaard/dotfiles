@@ -4,8 +4,8 @@ type = "bitwarden"
 [providers.age]
 type = "age"
 recipients = [
-    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOBc1KWo4iBvD7dDrDGSfs6Y8JDfJjiy0Urh6xp+bg80 aagaardbs@gmail.com",
-    "age1yubikey1qgqjhwglv64cufpp9hft7nv35es6ukwyr8a20gskhdfuxtcrmzncza904xh",
+  "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOBc1KWo4iBvD7dDrDGSfs6Y8JDfJjiy0Urh6xp+bg80 aagaardbs@gmail.com",
+  "age1yubikey1qgqjhwglv64cufpp9hft7nv35es6ukwyr8a20gskhdfuxtcrmzncza904xh",
 ]
 
 [secrets]

@@ -6,7 +6,6 @@ minimum_release_age = "0s"
 dotfiles.root = "~/.dotfiles"
 dotfiles.default_mode = "symlink"
 
-
 [bootstrap.user]
 login_shell = "/bin/zsh"
 
@@ -80,6 +79,8 @@ rtk = "latest"
 "npm:oxfmt" = "latest"
 "npm:fjson-fmt" = "latest"
 carapace = "latest"
+"pipx:tombi" = "latest"
+"npm:hunkdiff" = "latest"
 
 [dotfiles]
 # mise self-config
@@ -112,6 +113,7 @@ carapace = "latest"
 "~/.omp/agent/skills" = { source = "~/.dotfiles/skills", mode = "symlink" }
 "~/.factory/skills" = { source = "~/.dotfiles/skills", mode = "symlink" }
 "~/.pi/agent/skills" = { source = "~/.dotfiles/skills", mode = "symlink" }
+"~/.pi/agent/AGENTS.md" = { source = "~/.dotfiles/pi/AGENTS.md", mode = "symlink" }
 "~/.pi/agent/prompts" = { source = "~/.dotfiles/pi/prompts", mode = "symlink" }
 "~/.pi/agent/extensions" = { source = "~/.dotfiles/pi/extensions", mode = "symlink" }
 "~/.pi/agent/settings.json" = { source = "~/.dotfiles/pi/settings.json", mode = "symlink" }
