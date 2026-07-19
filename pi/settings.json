@@ -1,13 +1,11 @@
 {
   "autocompleteMaxVisible": 20,
-  "defaultModel": "gpt-5.6-luna",
+  "defaultModel": "gpt-5.6-sol",
   "defaultProjectTrust": "trust",
   "defaultProvider": "openai-codex",
-  "defaultThinkingLevel": "xhigh",
+  "defaultThinkingLevel": "high",
   "enabledModels": [
-    "openai-codex/gpt-5.3-codex-spark",
-    "openai-codex/gpt-5.6-sol",
-    "xai/grok-4.5",
+    "openai-codex/gpt-5.3-codex-spark", "openai-codex/gpt-5.6-sol",         "xai/grok-4.5",
     "openai-codex/gpt-5.6-luna"
   ],
   "extensions": [],
@@ -15,18 +13,8 @@
   "lastChangelogVersion": "0.80.10",
   "packages": [
     "npm:@ogulcancelik/pi-ssh-tools",
-    {
-      "source": "npm:@llblab/pi-telegram",
-      "extensions": [
-        "-index.ts"
-      ]
-    },
-    {
-      "source": "npm:@narumitw/pi-chrome-devtools",
-      "extensions": [
-        "-src/chrome-devtools.ts"
-      ]
-    },
+    { "source": "npm:@llblab/pi-telegram", "extensions": ["-index.ts"] },
+    { "source": "npm:@narumitw/pi-chrome-devtools", "extensions": ["-src/chrome-devtools.ts"] },
     "npm:@narumitw/pi-lsp",
     "npm:@howaboua/pi-ask",
     "npm:@howaboua/pi-codex-conversion",
@@ -38,20 +26,10 @@
   "showHardwareCursor": true,
   "theme": "dark/dark",
   "transport": "auto",
-  "warnings": {
-    "anthropicExtraUsage": true
-  },
+  "warnings": {"anthropicExtraUsage": true},
   "showCacheMissNotices": true,
   "collapseChangelog": true,
-  "skills": [
-    "-skills/ast-grep/SKILL.md",
-    "-skills/ast-grep-outline/SKILL.md",
-    "-skills/codegraph-ast-grep/SKILL.md"
-  ],
-  "compaction": {
-    "enabled": true
-  },
-  "retry": {
-    "enabled": true
-  }
+  "skills": ["-skills/ast-grep/SKILL.md", "-skills/ast-grep-outline/SKILL.md", "-skills/codegraph-ast-grep/SKILL.md"],
+  "compaction": {"enabled": true},
+  "retry": {"enabled": true}
 }

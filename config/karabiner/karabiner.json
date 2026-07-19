@@ -4,22 +4,12 @@
       "name": "Keychron K10",
       "selected": true,
       "virtual_hid_keyboard": {"keyboard_type_v2": "iso"},
-
-      // Physical key labels used by the owner:
-      // - physical Control: the far-left Control key
-      // - physical Windows: the key labeled Windows
-      // - physical Alt: the key immediately left of Space
-      //
-      // IMPORTANT: key_code values below are Karabiner event tokens, not
-      // physical key labels. Do not infer the physical key from the token;
-      // verify the event path with Karabiner-EventViewer first.
       "devices": [
         {
           "identifiers": {"is_keyboard": true, "is_pointing_device": false, "product_id": 592, "vendor_id": 1452},
           "ignore": false,
           "manipulate_caps_lock_led": true,
           "simple_modifications": [
-            // Current event-token remap; this does not identify physical keys.
             {
               "from": {"key_code": "left_control"},
               "to"  : [ {"key_code": "left_command"} ]
@@ -34,8 +24,6 @@
       "complex_modifications": {
         "rules": [
           {
-            // EXPERIMENTAL: physical-key path is unverified. Do not change
-            // these rules based on token names alone.
             "description" : "Keychron K10: keep physical Alt-Tab and Control-Tab separate",
             "manipulators": [
               {

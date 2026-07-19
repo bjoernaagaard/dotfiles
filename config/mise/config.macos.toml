@@ -18,6 +18,7 @@
 
 "brew-cask:font-maple-mono-nf" = "latest"
 "brew-cask:font-maple-mono" = "latest"
+"brew-cask:font-hack-nerd-font" = "latest"
 "brew-cask:ghostty" = "latest"
 "brew-cask:bitwarden" = "latest"
 "brew-cask:alacritty" = "latest"
@@ -50,11 +51,16 @@ kickstart = true
 "nikitabobko/tap" = "https://github.com/nikitabobko/homebrew-tap.git"
 
 [tasks.bootstrap]
-description = "Install AeroSpace from its Homebrew tap"
-run = "brew list --cask aerospace >/dev/null 2>&1 || brew install --cask nikitabobko/tap/aerospace"
+description = "Install AeroSpace and SketchyBar"
+run = """
+brew list --cask aerospace >/dev/null 2>&1 || brew install --cask nikitabobko/tap/aerospace
+brew tap FelixKratz/formulae
+brew list --formula sketchybar >/dev/null 2>&1 || brew install FelixKratz/formulae/sketchybar
+"""
 
 [dotfiles]
 "~/.config/aerospace/aerospace.toml" = { source = "~/.dotfiles/config/aerospace/aerospace.toml", mode = "symlink" }
+"~/.config/sketchybar" = { source = "~/.dotfiles/config/sketchybar", mode = "symlink" }
 "~/.config/karabiner/karabiner.json" = { source = "~/.dotfiles/config/karabiner/karabiner.json", mode = "symlink" }
 "~/Library/Application Support/Code/User/settings.json" = { source = "~/.dotfiles/Library/Application Support/Code/User/settings.json", mode = "symlink" }
 "~/Library/Application Support/Code/User/keybindings.json" = { source = "~/.dotfiles/Library/Application Support/Code/User/keybindings.json", mode = "symlink" }

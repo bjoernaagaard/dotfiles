@@ -1,0 +1,49 @@
+#!/usr/bin/env bash
+
+set -u
+
+SKETCHYBAR=/opt/homebrew/bin/sketchybar
+AEROSPACE=/opt/homebrew/bin/aerospace
+
+"$SKETCHYBAR" --bar \
+  position=top \
+  height=32 \
+  color=0x00000000 \
+  sticky=on \
+  padding_left=8 \
+  padding_right=8
+
+"$SKETCHYBAR" --default \
+  icon.drawing=off \
+  label.font="Hack Nerd Font:Regular:13.0" \
+  label.color=0xffd8dee9 \
+  padding_left=8 \
+  padding_right=8 \
+  background.height=24 \
+  background.corner_radius=6
+
+"$SKETCHYBAR" --add event aerospace_workspace_change
+
+for workspace in $(${AEROSPACE} list-workspaces --all); do
+  "$SKETCHYBAR" --add item "space.$workspace" left
+
+  "$SKETCHYBAR" --set "space.$workspace" \
+    label="$workspace" \
+    script="$CONFIG_DIR/plugins/aerospace.sh $workspace" \
+    click_script="$AEROSPACE workspace $workspace" \
+    background.color=0xff88c0d0 \
+    background.drawing=off
+
+  "$SKETCHYBAR" --subscribe \
+    "space.$workspace" \
+    aerospace_workspace_change
+done
+
+# Initialize the selected workspace on startup.
+focused="$(${AEROSPACE} list-workspaces --focused 2>/dev/null || true)"
+
+if [[ -n "$focused" ]]; then
+  "$SKETCHYBAR" --trigger \
+    aerospace_workspace_change \
+    "FOCUSED_WORKSPACE=$focused"
+fi
