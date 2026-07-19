@@ -66,5 +66,6 @@ brew list --formula borders >/dev/null 2>&1 || brew install FelixKratz/formulae/
 "~/.config/sketchybar" = { source = "~/.dotfiles/config/sketchybar", mode = "symlink" }
 "~/.config/borders/bordersrc" = { source = "~/.dotfiles/config/borders/bordersrc", mode = "symlink" }
 "~/.config/karabiner/karabiner.json" = { source = "~/.dotfiles/config/karabiner/karabiner.json", mode = "symlink" }
+"~/.config/karabiner/karabiner-old.json" = { source = "~/.dotfiles/config/karabiner/karabiner-old.json", mode = "symlink" }
 "~/Library/Application Support/Code/User/settings.json" = { source = "~/.dotfiles/Library/Application Support/Code/User/settings.json", mode = "symlink" }
 "~/Library/Application Support/Code/User/keybindings.json" = { source = "~/.dotfiles/Library/Application Support/Code/User/keybindings.json", mode = "symlink" }

@@ -23,10 +23,14 @@ selection-word-chars = " ,│`|:\"'()[]{}<>\t"
 clipboard-read = allow
 clipboard-write = allow
 clipboard-paste-protection = true
-macos-option-as-alt = false
+macos-option-as-alt = true
+
+# Let Herdr receive left Alt+Arrow instead of Ghostty's word-navigation defaults.
+keybind = alt+arrow_left=unbind
+keybind = alt+arrow_right=unbind
 
 shell-integration = detect
 shell-integration-features = cursor,no-sudo,title,ssh-env,ssh-terminfo,path
 
-# F11 is Fn+F11 while the K10 is in Mac mode.
+# F11 is direct in K10 Windows mode; Fn+F11 is Volume Down.
 keybind = f11=toggle_fullscreen

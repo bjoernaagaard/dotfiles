@@ -3,55 +3,11 @@
     {
       "name": "Keychron K10",
       "selected": true,
-      "virtual_hid_keyboard": {"keyboard_type_v2": "iso"},
-      "devices": [
-        {
-          "identifiers": {"is_keyboard": true, "is_pointing_device": false, "product_id": 592, "vendor_id": 1452},
-          "ignore": false,
-          "manipulate_caps_lock_led": true,
-          "simple_modifications": [
-            {
-              "from": {"key_code": "left_control"},
-              "to"  : [ {"key_code": "left_command"} ]
-            },
-            {
-              "from": {"key_code": "left_command"},
-              "to"  : [ {"key_code": "left_control"} ]
-            },
-            {
-              "from": {"key_code": "right_control"},
-              "to"  : [ {"key_code": "right_command"} ]
-            },
-            {
-              "from": {"key_code": "right_command"},
-              "to"  : [ {"key_code": "right_control"} ]
-            }
-          ]
-        }
-      ],
       "complex_modifications": {
         "rules": [
           {
-            "description" : "Keychron K10: keep physical Alt-Tab and Control-Tab separate",
+            "description" : "Keep physical Ctrl tab navigation as macOS Control after the device modifier swap",
             "manipulators": [
-              {
-                "type"      : "basic",
-                "from"      : {
-                  "key_code" : "tab",
-                  "modifiers": { "mandatory": ["left_control"], "optional": ["any"] }
-                },
-                "to"        : [
-                  { "key_code": "tab", "modifiers": ["left_option"] }
-                ],
-                "conditions": [
-                  {
-                    "type"       : "device_if",
-                    "identifiers": [
-                      {"is_keyboard": true, "is_pointing_device": false, "product_id": 592, "vendor_id": 1452}
-                    ]
-                  }
-                ]
-              },
               {
                 "type"      : "basic",
                 "from"      : {
@@ -64,27 +20,7 @@
                 "conditions": [
                   {
                     "type"       : "device_if",
-                    "identifiers": [
-                      {"is_keyboard": true, "is_pointing_device": false, "product_id": 592, "vendor_id": 1452}
-                    ]
-                  }
-                ]
-              },
-              {
-                "type"      : "basic",
-                "from"      : {
-                  "key_code" : "tab",
-                  "modifiers": { "mandatory": ["right_control"], "optional": ["any"] }
-                },
-                "to"        : [
-                  { "key_code": "tab", "modifiers": ["right_option"] }
-                ],
-                "conditions": [
-                  {
-                    "type"       : "device_if",
-                    "identifiers": [
-                      {"is_keyboard": true, "is_pointing_device": false, "product_id": 592, "vendor_id": 1452}
-                    ]
+                    "identifiers": [ {"vendor_id": 1452, "product_id": 592, "is_keyboard": true} ]
                   }
                 ]
               },
@@ -100,16 +36,102 @@
                 "conditions": [
                   {
                     "type"       : "device_if",
-                    "identifiers": [
-                      {"is_keyboard": true, "is_pointing_device": false, "product_id": 592, "vendor_id": 1452}
-                    ]
+                    "identifiers": [ {"vendor_id": 1452, "product_id": 592, "is_keyboard": true} ]
+                  }
+                ]
+              },
+              {
+                "type"      : "basic",
+                "from"      : {
+                  "key_code" : "page_up",
+                  "modifiers": { "mandatory": ["left_command"], "optional": ["any"] }
+                },
+                "to"        : [
+                  { "key_code": "page_up", "modifiers": ["left_control"] }
+                ],
+                "conditions": [
+                  {
+                    "type"       : "device_if",
+                    "identifiers": [ {"vendor_id": 1452, "product_id": 592, "is_keyboard": true} ]
+                  }
+                ]
+              },
+              {
+                "type"      : "basic",
+                "from"      : {
+                  "key_code" : "page_up",
+                  "modifiers": { "mandatory": ["right_command"], "optional": ["any"] }
+                },
+                "to"        : [
+                  { "key_code": "page_up", "modifiers": ["right_control"] }
+                ],
+                "conditions": [
+                  {
+                    "type"       : "device_if",
+                    "identifiers": [ {"vendor_id": 1452, "product_id": 592, "is_keyboard": true} ]
+                  }
+                ]
+              },
+              {
+                "type"      : "basic",
+                "from"      : {
+                  "key_code" : "page_down",
+                  "modifiers": { "mandatory": ["left_command"], "optional": ["any"] }
+                },
+                "to"        : [
+                  { "key_code": "page_down", "modifiers": ["left_control"] }
+                ],
+                "conditions": [
+                  {
+                    "type"       : "device_if",
+                    "identifiers": [ {"vendor_id": 1452, "product_id": 592, "is_keyboard": true} ]
+                  }
+                ]
+              },
+              {
+                "type"      : "basic",
+                "from"      : {
+                  "key_code" : "page_down",
+                  "modifiers": { "mandatory": ["right_command"], "optional": ["any"] }
+                },
+                "to"        : [
+                  { "key_code": "page_down", "modifiers": ["right_control"] }
+                ],
+                "conditions": [
+                  {
+                    "type"       : "device_if",
+                    "identifiers": [ {"vendor_id": 1452, "product_id": 592, "is_keyboard": true} ]
                   }
                 ]
               }
             ]
           }
         ]
-      }
+      },
+      "devices": [
+        {
+          "identifiers"         : {"vendor_id": 1452, "product_id": 592, "is_keyboard": true},
+          "simple_modifications": [
+            {
+              "from": {"key_code": "left_control"},
+              "to"  : [ {"key_code": "left_command"} ]
+            },
+            {
+              "from": {"key_code": "right_control"},
+              "to"  : [ {"key_code": "right_command"} ]
+            },
+            {
+              "from": {"key_code": "left_command"},
+              "to"  : [ {"key_code": "left_control"} ]
+            },
+            {
+              "from": {"key_code": "right_command"},
+              "to"  : [ {"key_code": "right_control"} ]
+            }
+          ]
+        }
+      ],
+      "virtual_hid_keyboard": {"keyboard_type": "iso", "keyboard_type_v2": "iso"}
     }
   ]
 }

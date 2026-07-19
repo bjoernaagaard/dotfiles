@@ -1,0 +1,80 @@
+flowchart LR
+  subgraph CONSUMERS["Skills that explicitly apply principles"]
+    ARCH["architect"]
+    ARENA["arena"]
+    FIGURE["figure-it-out"]
+    TS["typescript-best-practices"]
+    REFLECT["reflect"]
+    SHOW["show-me-your-work"]
+  end
+
+  subgraph CORE["Core principles"]
+    LAZY["laziness protocol"]
+    FOUND["foundational thinking"]
+    REDESIGN["redesign from first principles"]
+    SUBTRACT["subtract before you add"]
+    READER["minimize reader load"]
+    OUTCOME["outcome-oriented execution"]
+    EXPERIENCE["experience first"]
+    EXHAUST["exhaust the design space"]
+    LEVER["build the lever"]
+  end
+
+  subgraph ARCHP["Architecture principles"]
+    DOMAIN["model the domain"]
+    BOUNDARY["boundary discipline"]
+    TYPE["type-system discipline"]
+    IDEMPOTENT["make operations idempotent"]
+    MIGRATE["migrate callers, then delete legacy APIs"]
+    SEPARATE["separate before serializing shared state"]
+  end
+
+  subgraph VERIFP["Verification principles"]
+    PROVE["prove it works"]
+    ROOT["fix root causes"]
+    SEQUENCE["sequence verifiable units"]
+  end
+
+  subgraph DELEGATE["Delegation principles"]
+    CONTEXT["guard the context window"]
+    HUMAN["never block on the human"]
+  end
+
+  subgraph METAP["Meta principle"]
+    ENCODE["encode lessons in structure"]
+  end
+
+  ARCH --> EXHAUST
+  ARCH --> FOUND
+  ARCH --> OUTCOME
+  ARCH --> REDESIGN
+  ARCH --> ROOT
+  ARCH --> SUBTRACT
+
+  ARENA --> SEPARATE
+  ARENA --> REDESIGN
+  ARENA --> PROVE
+
+  FIGURE --> PROVE
+  FIGURE --> HUMAN
+  FIGURE --> FOUND
+  FIGURE --> LAZY
+  FIGURE --> SEPARATE
+  FIGURE --> SEQUENCE
+  FIGURE --> ENCODE
+
+  TS --> TYPE
+  TS --> BOUNDARY
+  REFLECT --> ENCODE
+  SHOW --> ENCODE
+  PROVE -->|audit trail| SHOW
+
+  LEVER -.->|smallest lever| LAZY
+  LEVER -.->|durable guardrail| ENCODE
+  LEVER -.->|scripted verification| PROVE
+  READER -.->|human analogue| CONTEXT
+  SEQUENCE -.->|verification complement| PROVE
+  SEQUENCE -.->|automation complement| LEVER
+  TYPE -.->|boundary parsing| BOUNDARY
+  TYPE -.->|schema-derived structure| ENCODE
+  EXPERIENCE -.->|target vs sequence| FOUND

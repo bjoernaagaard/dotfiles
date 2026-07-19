@@ -36,8 +36,8 @@ outer.top = 8
 outer.right = 8
 
 [mode.main.binding]
-# On the K10, Karabiner swaps the physical Ctrl and Command/Windows keys.
-# AeroSpace therefore sees the physical Command/Windows key as `ctrl`.
+# Karabiner maps the K10's physical Windows key to logical Control.
+# Keep window management there so physical Ctrl remains available to apps.
 ctrl-h = "focus left"
 ctrl-j = "focus down"
 ctrl-k = "focus up"

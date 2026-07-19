@@ -5,31 +5,28 @@ shell_mode = "auto"
 new_cwd = "follow"
 
 [keys]
-prefix = "ctrl+b"
+prefix = "alt+space"
 
-# Karabiner maps physical Ctrl to Command and physical Windows to Control.
-# Keep both logical modifiers so either physical key works for Herdr controls.
-focus_pane_left = ["cmd+left", "ctrl+left", "prefix+h", "ctrl+alt+h"]
-focus_pane_down = ["cmd+down", "ctrl+down", "prefix+j", "ctrl+alt+j"]
-focus_pane_up = ["cmd+up", "ctrl+up", "prefix+k", "ctrl+alt+k"]
-focus_pane_right = ["cmd+right", "ctrl+right", "prefix+l", "ctrl+alt+l"]
+# Left Alt is Herdr's management modifier. Physical Windows remains free for apps.
+focus_pane_left = ["alt+left", "prefix+left"]
+focus_pane_down = ["alt+down", "prefix+down"]
+focus_pane_up = ["alt+up", "prefix+up"]
+focus_pane_right = ["alt+right", "prefix+right"]
 
-split_vertical = ["cmd+shift+d", "ctrl+shift+d", "prefix+v", "ctrl+alt+d"]
+split_vertical = ["alt+shift+d", "prefix+v"]
 split_horizontal = [
-    "cmd+shift+c",
-    "ctrl+shift+c",
+    "alt+shift+c",
     "prefix+minus",
-    "ctrl+alt+shift+d",
 ]
-close_pane = ["cmd+shift+x", "ctrl+shift+x", "prefix+x"]
-zoom = ["prefix+z", "cmd+alt+z", "ctrl+alt+z"]
+close_pane = ["alt+shift+x", "prefix+x"]
+zoom = ["alt+z", "prefix+z"]
 resize_mode = "prefix+r"
 
-new_tab = ["cmd+shift+t", "ctrl+shift+t", "prefix+c", "ctrl+alt+c"]
-previous_tab = ["prefix+p", "cmd+comma", "ctrl+comma"]
-next_tab = ["prefix+n", "cmd+period", "ctrl+period"]
+new_tab = ["alt+shift+t", "prefix+c"]
+previous_tab = ["alt+comma", "prefix+p"]
+next_tab = ["alt+period", "prefix+n"]
 switch_tab = "prefix+1..9"
-close_tab = ["cmd+shift+w", "ctrl+shift+w", "prefix+shift+x"]
+close_tab = ["alt+shift+w", "prefix+shift+x"]
 
 workspace_picker = "prefix+w"
 new_workspace = "prefix+shift+n"
@@ -42,7 +39,7 @@ last_pane = "prefix+tab"
 toggle_sidebar = "prefix+b"
 detach = "prefix+q"
 reload_config = "prefix+shift+r"
-remote_image_paste = "ctrl+v"
+remote_image_paste = "alt+v"
 
 [[keys.command]] # open in a split beside your work
 key = "prefix+f"
@@ -66,7 +63,7 @@ sidebar_collapsed_mode = "compact"
 confirm_close = true
 prompt_new_tab_name = false
 mouse_capture = true
-right_click_passthrough_modifier = "ctrl"
+right_click_passthrough_modifier = "alt"
 redraw_on_focus_gained = true
 mouse_scroll_lines = 3
 pane_borders = true
