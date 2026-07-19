@@ -20,7 +20,8 @@
     "npm:@howaboua/pi-codex-conversion",
     "npm:@howaboua/pi-explore-subagents",
     "npm:@narumitw/pi-statusline",
-    "npm:@howaboua/pi-cache-hit-predictor"
+    "npm:@howaboua/pi-cache-hit-predictor",
+    "npm:@ogulcancelik/pi-herdr"
   ],
   "quietStartup": true,
   "showHardwareCursor": true,
@@ -29,7 +30,12 @@
   "warnings": {"anthropicExtraUsage": true},
   "showCacheMissNotices": true,
   "collapseChangelog": true,
-  "skills": ["-skills/ast-grep/SKILL.md", "-skills/ast-grep-outline/SKILL.md", "-skills/codegraph-ast-grep/SKILL.md"],
+  "skills": [
+    "-skills/ast-grep/SKILL.md",
+    "-skills/ast-grep-outline/SKILL.md",
+    "-skills/codegraph-ast-grep/SKILL.md",
+    "-skills/herdr/SKILL.md"
+  ],
   "compaction": {"enabled": true},
   "retry": {"enabled": true}
 }

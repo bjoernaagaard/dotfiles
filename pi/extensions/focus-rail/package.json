@@ -1,0 +1,45 @@
+{
+  "name": "focus-rail",
+  "version": "0.1.0",
+  "description": "A quiet, adaptive response policy for Pi sessions",
+  "type": "module",
+  "private": true,
+  "license": "MIT",
+  "keywords": [
+    "pi-package",
+    "pi",
+    "accessibility",
+    "interaction-policy"
+  ],
+  "files": [
+    "index.ts",
+    "src",
+    "eval",
+    "README.md",
+    "DECISIONS.md",
+    "tsconfig.json"
+  ],
+  "pi": {
+    "extensions": [
+      "./index.ts"
+    ]
+  },
+  "engines": {
+    "node": ">=22.5 <25"
+  },
+  "peerDependencies": {
+    "@earendil-works/pi-coding-agent": ">=0.80.10 <0.81"
+  },
+  "devDependencies": {
+    "@earendil-works/pi-coding-agent": "0.80.10",
+    "@types/node": "^24.0.0",
+    "tsx": "^4.20.0",
+    "typescript": "^5.9.0"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "test": "node --import tsx --test tests/*.test.ts",
+    "check": "npm run typecheck && npm test",
+    "eval:prompts": "node --import tsx eval/print-prompts.ts"
+  }
+}

@@ -3,13 +3,18 @@ start-at-login = true
 auto-reload-config = true
 
 after-startup-command = [
-  'exec-and-forget /opt/homebrew/bin/sketchybar',
+  # SketchyBar has built-in detection for an already-running instance, so it
+  # is safe to keep this here even when it is also managed by brew services.
+  'exec-and-forget sketchybar',
+  # Optional focused-window borders. The guard keeps AeroSpace startup clean
+  # on machines where the `borders` add-on has not been installed.
+  'exec-and-forget /bin/sh -c "command -v borders >/dev/null 2>&1 && exec borders"',
 ]
 
 exec-on-workspace-change = [
   '/bin/bash',
   '-c',
-  '/opt/homebrew/bin/sketchybar --trigger aerospace_workspace_change FOCUSED_WORKSPACE="$AEROSPACE_FOCUSED_WORKSPACE"',
+  'sketchybar --trigger aerospace_workspace_change FOCUSED_WORKSPACE="$AEROSPACE_FOCUSED_WORKSPACE" PREV_WORKSPACE="$AEROSPACE_PREV_WORKSPACE"',
 ]
 
 enable-normalization-flatten-containers = true
@@ -31,8 +36,8 @@ outer.top = 8
 outer.right = 8
 
 [mode.main.binding]
-# On the K10, the physical key labelled Alt is translated by the existing
-# Karabiner setup to the modifier AeroSpace spells `ctrl`.
+# On the K10, Karabiner swaps the physical Ctrl and Command/Windows keys.
+# AeroSpace therefore sees the physical Command/Windows key as `ctrl`.
 ctrl-h = "focus left"
 ctrl-j = "focus down"
 ctrl-k = "focus up"
@@ -76,3 +81,8 @@ ctrl-shift-semicolon = "mode service"
 esc = ["reload-config", "mode main"]
 r = ["flatten-workspace-tree", "mode main"]
 f = ["layout floating tiling", "mode main"]
+
+# GUI-launched AeroSpace does not always inherit the shell's Homebrew path.
+# Include both Homebrew layouts so callbacks work on Apple Silicon and Intel.
+[exec.env-vars]
+PATH = '/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/usr/local/sbin:${PATH}'

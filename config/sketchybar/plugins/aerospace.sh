@@ -1,9 +1,21 @@
 #!/usr/bin/env bash
 
-set -u
+set -euo pipefail
 
-SKETCHYBAR=/opt/homebrew/bin/sketchybar
+SKETCHYBAR="${SKETCHYBAR:-$(command -v sketchybar || true)}"
+if [[ -z "$SKETCHYBAR" ]]; then
+  for candidate in /opt/homebrew/bin/sketchybar /usr/local/bin/sketchybar; do
+    if [[ -x "$candidate" ]]; then
+      SKETCHYBAR="$candidate"
+      break
+    fi
+  done
+fi
 workspace="${1:-}"
+
+if [[ -z "$SKETCHYBAR" || -z "$workspace" || -z "${NAME:-}" ]]; then
+  exit 0
+fi
 
 if [[ "${FOCUSED_WORKSPACE:-}" == "$workspace" ]]; then
   "$SKETCHYBAR" --set "$NAME" \

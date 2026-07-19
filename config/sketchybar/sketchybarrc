@@ -1,9 +1,29 @@
 #!/usr/bin/env bash
 
-set -u
+set -euo pipefail
 
-SKETCHYBAR=/opt/homebrew/bin/sketchybar
-AEROSPACE=/opt/homebrew/bin/aerospace
+brew_prefix="${HOMEBREW_PREFIX:-}"
+if [[ -z "$brew_prefix" ]] && command -v brew >/dev/null 2>&1; then
+  brew_prefix="$(brew --prefix)"
+fi
+if [[ -z "$brew_prefix" ]]; then
+  for candidate in /opt/homebrew /usr/local; do
+    if [[ -x "$candidate/bin/sketchybar" ]]; then
+      brew_prefix="$candidate"
+      break
+    fi
+  done
+fi
+
+SKETCHYBAR="${SKETCHYBAR:-$(command -v sketchybar || true)}"
+AEROSPACE="${AEROSPACE:-$(command -v aerospace || true)}"
+SKETCHYBAR="${SKETCHYBAR:-${brew_prefix:+$brew_prefix/bin/sketchybar}}"
+AEROSPACE="${AEROSPACE:-${brew_prefix:+$brew_prefix/bin/aerospace}}"
+
+if [[ -z "$SKETCHYBAR" || -z "$AEROSPACE" || ! -x "$SKETCHYBAR" || ! -x "$AEROSPACE" ]]; then
+  echo "SketchyBar config requires both sketchybar and aerospace binaries" >&2
+  exit 1
+fi
 
 "$SKETCHYBAR" --bar \
   position=top \
@@ -39,7 +59,9 @@ for workspace in $(${AEROSPACE} list-workspaces --all); do
     aerospace_workspace_change
 done
 
-# Initialize the selected workspace on startup.
+# Initialize the selected workspace on startup. This is deliberately an
+# explicit trigger because the custom event is not emitted until a workspace
+# changes after the bar has started.
 focused="$(${AEROSPACE} list-workspaces --focused 2>/dev/null || true)"
 
 if [[ -n "$focused" ]]; then

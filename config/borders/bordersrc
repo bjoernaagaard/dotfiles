@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+# Optional companion to AeroSpace. Install with:
+#   brew tap FelixKratz/formulae
+#   brew install borders
+
+options=(
+  style=round
+  width=3.0
+  hidpi=on
+  active_color=0xff88c0d0
+  inactive_color=0xff4c566a
+)
+
+borders "${options[@]}"

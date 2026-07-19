@@ -35,6 +35,7 @@
 "brew-cask:karabiner-elements" = "latest"
 "brew-cask:zed" = "latest"
 "brew-cask:zen" = "latest"
+"brew:fontforge" = "latest"
 
 [bootstrap.macos.keyboard]
 key_repeat = 1
@@ -61,6 +62,7 @@ brew list --formula sketchybar >/dev/null 2>&1 || brew install FelixKratz/formul
 [dotfiles]
 "~/.config/aerospace/aerospace.toml" = { source = "~/.dotfiles/config/aerospace/aerospace.toml", mode = "symlink" }
 "~/.config/sketchybar" = { source = "~/.dotfiles/config/sketchybar", mode = "symlink" }
+"~/.config/borders/bordersrc" = { source = "~/.dotfiles/config/borders/bordersrc", mode = "symlink" }
 "~/.config/karabiner/karabiner.json" = { source = "~/.dotfiles/config/karabiner/karabiner.json", mode = "symlink" }
 "~/Library/Application Support/Code/User/settings.json" = { source = "~/.dotfiles/Library/Application Support/Code/User/settings.json", mode = "symlink" }
 "~/Library/Application Support/Code/User/keybindings.json" = { source = "~/.dotfiles/Library/Application Support/Code/User/keybindings.json", mode = "symlink" }
