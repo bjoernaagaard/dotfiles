@@ -21,14 +21,18 @@
         "-index.ts"
       ]
     },
-    "npm:@narumitw/pi-chrome-devtools",
+    {
+      "source": "npm:@narumitw/pi-chrome-devtools",
+      "extensions": [
+        "-src/chrome-devtools.ts"
+      ]
+    },
     "npm:@narumitw/pi-lsp",
     "npm:@howaboua/pi-ask",
     "npm:@howaboua/pi-codex-conversion",
     "npm:@howaboua/pi-explore-subagents",
     "npm:@narumitw/pi-statusline",
-    "npm:@howaboua/pi-cache-hit-predictor",
-    "npm:@plannotator/pi-extension"
+    "npm:@howaboua/pi-cache-hit-predictor"
   ],
   "quietStartup": true,
   "showHardwareCursor": true,
