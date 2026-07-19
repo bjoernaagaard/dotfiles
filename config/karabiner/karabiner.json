@@ -17,6 +17,14 @@
             {
               "from": {"key_code": "left_command"},
               "to"  : [ {"key_code": "left_control"} ]
+            },
+            {
+              "from": {"key_code": "right_control"},
+              "to"  : [ {"key_code": "right_command"} ]
+            },
+            {
+              "from": {"key_code": "right_command"},
+              "to"  : [ {"key_code": "right_control"} ]
             }
           ]
         }
@@ -52,6 +60,42 @@
                 },
                 "to"        : [
                   { "key_code": "tab", "modifiers": ["left_control"] }
+                ],
+                "conditions": [
+                  {
+                    "type"       : "device_if",
+                    "identifiers": [
+                      {"is_keyboard": true, "is_pointing_device": false, "product_id": 592, "vendor_id": 1452}
+                    ]
+                  }
+                ]
+              },
+              {
+                "type"      : "basic",
+                "from"      : {
+                  "key_code" : "tab",
+                  "modifiers": { "mandatory": ["right_control"], "optional": ["any"] }
+                },
+                "to"        : [
+                  { "key_code": "tab", "modifiers": ["right_option"] }
+                ],
+                "conditions": [
+                  {
+                    "type"       : "device_if",
+                    "identifiers": [
+                      {"is_keyboard": true, "is_pointing_device": false, "product_id": 592, "vendor_id": 1452}
+                    ]
+                  }
+                ]
+              },
+              {
+                "type"      : "basic",
+                "from"      : {
+                  "key_code" : "tab",
+                  "modifiers": { "mandatory": ["right_command"], "optional": ["any"] }
+                },
+                "to"        : [
+                  { "key_code": "tab", "modifiers": ["right_control"] }
                 ],
                 "conditions": [
                   {

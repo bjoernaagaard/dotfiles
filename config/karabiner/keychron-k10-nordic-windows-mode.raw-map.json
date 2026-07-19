@@ -1,0 +1,189 @@
+{
+  "format_version": 1,
+  "document_type": "karabiner_eventviewer_raw_hardware_map",
+  "capture": {
+    "keyboard": "Keychron K10 Nordic Edition",
+    "hardware_switch_mode": "Windows",
+    "connection": "USB",
+    "source": "Karabiner-EventViewer",
+    "karabiner_modifications_disabled": true,
+    "scope": "Events observed with EventViewer's temporary disable-modifications toggle enabled. Active-profile output verification is intentionally excluded.",
+    "event_convention": "Unless a sequence or no-event result is stated, each physical press emitted one down and one up event with the same code and HID usage."
+  },
+  "device": {
+    "manufacturer": "Keychron",
+    "product": "Keychron K10",
+    "transport": "USB",
+    "vendor_id": 1452,
+    "vendor_id_hex": "0x05ac",
+    "product_id": 592,
+    "product_id_hex": "0x0250",
+    "location_id_at_capture": 1122816,
+    "interfaces": [
+      {
+        "is_keyboard": true,
+        "is_pointing_device": false
+      },
+      {
+        "is_keyboard": true,
+        "is_pointing_device": true
+      }
+    ],
+    "notes": [
+      "The two entries are separate HID interfaces exposed by the same physical keyboard.",
+      "Runtime device_id values were omitted because they are ephemeral."
+    ]
+  },
+  "base_layer": {
+    "modifiers": [
+      {"physical": "Left Ctrl", "key_code": "left_control", "usage_page": 7, "usage": 224},
+      {"physical": "Left Windows", "key_code": "left_command", "usage_page": 7, "usage": 227},
+      {"physical": "Left Alt", "key_code": "left_option", "usage_page": 7, "usage": 226},
+      {"physical": "Right Alt / AltGr", "key_code": "right_option", "usage_page": 7, "usage": 230},
+      {"physical": "Right Windows", "key_code": "right_command", "usage_page": 7, "usage": 231},
+      {"physical": "Right Ctrl", "key_code": "right_control", "usage_page": 7, "usage": 228},
+      {"physical": "Fn", "eventviewer_event": null, "behavior": "firmware_layer_modifier"}
+    ],
+    "function_row": [
+      {"physical": "Esc", "key_code": "escape", "usage_page": 7, "usage": 41},
+      {"physical": "F1", "key_code": "f1", "usage_page": 7, "usage": 58},
+      {"physical": "F2", "key_code": "f2", "usage_page": 7, "usage": 59},
+      {"physical": "F3", "key_code": "f3", "usage_page": 7, "usage": 60},
+      {"physical": "F4", "key_code": "f4", "usage_page": 7, "usage": 61},
+      {"physical": "F5", "key_code": "f5", "usage_page": 7, "usage": 62},
+      {"physical": "F6", "key_code": "f6", "usage_page": 7, "usage": 63},
+      {"physical": "F7", "key_code": "f7", "usage_page": 7, "usage": 64},
+      {"physical": "F8", "key_code": "f8", "usage_page": 7, "usage": 65},
+      {"physical": "F9", "key_code": "f9", "usage_page": 7, "usage": 66},
+      {"physical": "F10", "key_code": "f10", "usage_page": 7, "usage": 67},
+      {"physical": "F11", "key_code": "f11", "usage_page": 7, "usage": 68},
+      {"physical": "F12", "key_code": "f12", "usage_page": 7, "usage": 69}
+    ],
+    "keys_right_of_f12": [
+      {
+        "physical": "First key right of F12",
+        "key_code": "print_screen",
+        "usage_page": 7,
+        "usage": 70
+      },
+      {
+        "physical": "Second key right of F12",
+        "output_type": "firmware_macro",
+        "sequence": [
+          {"type": "down", "key_code": "c", "usage_page": 7, "usage": 6},
+          {"type": "down", "key_code": "left_command", "usage_page": 7, "usage": 227},
+          {"type": "up", "key_code": "c", "usage_page": 7, "usage": 6, "flags": ["left_command"]},
+          {"type": "up", "key_code": "left_command", "usage_page": 7, "usage": 227}
+        ],
+        "note": "The c-down event precedes the modifier-down event; this is not exposed as one unique remappable key."
+      },
+      {
+        "physical": "Third key right of F12",
+        "eventviewer_event": null,
+        "behavior": "firmware_or_keyboard_internal"
+      }
+    ],
+    "navigation": [
+      {"physical": "Insert", "key_code": "insert", "usage_page": 7, "usage": 73},
+      {"physical": "Home", "key_code": "home", "usage_page": 7, "usage": 74},
+      {"physical": "Page Up", "key_code": "page_up", "usage_page": 7, "usage": 75},
+      {"physical": "Delete", "key_code": "delete_forward", "usage_page": 7, "usage": 76},
+      {"physical": "End", "key_code": "end", "usage_page": 7, "usage": 77},
+      {"physical": "Page Down", "key_code": "page_down", "usage_page": 7, "usage": 78}
+    ],
+    "arrows": [
+      {"physical": "Right Arrow", "key_code": "right_arrow", "usage_page": 7, "usage": 79},
+      {"physical": "Left Arrow", "key_code": "left_arrow", "usage_page": 7, "usage": 80},
+      {"physical": "Down Arrow", "key_code": "down_arrow", "usage_page": 7, "usage": 81},
+      {"physical": "Up Arrow", "key_code": "up_arrow", "usage_page": 7, "usage": 82}
+    ],
+    "numpad": [
+      {"physical": "Num Lock", "key_code": "keypad_num_lock", "usage_page": 7, "usage": 83},
+      {"physical": "Numpad /", "key_code": "keypad_slash", "usage_page": 7, "usage": 84},
+      {"physical": "Numpad *", "key_code": "keypad_asterisk", "usage_page": 7, "usage": 85},
+      {"physical": "Numpad -", "key_code": "keypad_hyphen", "usage_page": 7, "usage": 86},
+      {"physical": "Numpad +", "key_code": "keypad_plus", "usage_page": 7, "usage": 87},
+      {"physical": "Numpad Enter", "key_code": "keypad_enter", "usage_page": 7, "usage": 88},
+      {"physical": "Numpad 1", "key_code": "keypad_1", "usage_page": 7, "usage": 89},
+      {"physical": "Numpad 2", "key_code": "keypad_2", "usage_page": 7, "usage": 90},
+      {"physical": "Numpad 3", "key_code": "keypad_3", "usage_page": 7, "usage": 91},
+      {"physical": "Numpad 4", "key_code": "keypad_4", "usage_page": 7, "usage": 92},
+      {"physical": "Numpad 5", "key_code": "keypad_5", "usage_page": 7, "usage": 93},
+      {"physical": "Numpad 6", "key_code": "keypad_6", "usage_page": 7, "usage": 94},
+      {"physical": "Numpad 7", "key_code": "keypad_7", "usage_page": 7, "usage": 95},
+      {"physical": "Numpad 8", "key_code": "keypad_8", "usage_page": 7, "usage": 96},
+      {"physical": "Numpad 9", "key_code": "keypad_9", "usage_page": 7, "usage": 97},
+      {"physical": "Numpad 0", "key_code": "keypad_0", "usage_page": 7, "usage": 98},
+      {"physical": "Numpad decimal", "key_code": "keypad_period", "usage_page": 7, "usage": 99}
+    ],
+    "nordic_iso_positions": [
+      {"physical": "Key immediately left of 1", "key_code": "grave_accent_and_tilde", "usage_page": 7, "usage": 53},
+      {"physical": "First key immediately right of 0", "key_code": "hyphen", "usage_page": 7, "usage": 45},
+      {"physical": "Second key immediately right of 0", "key_code": "equal_sign", "usage_page": 7, "usage": 46},
+      {"physical": "First key immediately right of P", "key_code": "open_bracket", "usage_page": 7, "usage": 47},
+      {"physical": "Second key immediately right of P", "key_code": "close_bracket", "usage_page": 7, "usage": 48},
+      {"physical": "First key immediately right of L", "key_code": "semicolon", "usage_page": 7, "usage": 51},
+      {"physical": "Second key immediately right of L", "key_code": "quote", "usage_page": 7, "usage": 52},
+      {"physical": "Third key immediately right of L", "key_code": "non_us_pound", "usage_page": 7, "usage": 50},
+      {"physical": "Key between left Shift and Z", "key_code": "non_us_backslash", "usage_page": 7, "usage": 100},
+      {"physical": "First key immediately right of M", "key_code": "comma", "usage_page": 7, "usage": 54},
+      {"physical": "Second key immediately right of M", "key_code": "period", "usage_page": 7, "usage": 55},
+      {"physical": "Third key immediately right of M", "key_code": "slash", "usage_page": 7, "usage": 56}
+    ],
+    "additional_observed_keys": [
+      {"physical": "C", "key_code": "c", "usage_page": 7, "usage": 6},
+      {"physical": "E", "key_code": "e", "usage_page": 7, "usage": 8},
+      {"physical": "Tab", "key_code": "tab", "usage_page": 7, "usage": 43}
+    ]
+  },
+  "fn_layer": [
+    {
+      "physical": "Fn+F1",
+      "observed_behavior": "display_brightness_down",
+      "eventviewer_event": null,
+      "note": "Behavior was observed, but no raw event appeared in the copied EventViewer output."
+    },
+    {
+      "physical": "Fn+F2",
+      "observed_behavior": "display_brightness_up",
+      "eventviewer_event": null,
+      "note": "Behavior was observed, but no raw event appeared in the copied EventViewer output."
+    },
+    {
+      "physical": "Fn+F3",
+      "output_type": "key_chord",
+      "key_code": "tab",
+      "modifiers": ["left_option"]
+    },
+    {
+      "physical": "Fn+F4",
+      "output_type": "key_chord",
+      "key_code": "e",
+      "modifiers": ["left_control"]
+    },
+    {
+      "physical": "Fn+F5",
+      "eventviewer_event": null,
+      "observed_behavior": "keyboard_backlight_down",
+      "handling": "keyboard_firmware"
+    },
+    {
+      "physical": "Fn+F6",
+      "eventviewer_event": null,
+      "observed_behavior": "keyboard_backlight_up",
+      "handling": "keyboard_firmware"
+    },
+    {"physical": "Fn+F7", "consumer_key_code": "scan_previous_track", "usage_page": 12, "usage": 182},
+    {"physical": "Fn+F8", "consumer_key_code": "play_or_pause", "usage_page": 12, "usage": 205},
+    {"physical": "Fn+F9", "consumer_key_code": "scan_next_track", "usage_page": 12, "usage": 181},
+    {"physical": "Fn+F10", "consumer_key_code": "mute", "usage_page": 12, "usage": 226},
+    {"physical": "Fn+F11", "consumer_key_code": "volume_decrement", "usage_page": 12, "usage": 234},
+    {"physical": "Fn+F12", "consumer_key_code": "volume_increment", "usage_page": 12, "usage": 233}
+  ],
+  "physical_inventory_notes": {
+    "menu_application_key": "not_present",
+    "standalone_fn_event": "not_emitted",
+    "scroll_lock_and_pause": "No separately named physical keys were present or captured.",
+    "ordinary_alphanumeric_keys": "Not individually inventoried; only keys explicitly observed during this capture session are recorded."
+  }
+}
