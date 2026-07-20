@@ -45,11 +45,10 @@ Other optional settings include `ocrServerUrl`, `tessdataPath`, `ocrLanguage`, `
 
 ## Cache and diagnostics
 
-Document artifacts default to `~/.pi/agent/cache/parseview/documents`; rendered previews use `~/.pi/agent/cache/parseview/previews`.
+Document artifacts default to `~/.pi/agent/cache/parseview/documents`; rendered previews are written to temporary files or explicit output paths.
 
 The document cache uses source, parser version, parse settings, and the secret fingerprint in its key. Writes are atomic; artifact hashes are validated; corrupt entries are purged; total quota uses least-recently-accessed eviction. Screenshots revalidate the source hash before rendering.
 
 - `/parseview-doctor`: native package, converters, OCR, cache, and Chromium diagnostics
 - `/parseview-cache status`: document entry count and bytes
 - `/parseview-cache clear`: confirmed deletion of document artifacts
-- `/preview-clear-cache`: confirmed deletion of preview artifacts

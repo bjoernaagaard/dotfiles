@@ -47,6 +47,7 @@ export function matchKeywords(text: string): {
   matched: boolean;
   keywords: string[];
   category: IntentCategory;
+  categories: IntentCategory[];
 } {
   const candidates: Array<[IntentCategory, RegExp[]]> = [
     ["document.screenshot", [DOCUMENT_SCREENSHOT]],
@@ -57,37 +58,56 @@ export function matchKeywords(text: string): {
   ];
   const intentText = stripQuotedExamples(text);
 
+  const matchedCategories: IntentCategory[] = [];
+  const keywords: string[] = [];
   for (const [category, patterns] of candidates) {
-    const keywords = patterns.flatMap((pattern) => matches(intentText, pattern));
-    if (keywords.length > 0) return { matched: true, keywords: [...new Set(keywords)], category };
+    const categoryKeywords = patterns.flatMap((pattern) => matches(intentText, pattern));
+    if (categoryKeywords.length > 0) {
+      matchedCategories.push(category);
+      keywords.push(...categoryKeywords);
+    }
   }
-  return { matched: false, keywords: [], category: "" };
+  return {
+    matched: matchedCategories.length > 0,
+    keywords: [...new Set(keywords)],
+    category: matchedCategories[0] ?? "",
+    categories: matchedCategories,
+  };
 }
 
-export function buildGuidelines(_keywords: string[], category: IntentCategory): string {
-  switch (category) {
-    case "diagram":
-      return [
-        "• The prompt explicitly requests a diagram. Use `render_diagram`.",
-        "  Prefer ASCII for inline display and SVG or HTML for a saved artifact.",
-      ].join("\n");
-    case "preview":
-      return "• The prompt explicitly requests rendered output. Use `preview_content`; browser HTML needs no Chromium, while terminal PNG and PDF require Chromium, and the result reports the artifact path.";
-    case "document.parse":
-      return "• Parse the local regular file once with `parse_document`, choose OCR deliberately (`auto` uncertain, `on` scans, `off` born-digital), and retain its `documentId` for query/screenshot follow-up.";
-    case "document.query":
-      return "• Use `query_document` with the cached `documentId`: search to locate evidence, then request the smallest page/line window and follow explicit continuation or full-output recovery details.";
-    case "document.screenshot":
-      return "• Use `screenshot_document` only for the smallest cached page set whose visual layout is needed; start at 150 DPI and preserve its bounded path manifest.";
-    default:
-      return "";
-  }
+export function buildGuidelines(
+  _keywords: string[],
+  category: IntentCategory | IntentCategory[],
+): string {
+  const categories = (Array.isArray(category) ? category : [category]).filter(
+    (value): value is Exclude<IntentCategory, ""> => value !== "",
+  );
+  const guidelines = categories.map((value) => {
+    switch (value) {
+      case "diagram":
+        return [
+          "• The prompt explicitly requests a diagram. Use `render_diagram`.",
+          "  Prefer ASCII for inline display and SVG or HTML for a saved artifact.",
+        ].join("\n");
+      case "preview":
+        return "• The prompt explicitly requests rendered output. Use `preview_content`; browser HTML needs no Chromium, while terminal PNG and PDF require Chromium, and the result reports the artifact path.";
+      case "document.parse":
+        return "• Parse the local regular file once with `parse_document`, choose OCR deliberately (`auto` uncertain, `on` scans, `off` born-digital), and retain its `documentId` for query/screenshot follow-up.";
+      case "document.query":
+        return "• Use `query_document` with the cached `documentId`: search to locate evidence, then request the smallest page/line window and follow explicit continuation or full-output recovery details.";
+      case "document.screenshot":
+        return "• Use `screenshot_document` only for the smallest cached page set whose visual layout is needed; start at 150 DPI and preserve its bounded path manifest.";
+      default:
+        return "";
+    }
+  });
+  return [...new Set(guidelines.filter(Boolean))].join("\n");
 }
 
 interface AutotriggerState {
   hasIntent: boolean;
   matchedKeywords: string[];
-  category: IntentCategory;
+  categories: IntentCategory[];
   injectedThisTurn: boolean;
 }
 
@@ -95,19 +115,25 @@ export function registerAutotrigger(pi: ExtensionAPI, activation?: ActivationCon
   const state: AutotriggerState = {
     hasIntent: false,
     matchedKeywords: [],
-    category: "",
+    categories: [],
     injectedThisTurn: false,
   };
 
   pi.on("input", async (event) => {
     state.hasIntent = false;
     state.matchedKeywords = [];
-    state.category = "";
+    state.categories = [];
     state.injectedThisTurn = false;
 
     const result = matchKeywords(event.text);
-    if (result.matched && result.category) {
-      const requested = CATEGORY_TOOLS[result.category];
+    if (result.matched && result.categories.length > 0) {
+      const requested = [
+        ...new Set(
+          result.categories.flatMap((category) =>
+            category ? CATEGORY_TOOLS[category as Exclude<IntentCategory, "">] : [],
+          ),
+        ),
+      ];
       const added = activation?.beginTurn(requested) ?? [];
       if (
         !activation ||
@@ -116,7 +142,7 @@ export function registerAutotrigger(pi: ExtensionAPI, activation?: ActivationCon
       ) {
         state.hasIntent = true;
         state.matchedKeywords = result.keywords;
-        state.category = result.category;
+        state.categories = result.categories;
       }
     } else {
       activation?.beginTurn([]);
@@ -127,7 +153,7 @@ export function registerAutotrigger(pi: ExtensionAPI, activation?: ActivationCon
 
   pi.on("before_agent_start", async (event) => {
     if (!state.hasIntent || state.injectedThisTurn) return;
-    const guidelines = buildGuidelines(state.matchedKeywords, state.category);
+    const guidelines = buildGuidelines(state.matchedKeywords, state.categories);
     if (!guidelines) return;
     state.injectedThisTurn = true;
     return { systemPrompt: `${event.systemPrompt}\n\n${guidelines}` };

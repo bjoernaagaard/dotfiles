@@ -30,6 +30,19 @@ function renderError(theme: ThemeLike, label: string, error: unknown): Text {
   );
 }
 
+function renderToolError(
+  result: any,
+  theme: ThemeLike,
+  label: string,
+  context: any,
+): Text | undefined {
+  if (!context?.isError && !result?.details?.error) return undefined;
+  if (result?.details?.error) return renderError(theme, label, result.details.error);
+
+  const text = result?.content?.find((entry: any) => entry?.type === "text")?.text;
+  return renderError(theme, label, text || "Tool execution failed");
+}
+
 export function renderParseCall(args: any, theme: ThemeLike, _context: any): Text {
   const bits = ["parse_document", args?.path ? args.path : "<path>"];
   if (args?.format) bits.push(`format=${args.format}`);
@@ -45,12 +58,13 @@ export function renderParseResult(
   result: any,
   options: { expanded: boolean; isPartial: boolean },
   theme: ThemeLike,
-  _context: any,
+  context: any,
 ): Text {
+  const error = renderToolError(result, theme, "parse", context);
+  if (error) return error;
   if (options.isPartial) {
     return renderPartial(theme, "parse", result?.details?.phase ?? result?.details?.status);
   }
-  if (result?.details?.error) return renderError(theme, "parse", result.details.error);
 
   const details = result?.details ?? {};
   const summary = [
@@ -81,12 +95,13 @@ export function renderQueryResult(
   result: any,
   options: { expanded: boolean; isPartial: boolean },
   theme: ThemeLike,
-  _context: any,
+  context: any,
 ): Text {
+  const error = renderToolError(result, theme, "query", context);
+  if (error) return error;
   if (options.isPartial) {
     return renderPartial(theme, "query", result?.details?.phase ?? result?.details?.status);
   }
-  if (result?.details?.error) return renderError(theme, "query", result.details.error);
 
   const details = result?.details ?? {};
   const count = details.matchCount ?? details.lineCount ?? 0;
@@ -113,12 +128,13 @@ export function renderScreenshotResult(
   result: any,
   options: { expanded: boolean; isPartial: boolean },
   theme: ThemeLike,
-  _context: any,
+  context: any,
 ): Text {
+  const error = renderToolError(result, theme, "screenshot", context);
+  if (error) return error;
   if (options.isPartial) {
     return renderPartial(theme, "screenshot", result?.details?.phase ?? result?.details?.status);
   }
-  if (result?.details?.error) return renderError(theme, "screenshot", result.details.error);
 
   const details = result?.details ?? {};
   const lines = [`screenshot_document ${details.pageCount ?? 0} page(s)`];

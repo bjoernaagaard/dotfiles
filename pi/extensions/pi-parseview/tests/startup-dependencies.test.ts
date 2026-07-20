@@ -72,7 +72,7 @@ describe("startup dependency degradation", () => {
     expect(notify).toHaveBeenCalledTimes(2);
     expect(notify.mock.calls.map(([message]) => message)).toEqual([
       expect.stringMatching(/LiteParse/),
-      expect.stringMatching(/Chromium/),
+      expect.stringMatching(/PNG\/PDF.*HTML\/browser/),
     ]);
 
     await state.handlers.get("session_start")?.({ reason: "reload" }, uiContext);
@@ -81,7 +81,11 @@ describe("startup dependency degradation", () => {
     expect(notify.mock.calls.filter(([message]) => /Chromium/.test(message))).toHaveLength(2);
 
     await state.handlers.get("input")?.({ text: "parse this document" }, uiContext);
-    expect(state.active()).not.toContain("parse_document");
+    expect(state.active()).toContain("parse_document");
+    await state.handlers.get("input")?.({ text: "search the cached document" }, uiContext);
+    expect(state.active()).toContain("query_document");
+    await state.handlers.get("input")?.({ text: "screenshot page 1" }, uiContext);
+    expect(state.active()).not.toContain("screenshot_document");
     await state.handlers.get("input")?.({ text: "draw a sequence diagram" }, uiContext);
     expect(state.active()).toContain("render_diagram");
     await state.handlers.get("input")?.({ text: "render this markdown" }, uiContext);

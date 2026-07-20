@@ -1,3 +1,4 @@
+import { readFile, rm } from "node:fs/promises";
 import { describe, it, expect } from "vite-plus/test";
 
 const COMPLEX_DIAGRAM = `graph TD
@@ -74,6 +75,30 @@ describe("mermaid ASCII crash fallback", () => {
     expect(svg).toContain(theme.bg);
     expect(svg).toContain(theme.fg);
   });
+
+  it("wrapper handles leading Mermaid comments and adds SVG accessibility metadata", async () => {
+    const { runDiagramRender } = await import("../src/diagram/render");
+    const result = await runDiagramRender(
+      "%% leading comment\nsequenceDiagram\nA->>B: hello",
+      "svg",
+      undefined,
+      process.cwd(),
+    );
+    const outputPath = result.details.path;
+    expect(outputPath).toBeDefined();
+    if (!outputPath) return;
+
+    try {
+      const svg = await readFile(outputPath, "utf8");
+      expect(svg).toContain('role="img"');
+      expect(svg).toContain("<title");
+      expect(svg).toContain("<desc");
+      expect(svg).toContain("Mermaid sequence diagram");
+    } finally {
+      await rm(outputPath, { force: true });
+    }
+  });
+
   it("render_diagram-style catch falls back to SVG instead of error text", async () => {
     const { renderMermaidSVG } = await import("beautiful-mermaid");
     const { detectMermaidTheme } = await import("../src/theme");

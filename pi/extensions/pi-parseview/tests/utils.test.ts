@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vite-plus/test";
-import { normalizeMermaidCode, rewriteImagePaths } from "../src/utils";
+import { detectMermaidDiagramKind, normalizeMermaidCode, rewriteImagePaths } from "../src/utils";
 
 describe("normalizeMermaidCode", () => {
   it("converts semicolons to newlines", () => {
@@ -36,6 +36,39 @@ describe("normalizeMermaidCode", () => {
   it("does not double-normalize (idempotent)", () => {
     const input = "graph LR\nA --> B\nB --> C";
     expect(normalizeMermaidCode(normalizeMermaidCode(input))).toBe(input);
+  });
+
+  it("preserves semicolons inside quoted labels and messages", () => {
+    expect(normalizeMermaidCode('graph TD; A["Start; Keep"] --> B')).toBe(
+      'graph TD\nA["Start; Keep"] --> B',
+    );
+    expect(normalizeMermaidCode('sequenceDiagram; Alice->>Bob: "hello; keep"')).toBe(
+      'sequenceDiagram\nAlice->>Bob: "hello; keep"',
+    );
+  });
+
+  it("strips leading comments and init directives before dispatch", () => {
+    const input = '%% comment\n%%{init: {"theme":"forest"}}%%\nsequenceDiagram\nA->>B: hello';
+    expect(normalizeMermaidCode(input)).toBe("sequenceDiagram\nA->>B: hello");
+  });
+});
+
+describe("detectMermaidDiagramKind", () => {
+  it.each([
+    ["graph TD", "flowchart"],
+    ["stateDiagram-v2", "state"],
+    ["sequenceDiagram", "sequence"],
+    ["classDiagram", "class"],
+    ["erDiagram", "er"],
+    ["xychart-beta", "xychart"],
+  ] as const)("recognizes %s", (header, expected) => {
+    expect(detectMermaidDiagramKind(header)).toBe(expected);
+  });
+
+  it("fails clearly for unsupported headers", () => {
+    expect(() => detectMermaidDiagramKind("gantt\ntitle Work")).toThrow(
+      /Unsupported Mermaid diagram header/,
+    );
   });
 });
 

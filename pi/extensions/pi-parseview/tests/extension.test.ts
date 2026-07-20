@@ -62,7 +62,6 @@ const COMMAND_NAMES = [
   "preview",
   "preview-browser",
   "preview-pdf",
-  "preview-clear-cache",
 ];
 
 describe("extension registration", () => {

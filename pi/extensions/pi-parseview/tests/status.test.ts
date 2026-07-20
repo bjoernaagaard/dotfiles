@@ -2,12 +2,12 @@ import { describe, expect, it } from "vite-plus/test";
 import { formatParseViewStatus, PARSEVIEW_STATUS_KEY, setParseViewStatus } from "../src/status";
 
 describe("parseview footer status", () => {
-  it("summarizes parser and browser availability compactly", () => {
+  it("summarizes parser and export availability compactly", () => {
     expect(formatParseViewStatus({ parser: true, browser: true })).toBe(
-      "📄 PV parse ready web ready",
+      "📄 PV parse ready export ready",
     );
     expect(formatParseViewStatus({ parser: false, browser: true })).toBe(
-      "📄 PV parse missing web ready",
+      "📄 PV parse missing export ready",
     );
   });
 
@@ -22,7 +22,7 @@ describe("parseview footer status", () => {
     setParseViewStatus(ctx, undefined);
 
     expect(calls).toEqual([
-      [PARSEVIEW_STATUS_KEY, "📄 PV parse ready web missing"],
+      [PARSEVIEW_STATUS_KEY, "📄 PV parse ready export missing"],
       [PARSEVIEW_STATUS_KEY, undefined],
     ]);
   });

@@ -10,6 +10,7 @@ import {
 import { Type } from "typebox";
 import { StringEnum } from "@earendil-works/pi-ai";
 import { Text } from "@earendil-works/pi-tui";
+import { parseCommandLine } from "../command-args";
 import { loadConfig } from "../config";
 import { resolvePath, writeTempFile } from "../utils";
 import { renderMarkdown, wrapWithTheme } from "./render";
@@ -48,6 +49,44 @@ function guardAbort(signal?: AbortSignal | null): void {
   }
 }
 
+export interface PreviewCommandArgs {
+  content: string;
+  useBrowser: boolean;
+  usePdf: boolean;
+  fontSize?: number;
+}
+
+export function parsePreviewCommandArgs(args: string): PreviewCommandArgs {
+  const tokens = parseCommandLine(args);
+  const contentTokens: string[] = [];
+  let useBrowser = false;
+  let usePdf = false;
+  let fontSize: number | undefined;
+
+  for (let index = 0; index < tokens.length; index += 1) {
+    const token = tokens[index];
+    if (token === "--browser") {
+      useBrowser = true;
+    } else if (token === "--pdf") {
+      usePdf = true;
+    } else if (token === "--font-size" && /^\d+$/.test(tokens[index + 1] ?? "")) {
+      fontSize = Number(tokens[index + 1]);
+      index += 1;
+    } else {
+      contentTokens.push(token);
+    }
+  }
+
+  return { content: contentTokens.join(" ").trim(), useBrowser, usePdf, fontSize };
+}
+
+async function readPreviewCommandContent(tokens: string[], cwd: string): Promise<string> {
+  const candidate = tokens.join(" ").trim();
+  if (!candidate) throw new Error("Provide content or a file path");
+  const resolved = resolvePath(candidate, cwd);
+  return existsSync(resolved) ? readFile(resolved, "utf-8") : candidate;
+}
+
 export function registerPreview(pi: ExtensionAPI) {
   // --- LLM Tool ---
   pi.registerTool({
@@ -60,12 +99,17 @@ export function registerPreview(pi: ExtensionAPI) {
       filePath: Type.Optional(
         Type.String({ description: "Path to a file to render instead of inline content" }),
       ),
-      format: StringEnum(["terminal", "browser", "pdf"] as const, {
-        description: "Output format: terminal (PNG), browser (HTML), pdf (PDF file)",
-      }),
+      format: Type.Optional(
+        StringEnum(["terminal", "browser", "pdf"] as const, {
+          description:
+            "Output format: terminal (PNG), browser (HTML), pdf (PDF file); defaults to configured defaultFormat",
+        }),
+      ),
       outputPath: Type.Optional(Type.String({ description: "Optional output file path" })),
       fontSizePx: Type.Optional(
-        Type.Number({ description: "Font size in pixels (10-24, default: 16)" }),
+        Type.Number({
+          description: "Font size in pixels (10-24, defaults to configured fontSize)",
+        }),
       ),
     }),
     executionMode: "sequential" as const,
@@ -85,6 +129,7 @@ export function registerPreview(pi: ExtensionAPI) {
         throw new Error("No content to render. Provide content or filePath.");
       }
 
+      const format = params.format ?? loadConfig().defaultFormat;
       const fontSize = Math.min(24, Math.max(10, params.fontSizePx ?? loadConfig().fontSize));
 
       try {
@@ -92,7 +137,7 @@ export function registerPreview(pi: ExtensionAPI) {
         guardAbort(signal);
         const htmlFull = wrapWithTheme(htmlBody, { bg: DEFAULT_BG, fg: DEFAULT_FG }, fontSize);
 
-        if (params.format === "browser") {
+        if (format === "browser") {
           const outPath = params.outputPath
             ? await mutateSelectedOutput(params.outputPath, ctx.cwd, (target) =>
                 writeFile(target, htmlFull, "utf-8"),
@@ -113,7 +158,7 @@ export function registerPreview(pi: ExtensionAPI) {
           };
         }
 
-        if (params.format === "pdf") {
+        if (format === "pdf") {
           const outPath = params.outputPath
             ? await mutateSelectedOutput(params.outputPath, ctx.cwd, (target) =>
                 exportToPdf(htmlFull, target).then(() => undefined),
@@ -155,14 +200,22 @@ export function registerPreview(pi: ExtensionAPI) {
       }
     },
     renderCall(args, theme, _context) {
-      const format = args.format ?? "browser";
+      const format = args.format ?? loadConfig().defaultFormat;
       return new Text(
         theme.fg("toolTitle", theme.bold("preview ")) + theme.fg("muted", format),
         0,
         0,
       );
     },
-    renderResult(result: any, _options, theme, _context) {
+    renderResult(result: any, _options, theme, context) {
+      if (context.isError) {
+        const message = result.content.find((entry: any) => entry.type === "text")?.text;
+        return new Text(
+          theme.fg("error", `preview error: ${message || "Tool execution failed"}`),
+          0,
+          0,
+        );
+      }
       const path = result.details?.path ?? "";
       return new Text(theme.fg("success", "✓ ") + theme.fg("dim", path), 0, 0);
     },
@@ -182,41 +235,41 @@ export function registerPreview(pi: ExtensionAPI) {
         return;
       }
 
-      const useBrowser = args.includes("--browser");
-      const usePdf = args.includes("--pdf");
-      const fontSizeMatch = args.match(/--font-size\s+(\d+)/);
-      const fontSize = fontSizeMatch ? parseInt(fontSizeMatch[1], 10) : loadConfig().fontSize;
-      const cleanArgs = args
-        .replace(/ --browser/g, "")
-        .replace(/ --pdf/g, "")
-        .replace(/ --font-size\s+\d+/g, "")
-        .trim();
-
-      const isFile = !cleanArgs.includes(" ") && existsSync(resolvePath(cleanArgs, ctx.cwd));
-
       let content: string;
-      if (isFile) {
-        const resolved = resolvePath(cleanArgs, ctx.cwd);
-        content = await readFile(resolved, "utf-8");
-      } else {
-        content = cleanArgs;
+      let commandArgs: PreviewCommandArgs;
+      try {
+        commandArgs = parsePreviewCommandArgs(args);
+        content = await readPreviewCommandContent([commandArgs.content], ctx.cwd);
+      } catch (err) {
+        const msg = err instanceof Error ? err.message : String(err);
+        ctx.ui.notify(`Preview failed: ${msg}`, "error");
+        return;
       }
+
+      const format = commandArgs.usePdf
+        ? "pdf"
+        : commandArgs.useBrowser
+          ? "browser"
+          : loadConfig().defaultFormat;
+      const fontSize = commandArgs.fontSize ?? loadConfig().fontSize;
 
       try {
         const htmlBody = await renderMarkdown(content);
         const htmlFull = wrapWithTheme(htmlBody, { bg: DEFAULT_BG, fg: DEFAULT_FG }, fontSize);
         const tempPath = await writeTempFile(htmlFull, ".html");
 
-        if (usePdf) {
+        if (format === "pdf") {
           const pdfPath = tempPath.replace(/\.html$/, ".pdf");
           await exportToPdf(htmlFull, pdfPath);
           const opened = openWithBrowser(pdfPath);
           ctx.ui.notify(`${opened ? "PDF opened" : "PDF saved"}: ${pdfPath}`, "info");
-        } else if (useBrowser) {
+        } else if (format === "browser") {
           const opened = openWithBrowser(tempPath);
           ctx.ui.notify(`${opened ? "Browser opened" : "Preview saved"}: ${tempPath}`, "info");
         } else {
-          ctx.ui.notify(`Preview saved: ${tempPath}`, "info");
+          const pngPath = tempPath.replace(/\.html$/, ".png");
+          await exportToPng(htmlFull, pngPath);
+          ctx.ui.notify(`Preview rendered: ${pngPath}`, "info");
         }
       } catch (err) {
         const msg = err instanceof Error ? err.message : String(err);
@@ -231,18 +284,21 @@ export function registerPreview(pi: ExtensionAPI) {
       if (!ctx.hasUI) return;
 
       let content: string;
-      if (args && !args.includes(" ") && existsSync(resolvePath(args, ctx.cwd))) {
-        content = await readFile(resolvePath(args, ctx.cwd), "utf-8");
-      } else if (args) {
-        content = args;
-      } else {
-        ctx.ui.notify("Provide content or a file path", "warning");
+      try {
+        content = await readPreviewCommandContent(parseCommandLine(args ?? ""), ctx.cwd);
+      } catch (err) {
+        const message = err instanceof Error ? err.message : String(err);
+        ctx.ui.notify(message, "warning");
         return;
       }
 
       try {
         const htmlBody = await renderMarkdown(content);
-        const htmlFull = wrapWithTheme(htmlBody, { bg: DEFAULT_BG, fg: DEFAULT_FG }, 15);
+        const htmlFull = wrapWithTheme(
+          htmlBody,
+          { bg: DEFAULT_BG, fg: DEFAULT_FG },
+          loadConfig().fontSize,
+        );
         const tempPath = await writeTempFile(htmlFull, ".html");
         const opened = openWithBrowser(tempPath);
         ctx.ui.notify(`${opened ? "Browser opened" : "Preview saved"}: ${tempPath}`, "info");
@@ -259,18 +315,21 @@ export function registerPreview(pi: ExtensionAPI) {
       if (!ctx.hasUI) return;
 
       let content: string;
-      if (args && !args.includes(" ") && existsSync(resolvePath(args, ctx.cwd))) {
-        content = await readFile(resolvePath(args, ctx.cwd), "utf-8");
-      } else if (args) {
-        content = args;
-      } else {
-        ctx.ui.notify("Provide content or a file path", "warning");
+      try {
+        content = await readPreviewCommandContent(parseCommandLine(args ?? ""), ctx.cwd);
+      } catch (err) {
+        const message = err instanceof Error ? err.message : String(err);
+        ctx.ui.notify(message, "warning");
         return;
       }
 
       try {
         const htmlBody = await renderMarkdown(content);
-        const htmlFull = wrapWithTheme(htmlBody, { bg: DEFAULT_BG, fg: DEFAULT_FG }, 16);
+        const htmlFull = wrapWithTheme(
+          htmlBody,
+          { bg: DEFAULT_BG, fg: DEFAULT_FG },
+          loadConfig().fontSize,
+        );
         const pdfPath = await writeTempFile("", ".pdf");
         await exportToPdf(htmlFull, pdfPath);
         const opened = openWithBrowser(pdfPath);
@@ -279,21 +338,6 @@ export function registerPreview(pi: ExtensionAPI) {
         const msg = err instanceof Error ? err.message : String(err);
         ctx.ui.notify(`PDF failed: ${msg}`, "error");
       }
-    },
-  });
-
-  pi.registerCommand("preview-clear-cache", {
-    description: "Clear the preview cache",
-    handler: async (_args, ctx: ExtensionCommandContext) => {
-      if (!ctx.hasUI) return;
-      const confirmed = await ctx.ui.confirm(
-        "Clear ParseView preview cache?",
-        "Delete all cached preview artifacts?",
-      );
-      if (!confirmed) return;
-      const { previewCache } = await import("../cache");
-      await previewCache.clear();
-      ctx.ui.notify("ParseView preview cache cleared", "info");
     },
   });
 }

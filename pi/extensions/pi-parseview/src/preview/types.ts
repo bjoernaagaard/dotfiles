@@ -11,7 +11,7 @@ export interface ExportOptions {
 export interface PreviewToolParams {
   content?: string;
   filePath?: string;
-  format: "terminal" | "browser" | "pdf";
+  format?: "terminal" | "browser" | "pdf";
   outputPath?: string;
   fontSizePx?: number;
 }

@@ -9,6 +9,7 @@ import { createLiteparseService, type DocumentService } from "./parser";
 import { createParseTool } from "./tools/parse";
 import { createQueryTool } from "./tools/query";
 import { createScreenshotTool } from "./tools/screenshot";
+import { parseCommandLine, stripLeadingAt } from "../command-args";
 import type { ActivationController } from "../tools/activation";
 
 export interface ParseDocumentRuntime {
@@ -48,21 +49,32 @@ export function resetParseDocumentRuntime(): void {
   runtimePromise = null;
 }
 
-function parseLegacyCommandArgs(args: string): {
+export function parseLegacyCommandArgs(args: string): {
   path: string;
   targetPages?: string;
   ocrMode?: "off";
 } {
-  const targetPages = args.match(/--pages\s+"([^"]+)"|--pages\s+(\S+)/);
-  const filePath = args
-    .replace(/\s+--no-ocr\b/g, "")
-    .replace(/\s+--pages\s+"[^"]+"/g, "")
-    .replace(/\s+--pages\s+\S+/g, "")
-    .trim();
+  const tokens = parseCommandLine(args);
+  const pathTokens: string[] = [];
+  let targetPages: string | undefined;
+  let ocrMode: "off" | undefined;
+
+  for (let index = 0; index < tokens.length; index += 1) {
+    const token = tokens[index];
+    if (token === "--no-ocr") {
+      ocrMode = "off";
+    } else if (token === "--pages" && tokens[index + 1] !== undefined) {
+      targetPages = tokens[index + 1];
+      index += 1;
+    } else {
+      pathTokens.push(token);
+    }
+  }
+
   return {
-    path: filePath,
-    targetPages: targetPages?.[1] ?? targetPages?.[2],
-    ocrMode: /(?:^|\s)--no-ocr(?:\s|$)/.test(args) ? "off" : undefined,
+    path: stripLeadingAt(pathTokens.join(" ").trim()),
+    targetPages,
+    ocrMode,
   };
 }
 
@@ -94,7 +106,14 @@ export function registerDocumentTools(pi: ExtensionAPI, activation?: ActivationC
         return;
       }
 
-      const input = parseLegacyCommandArgs(args);
+      let input: ReturnType<typeof parseLegacyCommandArgs>;
+      try {
+        input = parseLegacyCommandArgs(args);
+      } catch (error) {
+        const message = error instanceof Error ? error.message : String(error);
+        ctx.ui.notify(`Invalid parse arguments: ${message}`, "warning");
+        return;
+      }
       if (!input.path) {
         ctx.ui.notify("A document path is required", "warning");
         return;

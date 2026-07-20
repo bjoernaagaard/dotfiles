@@ -58,7 +58,7 @@ export default function (pi: ExtensionAPI) {
     }
     if (!browser) {
       ctx.ui.notify(
-        "Browser preview disabled: no Chromium executable found. Install Chrome/Brave/Edge or set puppeteerExecutablePath in settings.",
+        "PNG/PDF preview export unavailable: no Chromium executable found. HTML/browser previews still work; install Chrome/Brave/Edge or set puppeteerExecutablePath in settings.",
         "warning",
       );
     }

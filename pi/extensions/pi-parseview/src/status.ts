@@ -10,7 +10,7 @@ export type ParseViewAvailability = {
 
 /** Keep the persistent segment short while making degraded dependencies visible. */
 export function formatParseViewStatus({ parser, browser }: ParseViewAvailability): string {
-  return `📄 PV parse ${parser ? "ready" : "missing"} web ${browser ? "ready" : "missing"}`;
+  return `📄 PV parse ${parser ? "ready" : "missing"} export ${browser ? "ready" : "missing"}`;
 }
 
 export function setParseViewStatus(

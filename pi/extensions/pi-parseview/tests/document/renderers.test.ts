@@ -114,4 +114,28 @@ describe("document renderers", () => {
     expect(screenshot).toContain("screenshot_document 2 page(s)");
     expect(screenshot).toContain("page-1-150.png");
   });
+
+  it("honors Pi's isError render context for thrown tool results", () => {
+    const context = { isError: true };
+    const result = { content: [{ type: "text", text: "native module failed" }], details: {} };
+
+    expect(
+      renderParseResult(result, { expanded: false, isPartial: false }, {}, context)
+        .render(120)
+        .join("\n")
+        .trimEnd(),
+    ).toBe("parse error: native module failed");
+    expect(
+      renderQueryResult(result, { expanded: false, isPartial: false }, {}, context)
+        .render(120)
+        .join("\n")
+        .trimEnd(),
+    ).toBe("query error: native module failed");
+    expect(
+      renderScreenshotResult(result, { expanded: false, isPartial: false }, {}, context)
+        .render(120)
+        .join("\n")
+        .trimEnd(),
+    ).toBe("screenshot error: native module failed");
+  });
 });

@@ -3,7 +3,7 @@ import type { ExtensionAPI } from "@earendil-works/pi-coding-agent";
 import { buildGuidelines, matchKeywords, registerAutotrigger } from "../src/autotrigger/index";
 import type { ActivationController } from "../src/tools/activation";
 
-const noMatch = { matched: false, keywords: [], category: "" };
+const noMatch = { matched: false, keywords: [], category: "", categories: [] };
 
 describe("matchKeywords", () => {
   it.each([
@@ -37,6 +37,17 @@ describe("matchKeywords", () => {
     ["inspect the page layout", "document.screenshot"],
   ])("routes document intent: %s", (text, category) => {
     expect(matchKeywords(text)).toMatchObject({ matched: true, category });
+  });
+
+  it("returns every matched category for compound requests", () => {
+    expect(
+      matchKeywords(
+        "parse this document, then query the cached document, render a diagram, and preview this file",
+      ),
+    ).toMatchObject({
+      matched: true,
+      categories: ["document.query", "document.parse", "diagram", "preview"],
+    });
   });
 
   it.each([
@@ -86,7 +97,7 @@ describe("buildGuidelines", () => {
 
 function captureAutotrigger() {
   const handlers = new Map<string, (...args: any[]) => any>();
-  const beginTurn = vi.fn(() => ["render_diagram"]);
+  const beginTurn = vi.fn((names: string[]) => names);
   const activation = { beginTurn } as unknown as ActivationController;
   const api = {
     on: (event: string, handler: (...args: any[]) => any) => handlers.set(event, handler),
@@ -108,6 +119,21 @@ describe("autotrigger event behavior", () => {
     expect(result).not.toHaveProperty("message");
     expect(JSON.stringify(result)).not.toContain('"role":"user"');
     expect(handlers.has("context")).toBe(false);
+  });
+
+  it("activates the union of tools and deduplicates compound guidance", async () => {
+    const { handlers, beginTurn } = captureAutotrigger();
+    await handlers.get("input")?.(
+      { text: "parse this document, then query the cached document and render a diagram" },
+      {},
+    );
+    const result = await handlers.get("before_agent_start")?.({ systemPrompt: "base" }, {});
+
+    expect(beginTurn).toHaveBeenCalledWith(["query_document", "parse_document", "render_diagram"]);
+    expect(result.systemPrompt).toContain("parse_document");
+    expect(result.systemPrompt).toContain("query_document");
+    expect(result.systemPrompt).toContain("render_diagram");
+    expect(result.systemPrompt.match(/The prompt explicitly requests a diagram/g)).toHaveLength(1);
   });
 
   it("injects at most once per input and resets for the next input", async () => {

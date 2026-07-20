@@ -8,7 +8,7 @@ export interface ParseViewConfig {
   puppeteerExecutablePath?: string;
   ocrEnabled: boolean;
   diagramDefaultFormat: "ascii" | "svg" | "html";
-  cacheTtl: number;
+  diagramTheme?: string;
 }
 
 const DEFAULTS: ParseViewConfig = {
@@ -17,7 +17,7 @@ const DEFAULTS: ParseViewConfig = {
   puppeteerExecutablePath: undefined,
   ocrEnabled: false,
   diagramDefaultFormat: "ascii",
-  cacheTtl: 300,
+  diagramTheme: undefined,
 };
 
 const VALID_FORMATS = new Set(["browser", "terminal", "pdf"]);
@@ -48,11 +48,11 @@ function validate(config: Record<string, unknown>): Partial<ParseViewConfig> {
     result.diagramDefaultFormat =
       config.diagramDefaultFormat as ParseViewConfig["diagramDefaultFormat"];
   }
+  if (typeof config.diagramTheme === "string" && config.diagramTheme.trim().length > 0) {
+    result.diagramTheme = config.diagramTheme.trim();
+  }
   if (typeof config.fontSize === "number") {
     result.fontSize = Math.max(10, Math.min(24, Math.round(config.fontSize)));
-  }
-  if (typeof config.cacheTtl === "number" && config.cacheTtl >= 0) {
-    result.cacheTtl = Math.round(config.cacheTtl);
   }
   if (typeof config.ocrEnabled === "boolean") {
     result.ocrEnabled = config.ocrEnabled;

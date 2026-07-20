@@ -22,8 +22,8 @@ describe("loadConfig", () => {
     expect(cfg.defaultFormat).toBe("browser");
     expect(cfg.fontSize).toBe(16);
     expect(cfg.ocrEnabled).toBe(false);
-    expect(cfg.cacheTtl).toBe(300);
     expect(cfg.diagramDefaultFormat).toBe("ascii");
+    expect(cfg.diagramTheme).toBeUndefined();
     expect(cfg.puppeteerExecutablePath).toBeUndefined();
   });
 
@@ -109,6 +109,20 @@ describe("loadConfig", () => {
     const cfg = loadConfig();
     expect(cfg.defaultFormat).toBe("browser");
     expect(cfg.diagramDefaultFormat).toBe("ascii");
+    rmSync(dir, { recursive: true, force: true });
+  });
+
+  it("reads the configured Mermaid theme name", () => {
+    const dir = tmpDir();
+    const agentDir = join(dir, "agent");
+    mkdirSync(agentDir, { recursive: true });
+    writeFileSync(
+      join(agentDir, "settings.json"),
+      JSON.stringify({ "pi-parseview": { diagramTheme: " nord-light " } }),
+    );
+
+    initConfig(dir, agentDir);
+    expect(loadConfig().diagramTheme).toBe("nord-light");
     rmSync(dir, { recursive: true, force: true });
   });
 });

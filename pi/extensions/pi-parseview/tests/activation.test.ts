@@ -90,13 +90,22 @@ describe("ParseView activation controller", () => {
     expect(state.active()).toEqual(["read", "query_document", "parse_document"]);
   });
 
-  it("does not load parser capabilities while LiteParse is unavailable", () => {
+  it("keeps plain-text parse/query available while gating native screenshots", () => {
     const state = recorder();
     const activation = createActivationController(state.api);
     activation.setParserAvailable(false);
 
+    expect(activation.beginTurn(["parse_document", "query_document"])).toEqual([
+      "parse_document",
+      "query_document",
+    ]);
     expect(activation.beginTurn(["screenshot_document"])).toEqual([]);
-    expect(state.active()).toEqual(["read", "other_extension_tool"]);
+    expect(state.active()).toEqual([
+      "read",
+      "other_extension_tool",
+      "parse_document",
+      "query_document",
+    ]);
     expect(activation.beginTurn(["render_diagram"])).toEqual(["render_diagram"]);
   });
 

@@ -23,6 +23,8 @@ These tools are registered at startup but activated lazily from explicit intent.
 
 `mermaid` remains registered but inactive as a compatibility alias for stored calls. New model-visible guidance and normal activation expose only `render_diagram`.
 
+`render_diagram` supports the Beautiful Mermaid subset: flowcharts (`graph`/`flowchart`), state diagrams, sequence diagrams, class diagrams, ER diagrams, and XY charts. Other Mermaid headers such as `gantt`, `pie`, and `mindmap` fail with an explicit unsupported-header error rather than being rendered as a partial flowchart. Semicolon separators are accepted; semicolons inside quoted labels and messages are preserved.
+
 ### Commands
 
 | Command                                         | Purpose                                                  |
@@ -34,11 +36,12 @@ These tools are registered at startup but activated lazily from explicit intent.
 | `/preview [--browser\|--pdf] <content-or-file>` | Render content                                           |
 | `/preview-browser <content-or-file>`            | Open an HTML preview                                     |
 | `/preview-pdf <content-or-file>`                | Export and open a PDF                                    |
-| `/preview-clear-cache`                          | Clear only preview artifacts                             |
+
+Command paths may be quoted when they contain spaces, for example `/preview-browser "docs/project notes.md"`. `/parse` also accepts the same quoted paths and normalizes one leading `@`.
 
 ## Footer status
 
-ParseView publishes one small `parseview` status segment with parser and browser availability via `ctx.ui.setStatus`. It never replaces Pi's footer, and optional consumers such as `pi-statusline` pick it up automatically; without one, Pi's built-in footer still displays it.
+ParseView publishes one small `parseview` status segment with parser and PNG/PDF export availability via `ctx.ui.setStatus`. HTML/browser previews do not require Chromium. It never replaces Pi's footer, and optional consumers such as `pi-statusline` pick it up automatically; without one, Pi's built-in footer still displays it.
 
 ## Document workflow
 
@@ -117,10 +120,12 @@ Use Pi settings globally at `~/.pi/agent/settings.json`, or per project at `.pi/
     "fontSize": 16,
     "puppeteerExecutablePath": "/path/to/chrome",
     "diagramDefaultFormat": "ascii",
-    "cacheTtl": 300
+    "diagramTheme": "tokyo-night"
   }
 }
 ```
+
+When available, the active Pi theme name is preferred for diagrams. `diagramTheme` is the fallback configured Beautiful Mermaid theme name (for example `tokyo-night`, `nord-light`, or `github-dark`).
 
 `ocrEnabled` from older pi-parseview settings is still tolerated when reading settings, but the consolidated document parser uses `ocrMode` in `parseview.json` instead.
 
@@ -152,9 +157,6 @@ Secrets are referenced by environment-variable name. Secret values are fingerpri
 ## Caches and safety
 
 - Documents: `~/.pi/agent/cache/parseview/documents`
-- Previews: `~/.pi/agent/cache/parseview/previews`
-
-The two clear commands cannot delete each other's data. Both commands ask for confirmation.
 
 The document cache provides:
 
@@ -166,6 +168,8 @@ The document cache provides:
 - bounded tool output using Pi's 50 KB / 2,000-line ceiling for parse, query, screenshot manifests, and inline diagrams
 - strictly advancing continuation queries for complete-line truncation, or byte-identical full-output temporary files when safe continuation is impossible (including service-bounded reads and oversized first lines)
 - per-file mutation queue coverage for complete explicit preview/diagram output mutation windows
+
+Preview artifacts are written to temporary files and their paths are returned directly; they are not retained in a ParseView cache.
 
 Native LiteParse operations do not accept `AbortSignal`. Pi cancellation is checked before native work, after it completes, and before persistence; native CPU work already in progress cannot be interrupted in-process.
 

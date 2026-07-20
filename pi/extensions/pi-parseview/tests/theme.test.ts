@@ -42,6 +42,15 @@ describe("detectMermaidTheme", () => {
     expect(result.fg).toBe("#d8dee9");
   });
 
+  it("prefers the most specific Tokyo Night variant", () => {
+    expect(detectMermaidTheme("tokyo-night-storm").bg).toBe("#24283b");
+    expect(detectMermaidTheme("tokyo-night-light").bg).toBe("#d5d6db");
+  });
+
+  it("prefers the most specific Nord variant", () => {
+    expect(detectMermaidTheme("nord-light").bg).toBe("#eceff4");
+  });
+
   it("handles dracula theme", () => {
     const result = detectMermaidTheme("dracula");
     expect(result.bg).toBe("#282a36");

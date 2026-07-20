@@ -33,17 +33,26 @@ export function detectMermaidTheme(
   bgColor?: string,
   fgColor?: string,
 ): DiagramColors {
-  // Try direct map first
+  // Prefer exact names, then the most specific partial match. This keeps
+  // `tokyo-night-storm` from being captured by `tokyo-night`, and similarly
+  // preserves `nord-light`.
   if (piThemeName) {
-    const lower = piThemeName.toLowerCase();
-    for (const [key, bmName] of Object.entries(THEME_MAP)) {
+    const lower = piThemeName.toLowerCase().trim();
+    const candidates = Object.entries(THEME_MAP).sort(([a], [b]) => b.length - a.length);
+    for (const [key, bmName] of candidates) {
+      if (lower === key) {
+        return BM_THEMES[bmName as keyof typeof BM_THEMES];
+      }
+    }
+    for (const [key, bmName] of candidates) {
       if (lower.includes(key)) {
         return BM_THEMES[bmName as keyof typeof BM_THEMES];
       }
     }
   }
 
-  // Fall back to bg color inference
+  // Fall back to the closest built-in light/dark palette when callers can
+  // provide terminal colors but no recognized named theme.
   if (bgColor && fgColor) {
     const inferred = inferTheme(bgColor, fgColor);
     return BM_THEMES[inferred as keyof typeof BM_THEMES];

@@ -73,8 +73,7 @@ export function createActivationController(pi: ExtensionAPI): ActivationControll
   };
 
   const isAvailable = (name: ManagedToolName): boolean =>
-    parserAvailable ||
-    (!name.startsWith("parse_") && name !== "query_document" && name !== "screenshot_document");
+    parserAvailable || name !== "screenshot_document";
 
   const dependencyClosure = (names: Iterable<string>): Set<ManagedToolName> => {
     const closure = new Set<ManagedToolName>();

@@ -58,9 +58,3 @@ export class TimedCache {
     await this.store.clear();
   }
 }
-
-import { getAgentDir } from "@earendil-works/pi-coding-agent";
-
-const CACHE_DIR = join(getAgentDir(), "cache", "parseview", "previews");
-
-export const previewCache = new Cache(CACHE_DIR);
