@@ -1,6 +1,6 @@
 {
   "autocompleteMaxVisible": 20,
-  "defaultModel": "gpt-5.6-luna",
+  "defaultModel": "gpt-5.6-sol",
   "defaultProjectTrust": "trust",
   "defaultProvider": "openai-codex",
   "defaultThinkingLevel": "high",
@@ -10,7 +10,12 @@
     "xai/grok-4.5",
     "openai-codex/gpt-5.6-luna"
   ],
-  "extensions": [],
+  "extensions": [
+    "-extensions/focus-rail/index.ts",
+    "-extensions/pi-dagster/extensions/core.ts",
+    "-extensions/pi-dagster/extensions/provider.ts",
+    "-extensions/pi-dagster/extensions/remote.ts"
+  ],
   "hideThinkingBlock": false,
   "lastChangelogVersion": "0.80.10",
   "packages": [
@@ -31,7 +36,12 @@
     "npm:@howaboua/pi-ask",
     "npm:@howaboua/pi-codex-conversion",
     "npm:@howaboua/pi-explore-subagents",
-    "npm:@narumitw/pi-statusline",
+    {
+      "source": "npm:@narumitw/pi-statusline",
+      "extensions": [
+        "-src/statusline.ts"
+      ]
+    },
     "npm:@howaboua/pi-cache-hit-predictor",
     "npm:@ogulcancelik/pi-herdr"
   ],
@@ -48,7 +58,9 @@
     "-skills/ast-grep/SKILL.md",
     "-skills/ast-grep-outline/SKILL.md",
     "-skills/codegraph-ast-grep/SKILL.md",
-    "-skills/herdr/SKILL.md"
+    "-skills/herdr/SKILL.md",
+    "-skills/dagster/SKILL.md",
+    "-skills/python-development/SKILL.md"
   ],
   "compaction": {
     "enabled": true

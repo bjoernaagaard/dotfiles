@@ -1,5 +1,6 @@
 [settings]
 experimental = true
+activate_aggressive = true
 python.uv_venv_auto = "create|source"
 env_shell_expand = true
 minimum_release_age = "0s"
@@ -61,26 +62,26 @@ rtk = "latest"
 "aqua:gastownhall/beads" = "latest"
 "npm:@bitwarden/cli" = "latest"
 "npm:@llamaindex/liteparse" = "latest"
-"npm:beautiful-mermaid-cli" = "latest"
-"npm:pi-acp" = "latest"
-"npm:vscode-langservers-extracted" = "latest"
-"npm:localtunnel" = "latest"
 "npm:@tobilu/qmd" = "latest"
 "npm:@openai/codex" = { version = "latest", npm_args = "--ignore-scripts=true" }
 "npm:droid" = { version = "latest", npm_args = "--ignore-scripts=true" }
-"npm:wrangler" = { version = "latest", npm_args = "--ignore-scripts=true" }
-"cargo:eza" = "latest"
-"npm:@inkeep/open-knowledge" = { version = "latest", npm_args = "--ignore-scripts=false" }
-"npm:@colbymchenry/codegraph" = "latest"
 "pipx:pyrefly" = "latest"
 "pipx:ty" = "latest"
 "pipx:ruff" = "latest"
 "npm:oxlint" = "latest"
 "npm:oxfmt" = "latest"
-"npm:fjson-fmt" = "latest"
-carapace = "latest"
 "pipx:tombi" = "latest"
 "npm:hunkdiff" = "latest"
+"npm:beautiful-mermaid-cli" = "latest"
+"npm:pi-acp" = "latest"
+"npm:vscode-langservers-extracted" = "latest"
+"npm:localtunnel" = "latest"
+"npm:wrangler" = { version = "latest", npm_args = "--ignore-scripts=true" }
+"cargo:eza" = "latest"
+"npm:@inkeep/open-knowledge" = { version = "latest", npm_args = "--ignore-scripts=false" }
+"npm:@colbymchenry/codegraph" = "latest"
+"npm:fjson-fmt" = "latest"
+carapace = "latest"
 
 [dotfiles]
 # mise self-config
