@@ -292,6 +292,7 @@ export class ToolRegistrar {
 	private readonly pi: ExtensionAPI;
 	private readonly manager: GraphManager;
 	private readonly allowCreate: () => boolean;
+	private readonly pendingCreation = new Map<string, Promise<void>>();
 	private active = false;
 
 	constructor(pi: ExtensionAPI, manager: GraphManager, allowCreate: () => boolean) {
@@ -302,7 +303,7 @@ export class ToolRegistrar {
 
 	registerAll(): void {
 		const manager = this.manager;
-		const allowCreate = this.allowCreate;
+		const start = (root: string, signal: AbortSignal | undefined, ctx: ExtensionContext) => this.startForTool(root, signal, ctx);
 
 		this.pi.registerTool({
 			name: "codegraph_context",
@@ -319,7 +320,7 @@ export class ToolRegistrar {
 			}, strict),
 			async execute(_id, params, signal, _update, ctx) {
 				const root = rootFor(ctx, params.projectPath);
-				await manager.start(root, { allowCreate: allowCreate(), signal });
+				await start(root, signal, ctx);
 				const context = await manager.query("context", signal, (graph) => graph.buildContext(params.query, {
 					format: "json",
 					maxNodes: params.maxNodes ?? 40,
@@ -359,7 +360,7 @@ export class ToolRegistrar {
 			}, strict),
 			async execute(_id, params, signal, _update, ctx) {
 				const root = rootFor(ctx, params.projectPath);
-				await manager.start(root, { allowCreate: allowCreate(), signal });
+				await start(root, signal, ctx);
 				const payload = await manager.query("node", signal, async (graph) => {
 					const fileHint = params.filePath ?? params.file;
 					if (!params.symbol) {
@@ -410,7 +411,7 @@ export class ToolRegistrar {
 			}, strict),
 			async execute(_id, params, signal, _update, ctx) {
 				const root = rootFor(ctx, params.projectPath);
-				await manager.start(root, { allowCreate: allowCreate(), signal });
+				await start(root, signal, ctx);
 				const payload = await manager.query("files", signal, (graph) => {
 					let files = graph.getFiles().sort((left, right) => left.path.localeCompare(right.path));
 					if (params.path) {
@@ -461,7 +462,7 @@ export class ToolRegistrar {
 			}, strict),
 			async execute(_id, params, signal, _update, ctx) {
 				const root = rootFor(ctx, params.projectPath);
-				await manager.start(root, { allowCreate: allowCreate(), signal });
+				await start(root, signal, ctx);
 				const matches = await manager.query("search", signal, (graph) => graph.searchNodes(params.query, {
 					limit: params.limit ?? 25,
 					kinds: params.kinds as NodeKind[] | undefined,
@@ -490,7 +491,7 @@ export class ToolRegistrar {
 				}, strict),
 				async execute(_id, params, signal, _update, ctx) {
 					const root = rootFor(ctx, params.projectPath);
-					await manager.start(root, { allowCreate: allowCreate(), signal });
+					await start(root, signal, ctx);
 					const payload = await manager.query(direction, signal, async (graph) => {
 						const resolution = resolveSymbol(graph, root, params.symbol, params.filePath);
 						if (resolution.status !== "resolved") return resolution;
@@ -530,7 +531,7 @@ export class ToolRegistrar {
 			}, strict),
 			async execute(_id, params, signal, _update, ctx) {
 				const root = rootFor(ctx, params.projectPath);
-				await manager.start(root, { allowCreate: allowCreate(), signal });
+				await start(root, signal, ctx);
 				const payload = await manager.query("impact", signal, (graph) => {
 					const resolution = resolveSymbol(graph, root, params.symbol, params.filePath);
 					if (resolution.status !== "resolved") return resolution;
@@ -559,7 +560,7 @@ export class ToolRegistrar {
 				parameters: Type.Object({ projectPath: rootParam }, strict),
 				async execute(_id, params, signal, _update, ctx) {
 					const root = rootFor(ctx, params.projectPath);
-					await manager.start(root, { allowCreate: allowCreate(), signal });
+					await start(root, signal, ctx);
 					const official = await manager.query("stats", signal, (graph) => ({
 						stats: graph.getStats(),
 						backend: graph.getBackend(),
@@ -580,6 +581,39 @@ export class ToolRegistrar {
 				},
 			});
 		}
+	}
+
+	private async startForTool(root: string, signal: AbortSignal | undefined, ctx: ExtensionContext): Promise<void> {
+		if (this.allowCreate()) {
+			await this.manager.start(root, { allowCreate: true, signal });
+			return;
+		}
+
+		try {
+			await this.manager.start(root, { allowCreate: false, signal });
+			return;
+		} catch (error) {
+			if (this.manager.snapshot().kind !== "missing" || !ctx.hasUI) throw error;
+		}
+
+		let creation = this.pendingCreation.get(root);
+		if (!creation) {
+			creation = (async () => {
+				const confirmed = await ctx.ui.confirm(
+					"Create CodeGraph index?",
+					`No CodeGraph index exists for ${root}. Create and index it now?`,
+					{ signal },
+				);
+				if (!confirmed) throw new Error(`No CodeGraph index for ${root}. Run /codegraph init or approve creation when prompted.`);
+				await this.manager.start(root, { allowCreate: true, signal });
+			})();
+			this.pendingCreation.set(root, creation);
+			const clearPending = () => {
+				if (this.pendingCreation.get(root) === creation) this.pendingCreation.delete(root);
+			};
+			void creation.then(clearPending, clearPending);
+		}
+		await creation;
 	}
 
 	setReady(ready: boolean): void {

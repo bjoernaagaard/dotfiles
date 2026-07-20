@@ -23,7 +23,7 @@ Production installation includes `@colbymchenry/codegraph@1.4.1` and its matchin
 
 ## Lifecycle and freshness
 
-For an existing index, the manager calls `CodeGraph.open`, performs an incremental `sync`, refreshes an incomplete/outdated index when necessary, then starts `watch`. For a missing index, automatic creation (enabled by default) calls `CodeGraph.init` followed by `indexAll`.
+For an existing index, the manager calls `CodeGraph.open`, performs an incremental `sync`, refreshes an incomplete/outdated index when necessary, then starts `watch`. For a missing index, startup reports the missing state without creating anything. The first CodeGraph tool call asks for confirmation before calling `CodeGraph.init` followed by `indexAll`. Automatic creation remains available only when explicitly enabled with `--codegraph-auto-index`.
 
 Source mutations mark the graph stale synchronously and schedule direct `graph.sync()` without reconnecting anything. Paths coalesce by root, and an edit arriving during sync schedules a second pass. Queries are rejected while stale, syncing, or failed.
 
@@ -81,7 +81,7 @@ When both extensions are loaded, ast-grep applies emit the shared `pi:files-muta
 
 | Flag | Default | Meaning |
 |---|---:|---|
-| `--codegraph-auto-index` | `true` | Create a missing index after session start |
+| `--codegraph-auto-index` | `false` | Explicitly create a missing index after session start |
 | `--codegraph-profile` | `false` | Enable `perf_hooks` instrumentation |
 | `--codegraph-ascii-status` | `false` | Use ASCII separators in status text |
 

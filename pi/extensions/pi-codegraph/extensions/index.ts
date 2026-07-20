@@ -24,8 +24,6 @@ export default function codegraphExtension(pi: ExtensionAPI): void {
 	const manager = new GraphManager({
 		onStateChange(snapshot) {
 			if (disposed || !activeContext || snapshot.projectRoot !== activeRoot) return;
-			const ready = snapshot.kind === "ready" && snapshot.fresh;
-			registrar?.setReady(ready);
 			if (activeContext.hasUI) {
 				activeContext.ui.setStatus(STATUS_KEY, formatStatus(snapshot, Boolean(pi.getFlag(FLAG_ASCII_STATUS))));
 			}
@@ -36,7 +34,7 @@ export default function codegraphExtension(pi: ExtensionAPI): void {
 	pi.registerFlag(FLAG_AUTO_INDEX, {
 		type: "boolean",
 		default: DEFAULT_AUTO_INDEX,
-		description: "Create a missing embedded CodeGraph index after session start",
+		description: "Automatically create a missing embedded CodeGraph index after session start",
 	});
 	pi.registerFlag(FLAG_PROFILE, {
 		type: "boolean",
@@ -74,7 +72,6 @@ export default function codegraphExtension(pi: ExtensionAPI): void {
 			allowCreate: Boolean(pi.getFlag(FLAG_AUTO_INDEX)),
 			signal: undefined,
 		}).catch((error) => {
-			registrar.setReady(false);
 			if (ctx.hasUI && manager.snapshot().kind !== "missing") {
 				ctx.ui.notify(`CodeGraph startup failed: ${error instanceof Error ? error.message : String(error)}`, "warning");
 			}
@@ -96,15 +93,20 @@ export default function codegraphExtension(pi: ExtensionAPI): void {
 	pi.on("session_start", (_event, ctx) => {
 		updateSession(ctx);
 		if (!ctx.isProjectTrusted()) {
+			registrar.setReady(false);
 			if (ctx.hasUI) ctx.ui.setStatus(STATUS_KEY, undefined);
 			return;
 		}
+		// Keep the tools callable while a missing index is reported. The first
+		// tool call will ask whether the user wants to create it.
+		registrar.setReady(true);
 		startFor(ctx);
 	});
 
 	pi.on("resources_discover", (event, ctx) => {
 		if (!activeRoot) updateSession(ctx);
 		if (!ctx.isProjectTrusted()) return;
+		registrar.setReady(true);
 		startFor(ctx, canonicalRoot(event.cwd));
 	});
 

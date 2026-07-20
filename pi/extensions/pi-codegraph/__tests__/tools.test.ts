@@ -20,8 +20,13 @@ function harness() {
 	return { pi: pi as ExtensionAPI, definitions, active: () => active };
 }
 
-function context(root: string, trusted = true) {
-	return { cwd: root, isProjectTrusted: () => trusted } as any;
+function context(root: string, trusted = true, confirm?: () => Promise<boolean>) {
+	return {
+		cwd: root,
+		isProjectTrusted: () => trusted,
+		hasUI: confirm !== undefined,
+		ui: { confirm },
+	} as any;
 }
 
 describe("fixed native tool catalog", () => {
@@ -91,6 +96,30 @@ describe("fixed native tool catalog", () => {
 			const search = await value.definitions.get("codegraph_search").execute("id", { query: "greet", limit: 2 }, undefined, undefined, ctx);
 			assert.match(search.content[0].text, /"name": "greet"/u);
 			assert.equal(search.details.truncated, false);
+		} finally {
+			await manager.shutdown();
+			rmSync(root, { recursive: true, force: true });
+		}
+	});
+
+	it("asks before creating a missing index on the first tool call", async () => {
+		const root = mkdtempSync(path.join(tmpdir(), "pi-codegraph-confirm-"));
+		const graph = new FakeGraph();
+		const api = fakeApi(graph, false);
+		const manager = new GraphManager({ loadApi: () => api, nodeVersion: "24.1.0" });
+		const value = harness();
+		new ToolRegistrar(value.pi, manager, () => false).registerAll();
+		let prompts = 0;
+		try {
+			const search = value.definitions.get("codegraph_search");
+			const result = await search.execute("id", { query: "greet" }, undefined, undefined, context(root, true, async () => {
+				prompts += 1;
+				return true;
+			}));
+			assert.match(result.content[0].text, /"name": "greet"/u);
+			assert.equal(prompts, 1);
+			assert.equal(api.inits, 1);
+			assert.equal(graph.indexCalls, 1);
 		} finally {
 			await manager.shutdown();
 			rmSync(root, { recursive: true, force: true });

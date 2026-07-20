@@ -65,6 +65,22 @@ describe("GraphManager direct lifecycle", () => {
 		}
 	});
 
+	it("reports a missing graph without creating it when creation is not allowed", async () => {
+		const project = root();
+		const graph = new FakeGraph();
+		const api = fakeApi(graph, false);
+		const manager = new GraphManager({ loadApi: () => api, nodeVersion: "24.1.0" });
+		try {
+			await assert.rejects(() => manager.start(project, { allowCreate: false }), /Run \/codegraph init/u);
+			assert.equal(api.inits, 0);
+			assert.equal(graph.indexCalls, 0);
+			assert.equal(manager.snapshot().kind, "missing");
+		} finally {
+			await manager.shutdown();
+			rmSync(project, { recursive: true, force: true });
+		}
+	});
+
 	it("marks stale synchronously, coalesces paths, and runs a second sync for edits during sync", async () => {
 		const project = root();
 		const graph = new FakeGraph();

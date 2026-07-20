@@ -18,7 +18,7 @@ export const STATUS_KEY = "codegraph";
 export const FLAG_AUTO_INDEX = "codegraph-auto-index";
 export const FLAG_PROFILE = "codegraph-profile";
 export const FLAG_ASCII_STATUS = "codegraph-ascii-status";
-export const DEFAULT_AUTO_INDEX = true;
+export const DEFAULT_AUTO_INDEX = false;
 export const PACKAGE_VERSION = "0.2.0";
 
 export const PI_MAX_OUTPUT_BYTES = 50 * 1024;

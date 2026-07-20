@@ -70,7 +70,7 @@ rtk = "latest"
 "npm:droid" = { version = "latest", npm_args = "--ignore-scripts=true" }
 "npm:wrangler" = { version = "latest", npm_args = "--ignore-scripts=true" }
 "cargo:eza" = "latest"
-"npm:@inkeep/open-knowledge" = "latest"
+"npm:@inkeep/open-knowledge" = { version = "latest", npm_args = "--ignore-scripts=false" }
 "npm:@colbymchenry/codegraph" = "latest"
 "pipx:pyrefly" = "latest"
 "pipx:ty" = "latest"
