@@ -2,10 +2,14 @@ config-version = 2
 start-at-login = true
 auto-reload-config = true
 
+on-window-detected = [
+  { if.app-id = "com.mitchellh.ghostty", run = [
+    "layout tiling",
+  ] },
+]
+
 after-startup-command = [
   "exec-and-forget sketchybar >> $HOME/.sketchybar/service.log 2>&1",
-  # JankyBorders has a built-in detection of already running process,
-  # so it won't be run twice on AeroSpace restart
   "exec-and-forget borders",
 ]
 

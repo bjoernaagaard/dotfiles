@@ -16,8 +16,8 @@
     "-extensions/pi-dagster/extensions/provider.ts",
     "-extensions/pi-dagster/extensions/remote.ts"
   ],
-  "hideThinkingBlock": false,
-  "lastChangelogVersion": "0.81.0",
+  "hideThinkingBlock": true,
+  "lastChangelogVersion": "0.81.1",
   "packages": [
     "npm:@ogulcancelik/pi-ssh-tools",
     {

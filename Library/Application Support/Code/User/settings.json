@@ -27,6 +27,11 @@
     "editor.formatOnSave"     : true,
     "editor.codeActionsOnSave": {"source.fixAll": "always"}
   },
+  "[lua]": {
+    "editor.defaultFormatter" : "sumneko.lua",
+    "editor.formatOnSave"     : true,
+    "editor.codeActionsOnSave": {"source.fixAll": "always"}
+  },
   "[yaml]": {
     "editor.defaultFormatter" : "thegeeklab.yamlfmt-ng",
     "editor.formatOnSave"     : true,
