@@ -5,49 +5,36 @@ shell_mode = "auto"
 new_cwd = "follow"
 
 [keys]
-prefix = "alt+space"
+prefix = "option+space"
+toggle_sidebar = "option+b"
+detach = "option+q"
+reload_config = "option+shift+r"
+remote_image_paste = "option+v"
 
-# Left Alt is Herdr's management modifier. Physical Windows remains free for apps.
-focus_pane_left = ["alt+left", "prefix+left"]
-focus_pane_down = ["alt+down", "prefix+down"]
-focus_pane_up = ["alt+up", "prefix+up"]
-focus_pane_right = ["alt+right", "prefix+right"]
+focus_pane_left = ["option+left"]
+focus_pane_down = ["option+down"]
+focus_pane_up = ["option+up"]
+focus_pane_right = ["option+right"]
 
-split_vertical = ["alt+shift+d", "prefix+v"]
-split_horizontal = [
-    "alt+shift+c",
-    "prefix+minus",
-]
-close_pane = ["alt+shift+x", "prefix+x"]
-zoom = ["alt+z", "prefix+z"]
-resize_mode = "prefix+r"
+split_vertical = ["option+d"]
+split_horizontal = ["option+c"]
+close_pane = ["option+x"]
+resize_mode = "option+r"
 
-new_tab = ["alt+shift+t", "prefix+c"]
-previous_tab = ["alt+comma", "prefix+p"]
-next_tab = ["alt+period", "prefix+n"]
-switch_tab = "prefix+1..9"
-close_tab = ["alt+shift+w", "prefix+shift+x"]
+new_tab = ["option+t"]
+previous_tab = ["option+comma"]
+next_tab = ["option+period"]
+close_tab = ["option+w"]
 
-workspace_picker = "prefix+w"
-new_workspace = "prefix+shift+n"
-rename_workspace = "prefix+shift+w"
-close_workspace = "prefix+shift+d"
-previous_workspace = "prefix+shift+left"
-next_workspace = "prefix+shift+right"
-last_pane = "prefix+tab"
+last_pane = ["prefix+tab"]
 
-toggle_sidebar = "prefix+b"
-detach = "prefix+q"
-reload_config = "prefix+shift+r"
-remote_image_paste = "alt+v"
-
-[[keys.command]] # open in a split beside your work
-key = "prefix+f"
+[[keys.command]]
+key = "option+o"
 type = "shell"
 command = "herdr plugin action invoke open-file-viewer --plugin herdr-file-viewer"
 
-[[keys.command]] # …or in its own tab
-key = "prefix+shift+f"
+[[keys.command]]
+key = "option+shift+o"
 type = "shell"
 command = "herdr plugin action invoke open-file-viewer-tab --plugin herdr-file-viewer"
 
@@ -63,7 +50,7 @@ sidebar_collapsed_mode = "compact"
 confirm_close = true
 prompt_new_tab_name = false
 mouse_capture = true
-right_click_passthrough_modifier = "alt"
+right_click_passthrough_modifier = "option"
 redraw_on_focus_gained = true
 mouse_scroll_lines = 3
 pane_borders = true
@@ -93,7 +80,12 @@ scrollback_limit_bytes = 10000000
 
 [experimental]
 switch_ascii_input_source_in_prefix = true
-pane_history = false
+pane_history = true
+reveal_hidden_cursor_for_cjk_ime = true
+cjk_ime_agents = ["claude", "pi", "codex"]
 
 [session]
 resume_agents_on_restore = true
+
+[update]
+channel = "preview"

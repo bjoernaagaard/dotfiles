@@ -1,71 +1,14 @@
-#!/usr/bin/env bash
+sketchybar --add event aerospace_workspace_change
 
-set -euo pipefail
-
-brew_prefix="${HOMEBREW_PREFIX:-}"
-if [[ -z "$brew_prefix" ]] && command -v brew >/dev/null 2>&1; then
-  brew_prefix="$(brew --prefix)"
-fi
-if [[ -z "$brew_prefix" ]]; then
-  for candidate in /opt/homebrew /usr/local; do
-    if [[ -x "$candidate/bin/sketchybar" ]]; then
-      brew_prefix="$candidate"
-      break
-    fi
-  done
-fi
-
-SKETCHYBAR="${SKETCHYBAR:-$(command -v sketchybar || true)}"
-AEROSPACE="${AEROSPACE:-$(command -v aerospace || true)}"
-SKETCHYBAR="${SKETCHYBAR:-${brew_prefix:+$brew_prefix/bin/sketchybar}}"
-AEROSPACE="${AEROSPACE:-${brew_prefix:+$brew_prefix/bin/aerospace}}"
-
-if [[ -z "$SKETCHYBAR" || -z "$AEROSPACE" || ! -x "$SKETCHYBAR" || ! -x "$AEROSPACE" ]]; then
-  echo "SketchyBar config requires both sketchybar and aerospace binaries" >&2
-  exit 1
-fi
-
-"$SKETCHYBAR" --bar \
-  position=top \
-  height=32 \
-  color=0x00000000 \
-  sticky=on \
-  padding_left=8 \
-  padding_right=8
-
-"$SKETCHYBAR" --default \
-  icon.drawing=off \
-  label.font="Hack Nerd Font:Regular:13.0" \
-  label.color=0xffd8dee9 \
-  padding_left=8 \
-  padding_right=8 \
-  background.height=24 \
-  background.corner_radius=6
-
-"$SKETCHYBAR" --add event aerospace_workspace_change
-
-for workspace in $(${AEROSPACE} list-workspaces --all); do
-  "$SKETCHYBAR" --add item "space.$workspace" left
-
-  "$SKETCHYBAR" --set "space.$workspace" \
-    label="$workspace" \
-    script="$CONFIG_DIR/plugins/aerospace.sh $workspace" \
-    click_script="$AEROSPACE workspace $workspace" \
-    background.color=0xff88c0d0 \
-    background.drawing=off
-
-  "$SKETCHYBAR" --subscribe \
-    "space.$workspace" \
-    aerospace_workspace_change
+for sid in $(aerospace list-workspaces --all); do
+    sketchybar --add item space.$sid left \
+        --subscribe space.$sid aerospace_workspace_change \
+        --set space.$sid \
+        background.color=0x44ffffff \
+        background.corner_radius=5 \
+        background.height=20 \
+        background.drawing=off \
+        label="$sid" \
+        click_script="aerospace workspace $sid" \
+        script="$CONFIG_DIR/plugins/aerospace.sh $sid"
 done
-
-# Initialize the selected workspace on startup. This is deliberately an
-# explicit trigger because the custom event is not emitted until a workspace
-# changes after the bar has started.
-focused="$(${AEROSPACE} list-workspaces --focused 2>/dev/null || true)"
-
-if [[ -n "$focused" ]]; then
-  "$SKETCHYBAR" --trigger \
-    aerospace_workspace_change \
-    "FOCUSED_WORKSPACE=$focused"
-fi
