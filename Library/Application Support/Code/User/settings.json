@@ -264,5 +264,6 @@
   "evenBetterToml.formatter.indentEntries": true,
   "workbench.colorTheme": "Gruvbox Dark Soft",
   "extensions.experimental.deferredStartupFinishedActivation": true,
-  "scm.repositories.selectionMode": "single"
+  "scm.repositories.selectionMode": "single",
+  "extensions.ignoreRecommendations": true
 }
