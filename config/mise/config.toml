@@ -82,6 +82,7 @@ rtk = "latest"
 "npm:@colbymchenry/codegraph" = "latest"
 "npm:fjson-fmt" = "latest"
 carapace = "latest"
+lua = "latest"
 
 [dotfiles]
 # mise self-config

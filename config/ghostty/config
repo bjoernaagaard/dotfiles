@@ -24,7 +24,7 @@ selection-word-chars = " ,│`|:\"'()[]{}<>\t"
 clipboard-read = allow
 clipboard-write = allow
 clipboard-paste-protection = true
-macos-option-as-alt = true
+macos-option-as-alt = false
 
 shell-integration = detect
 shell-integration-features = cursor,no-sudo,title,ssh-env,ssh-terminfo,path
