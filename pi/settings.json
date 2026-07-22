@@ -1,22 +1,21 @@
 {
   "autocompleteMaxVisible": 20,
-  "defaultModel": "gpt-5.6-sol",
+  "defaultModel": "gpt-5.6-luna",
   "defaultProjectTrust": "trust",
   "defaultProvider": "openai-codex",
   "defaultThinkingLevel": "xhigh",
   "enabledModels": [
-    "openai-codex/gpt-5.3-codex-spark", "openai-codex/gpt-5.6-sol",         "xai/grok-4.5",
+    "openai-codex/gpt-5.3-codex-spark",
+    "openai-codex/gpt-5.6-sol",
+    "xai/grok-4.5",
     "openai-codex/gpt-5.6-luna"
   ],
   "extensions": [
-    "-extensions/focus-rail/index.ts",
     "-extensions/pi-dagster/extensions/core.ts",
     "-extensions/pi-dagster/extensions/provider.ts",
     "-extensions/pi-dagster/extensions/remote.ts",
     "-extensions/questdb/index.ts",
-    "-extensions/pi-swarm/index.ts",
     "-extensions/pi-parseview/index.ts",
-    "-extensions/pdx/index.ts",
     "-extensions/pi-codegraph/extensions/index.ts",
     "/Users/bsa/projects/pidex/src/index.ts"
   ],
@@ -24,20 +23,40 @@
   "lastChangelogVersion": "0.81.1",
   "packages": [
     "npm:@ogulcancelik/pi-ssh-tools",
-    { "source": "npm:@llblab/pi-telegram", "extensions": ["-index.ts"] },
-    { "source": "npm:@narumitw/pi-chrome-devtools", "extensions": ["-src/chrome-devtools.ts"] },
     "npm:@narumitw/pi-lsp",
     "npm:@howaboua/pi-ask",
-    "npm:@howaboua/pi-codex-conversion",
-    "npm:@howaboua/pi-explore-subagents",
-    { "source": "npm:@narumitw/pi-statusline", "extensions": ["+src/statusline.ts"] },
-    "npm:@howaboua/pi-cache-hit-predictor"
+    {
+      "source": "npm:@howaboua/pi-codex-conversion",
+      "extensions": [
+        "+dist/index.js"
+      ]
+    },
+    {
+      "source": "npm:@howaboua/pi-explore-subagents",
+      "extensions": [
+        "+index.ts"
+      ]
+    },
+    {
+      "source": "npm:@narumitw/pi-statusline",
+      "extensions": [
+        "+src/statusline.ts"
+      ]
+    },
+    {
+      "source": "npm:@howaboua/pi-cache-hit-predictor",
+      "extensions": [
+        "+index.ts"
+      ]
+    }
   ],
   "quietStartup": true,
   "showHardwareCursor": true,
   "theme": "dark/dark",
   "transport": "auto",
-  "warnings": {"anthropicExtraUsage": true},
+  "warnings": {
+    "anthropicExtraUsage": true
+  },
   "showCacheMissNotices": true,
   "collapseChangelog": true,
   "skills": [
@@ -48,6 +67,10 @@
     "-skills/dagster/SKILL.md",
     "-skills/python-development/SKILL.md"
   ],
-  "compaction": {"enabled": true},
-  "retry": {"enabled": true}
+  "compaction": {
+    "enabled": true
+  },
+  "retry": {
+    "enabled": true
+  }
 }
