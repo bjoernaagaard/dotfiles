@@ -5,9 +5,11 @@
 #include <mach/mach_port.h>
 #include <mach/message.h>
 #include <bootstrap.h>
-#include <stdlib.h>
 #include <pthread.h>
+#include <stdbool.h>
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
 typedef char* env;
 
@@ -82,12 +84,11 @@ static inline bool mach_send_message(mach_port_t port, char* message, uint32_t l
   return err == KERN_SUCCESS;
 }
 
-static inline uint32_t format_message(char* message, char* formatted_message) {
-  // This is not actually robust, switch to stack based messaging.
+static inline uint32_t format_message(const char* message, char* formatted_message) {
   char outer_quote = 0;
   uint32_t caret = 0;
-  uint32_t message_length = strlen(message) + 1;
-  for (int i = 0; i < message_length; ++i) {
+  size_t message_length = strlen(message);
+  for (size_t i = 0; i < message_length; ++i) {
     if (message[i] == '"' || message[i] == '\'') {
       if (outer_quote && outer_quote == message[i]) outer_quote = 0;
       else if (!outer_quote) outer_quote = message[i];
@@ -98,12 +99,9 @@ static inline uint32_t format_message(char* message, char* formatted_message) {
     caret++;
   }
 
-  if (caret > 0 && formatted_message[caret] == '\0'
-      && formatted_message[caret - 1] == '\0') {
-    caret--;
-  }
-  formatted_message[caret] = '\0';
-  return caret + 1;
+  formatted_message[caret++] = '\0';
+  formatted_message[caret++] = '\0';
+  return caret;
 }
 
 static inline void sketchybar(char* message) {
