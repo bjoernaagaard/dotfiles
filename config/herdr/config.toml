@@ -5,7 +5,7 @@ shell_mode = "auto"
 new_cwd = "follow"
 
 [keys]
-prefix = "option+space"
+prefix = "ctrl+space"
 toggle_sidebar = "option+shift+b"
 detach = "option+shift+q"
 reload_config = "option+shift+e"
@@ -28,37 +28,8 @@ close_tab = ["option+shift+w"]
 
 last_pane = ["prefix+tab"]
 
-[[keys.command]]
-key = "option+o"
-type = "shell"
-command = "herdr plugin action invoke open-file-viewer --plugin herdr-file-viewer"
-
-[[keys.command]]
-key = "option+shift+o"
-type = "shell"
-command = "herdr plugin action invoke open-file-viewer-tab --plugin herdr-file-viewer"
-
-[theme]
-name = "nord"
-auto_switch = true
-
 [ui]
-sidebar_width = 24
-sidebar_min_width = 18
-sidebar_max_width = 36
-sidebar_collapsed_mode = "compact"
-confirm_close = true
 prompt_new_tab_name = false
-mouse_capture = true
-right_click_passthrough_modifier = "command"
-redraw_on_focus_gained = true
-mouse_scroll_lines = 3
-pane_borders = true
-pane_gaps = true
-show_agent_labels_on_pane_borders = true
-hide_tab_bar_when_single_tab = false
-agent_panel_scope = "all"
-agent_panel_sort = "priority"
 
 [ui.toast]
 delivery = "herdr"
@@ -75,17 +46,13 @@ enabled = true
 manage_ssh_config = true
 
 [advanced]
-allow_nested = false
 scrollback_limit_bytes = 10000000
-
-[experimental]
-switch_ascii_input_source_in_prefix = true
-pane_history = true
-reveal_hidden_cursor_for_cjk_ime = true
-cjk_ime_agents = ["claude", "pi", "codex"]
 
 [session]
 resume_agents_on_restore = true
 
 [update]
 channel = "preview"
+
+[experimental]
+switch_ascii_input_source_in_prefix = false

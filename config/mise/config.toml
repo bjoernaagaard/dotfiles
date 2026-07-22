@@ -63,7 +63,6 @@ rtk = "latest"
 "npm:@bitwarden/cli" = "latest"
 "npm:@llamaindex/liteparse" = "latest"
 "npm:@tobilu/qmd" = "latest"
-"npm:@openai/codex" = { version = "latest", npm_args = "--ignore-scripts=true" }
 "npm:droid" = { version = "latest", npm_args = "--ignore-scripts=true" }
 "pipx:pyrefly" = "latest"
 "pipx:ty" = "latest"

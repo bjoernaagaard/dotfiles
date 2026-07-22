@@ -6,6 +6,15 @@ on-window-detected = [
   { if.app-id = "com.mitchellh.ghostty", run = [
     "layout tiling",
   ] },
+  { if.app-id = "com.apple.ActivityMonitor", run = [
+    "layout floating",
+  ] },
+  { if.app-id = "com.apple.systempreferences", run = [
+    "layout floating",
+  ] },
+  { if.app-id = "com.apple.finder", run = [
+    "layout floating",
+  ] },
 ]
 
 after-startup-command = [
@@ -16,7 +25,7 @@ after-startup-command = [
 exec-on-workspace-change = [
   "/bin/bash",
   "-c",
-  'sketchybar --trigger aerospace_workspace_change FOCUSED_WORKSPACE=$AEROSPACE_FOCUSED_WORKSPACE FOCUSED_DISPLAY=$(aerospace list-monitors --focused | awk "{print $1}")',
+  "sketchybar --trigger aerospace_workspace_change FOCUSED_WORKSPACE=$AEROSPACE_FOCUSED_WORKSPACE PREV_WORKSPACE=$AEROSPACE_PREV_WORKSPACE"
 ]
 
 on-focus-changed = [
@@ -47,8 +56,6 @@ outer.right = 10
 cmd-h = []  # Disable "hide application"
 cmd-ctrl-h = []  # Disable "hide others"
 
-ctrl-f = "fullscreen"
-
 # See: https://nikitabobko.github.io/AeroSpace/commands#layout
 ctrl-slash = "layout tiles horizontal vertical"
 ctrl-comma = "layout accordion horizontal vertical"
@@ -68,7 +75,7 @@ ctrl-shift-right = "move right"
 # See: https://nikitabobko.github.io/AeroSpace/commands#resize
 ctrl-shift-minus = "resize smart -50"
 ctrl-shift-equal = "resize smart +50"
-ctrl-shift-c = "reload-config"
+ctrl-shift-g = "reload-config"
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#workspace
 ctrl-1 = "workspace 1"
@@ -82,36 +89,36 @@ ctrl-8 = "workspace 8"
 ctrl-9 = "workspace 9"
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#move-node-to-workspace
-ctrl-shift-1 = "move-node-to-workspace 1"
-ctrl-shift-2 = "move-node-to-workspace 2"
-ctrl-shift-3 = "move-node-to-workspace 3"
-ctrl-shift-4 = "move-node-to-workspace 4"
-ctrl-shift-5 = "move-node-to-workspace 5"
-ctrl-shift-6 = "move-node-to-workspace 6"
-ctrl-shift-7 = "move-node-to-workspace 7"
-ctrl-shift-8 = "move-node-to-workspace 8"
-ctrl-shift-9 = "move-node-to-workspace 9"
+ctrl-shift-1 = "move-node-to-workspace 1 --focus-follows-window"
+ctrl-shift-2 = "move-node-to-workspace 2 --focus-follows-window"
+ctrl-shift-3 = "move-node-to-workspace 3 --focus-follows-window"
+ctrl-shift-4 = "move-node-to-workspace 4 --focus-follows-window"
+ctrl-shift-5 = "move-node-to-workspace 5 --focus-follows-window"
+ctrl-shift-6 = "move-node-to-workspace 6 --focus-follows-window"
+ctrl-shift-7 = "move-node-to-workspace 7 --focus-follows-window"
+ctrl-shift-8 = "move-node-to-workspace 8 --focus-follows-window"
+ctrl-shift-9 = "move-node-to-workspace 9 --focus-follows-window"
 
-# See: https://nikitabobko.github.io/AeroSpace/commands#workspace-back-and-forth
-cmd-tab = "workspace-back-and-forth"
-
-# See: https://nikitabobko.github.io/AeroSpace/commands#move-workspace-to-monitor
-ctrl-shift-tab = "move-workspace-to-monitor --wrap-around next"
-
-# See: https://nikitabobko.github.io/AeroSpace/commands#mode
 ctrl-shift-semicolon = [
   "mode service",
   "exec-and-forget sketchybar --trigger aerospace_enter_service_mode",
 ]
 
-[mode.service.binding]
-esc = [
-  "reload-config",
-  "mode main",
-  "exec-and-forget sketchybar --trigger aerospace_leave_service_mode",
-]
-r = ["flatten-workspace-tree", "mode main"]
-f = ["layout floating tiling", "mode main"]
+# See: https://nikitabobko.github.io/AeroSpace/commands#workspace-back-and-forth
+ctrl-tab = "exec-and-forget  aerospace list-workspaces --monitor focused --empty no | aerospace workspace --stdin next"
+ctrl-shift-tab = "exec-and-forget  aerospace list-workspaces --monitor focused --empty no | aerospace workspace --stdin prev"
+
+ctrl-shift-f = "fullscreen"
+ctrl-shift-s = "layout v_accordion"
+ctrl-shift-r = "mode resize"
+
+[mode.resize.binding]
+h = "resize width -50"
+j = "resize height +50"
+k = "resize height -50"
+l = "resize width +50"
+enter = "mode main"
+esc = "mode main"
 
 # GUI-launched AeroSpace does not always inherit the shell's Homebrew path.
 # Include both Homebrew layouts so callbacks work on Apple Silicon and Intel.

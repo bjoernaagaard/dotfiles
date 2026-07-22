@@ -4,6 +4,10 @@ font-family = PaperMono NF
 font-size = 14
 theme = Material Design Colors
 keybind = alt+backspace=text:\x1b\x7f
+keybind = alt+¨=text:\x7e
+keybind = alt+BracketRight=text:\x7e
+keybind = alt+'=text:\x40
+keybind = alt+Quote=text:\x40
 
 background-opacity = 0.98
 background-blur = true
@@ -24,7 +28,7 @@ selection-word-chars = " ,│`|:\"'()[]{}<>\t"
 clipboard-read = allow
 clipboard-write = allow
 clipboard-paste-protection = true
-macos-option-as-alt = false
+macos-option-as-alt = true
 
 shell-integration = detect
 shell-integration-features = cursor,no-sudo,title,ssh-env,ssh-terminfo,path
