@@ -15,16 +15,16 @@ return {
         }
     },
     bar = {
-        height = 36,
+        height = 26,
         padding = {
-            x = 10,
+            x = 8,
             y = 0
         },
         background = colors.bar.bg
     },
     items = {
-        height = 26,
-        gap = 5,
+        height = 22,
+        gap = 4,
         padding = {
             right = 16,
             left = 12,
@@ -32,28 +32,29 @@ return {
             bottom = 0
         },
         default_color = function(workspace)
-            return colors.rainbow[workspace + 1]
+            return colors.white
         end,
         highlight_color = function(workspace)
-            return colors.yellow
+            return colors.white
         end,
         colors = {
-            background = colors.bg1
+            background = colors.transparent,
+            selected = colors.selection
         },
-        corner_radius = 6
+        corner_radius = 5
     },
 
     icons = "sketchybar-app-font:Regular:16.0", -- alternatively available: NerdFont
 
     font = {
-        text = "Maple Mono NF", -- Used for text
-        numbers = "Maple Mono NF", -- Used for numbers
+        text = "SF Pro", -- Used for text
+        numbers = "SF Pro", -- Used for numbers
         style_map = {
             ["Regular"] = "Regular",
-            ["Semibold"] = "Medium",
-            ["Bold"] = "SemiBold",
-            ["Heavy"] = "Bold",
-            ["Black"] = "ExtraBold"
+            ["Semibold"] = "Semibold",
+            ["Bold"] = "Bold",
+            ["Heavy"] = "Heavy",
+            ["Black"] = "Black"
         }
     }
 }

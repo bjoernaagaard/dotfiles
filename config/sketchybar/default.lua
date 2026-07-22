@@ -8,7 +8,7 @@ sbar.default({
         font = {
             family = settings.font.text,
             style = settings.font.style_map["Bold"],
-            size = 14.0
+            size = 13.0
         },
         color = colors.white,
         padding_left = settings.paddings,
@@ -30,10 +30,12 @@ sbar.default({
         padding_right = settings.paddings
     },
     background = {
+        drawing = false,
         height = settings.items.height,
         corner_radius = settings.items.corner_radius,
-        border_width = 2,
-        border_color = colors.bg2,
+        color = colors.transparent,
+        border_width = 0,
+        border_color = colors.transparent,
         image = {
             corner_radius = settings.items.corner_radius,
             border_color = colors.grey,
@@ -42,12 +44,12 @@ sbar.default({
     },
     popup = {
         background = {
-            border_width = 2,
+            border_width = 0,
             corner_radius = settings.items.corner_radius,
-            border_color = colors.popup.border,
+            border_color = colors.transparent,
             color = colors.popup.bg,
             shadow = {
-                drawing = true
+                drawing = false
             }
         },
         blur_radius = 50

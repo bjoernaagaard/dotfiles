@@ -1,4 +1,6 @@
 return {
+    ["Ghostty"] = ":terminal:",
+    ["Zen"] = ":firefox:",
     ["Typora"] = ":text:",
     ["Orion"] = ":orion:",
     ["Orion RC"] = ":orion:",

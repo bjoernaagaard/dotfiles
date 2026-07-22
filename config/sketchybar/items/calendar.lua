@@ -1,58 +1,34 @@
 local settings = require("settings")
 local colors = require("colors")
 
--- Padding item required because of bracket
-sbar.add("item", {
-    position = "right",
-    width = settings.group_paddings
-})
+local function clock_string()
+    return (os.date("%a %I:%M %p"):gsub(" 0", " "))
+end
 
-local cal = sbar.add("item", {
-    icon = {
-        color = colors.white,
-        padding_left = 8,
-        font = {
-            size = 22.0
-        }
-    },
-    label = {
-        color = colors.white,
-        padding_right = 8,
-        width = 80,
-        align = "right",
-        font = {
-            family = settings.icons
-        }
-    },
+local clock = sbar.add("item", "clock", {
     position = "right",
     update_freq = 30,
-    padding_left = 1,
-    padding_right = 1,
-    background = {
-        color = colors.bg2,
-        border_color = colors.rainbow[#colors.rainbow],
-        border_width = 1
+    padding_left = 6,
+    padding_right = 2,
+    icon = {
+        drawing = false
+    },
+    label = {
+        string = clock_string(),
+        color = colors.white,
+        font = {
+            family = settings.font.text,
+            style = settings.font.style_map["Semibold"],
+            size = 13.0
+        }
     }
 })
 
--- Double border for calendar using a single item bracket
--- sbar.add("bracket", { cal.name }, {
---   background = {
---     color = colors.transparent,
---     height = 30,
---     border_color = colors.grey,
---   }
--- })
+clock:subscribe({"forced", "routine", "system_woke"}, function()
+    clock:set({label = clock_string()})
+end)
 
--- Padding item required because of bracket
-sbar.add("item", {
-    position = "right",
-    width = settings.group_paddings
-})
-
-cal:subscribe({"forced", "routine", "system_woke"}, function(env)
-    cal:set({
-        icon = "",
-        label = os.date("%m/%d %H:%M")
-    })
+-- The bar stays date-free; clicking opens the full system calendar.
+clock:subscribe("mouse.clicked", function()
+    sbar.exec("open -a Calendar")
 end)

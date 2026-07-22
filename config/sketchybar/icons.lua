@@ -28,11 +28,13 @@ return {
         _0 = "􀛪",
         charging = "􀢋"
     },
-    wifi = {
+    network = {
         upload = "􀄨",
         download = "􀄩",
-        connected = "􀙇",
+        wifi = "􀙇",
         disconnected = "􀙈",
+        ethernet = "􀌒",
+        generic = "􀤆",
         router = "􁓤"
     },
     media = {
