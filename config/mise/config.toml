@@ -7,6 +7,9 @@ minimum_release_age = "0s"
 dotfiles.root = "~/.dotfiles"
 dotfiles.default_mode = "symlink"
 
+[settings.node]
+corepack = true
+
 [bootstrap.user]
 login_shell = "/bin/zsh"
 
@@ -58,31 +61,22 @@ pandoc = "latest"
 protobuf = "latest"
 redis = "latest"
 rtk = "latest"
-"aqua:gastownhall/beads" = "latest"
 "npm:@bitwarden/cli" = "latest"
 "npm:@llamaindex/liteparse" = "latest"
-"npm:@tobilu/qmd" = "latest"
-"npm:droid" = { version = "latest", npm_args = "--ignore-scripts=true" }
-"npm:@earendil-works/pi-coding-agent" = { version = "latest", npm_args = "--ignore-scripts=true" }
 "pipx:pyrefly" = "latest"
 "pipx:ty" = "latest"
 "pipx:ruff" = "latest"
 "npm:oxlint" = "latest"
 "npm:oxfmt" = "latest"
 "pipx:tombi" = "latest"
-"npm:hunkdiff" = "latest"
 "npm:beautiful-mermaid-cli" = "latest"
 "npm:pi-acp" = "latest"
 "npm:vscode-langservers-extracted" = "latest"
-"npm:localtunnel" = "latest"
-"npm:wrangler" = { version = "latest", npm_args = "--ignore-scripts=true" }
 "cargo:eza" = "latest"
-"npm:@inkeep/open-knowledge" = { version = "latest", npm_args = "--ignore-scripts=false" }
-"npm:@colbymchenry/codegraph" = "latest"
-"npm:fjson-fmt" = "latest"
 carapace = "latest"
 lua = "latest"
-node = "lts"
+node = "latest"
+"npm:biome" = "latest"
 
 [dotfiles]
 # mise self-config

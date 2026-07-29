@@ -2,15 +2,8 @@
   "pyrefly": { "command": ["pyrefly", "lsp"], "extensions": [".py", ".pyi"] },
   "ruff"   : { "command": ["ruff", "server"], "extensions": [".py", ".pyi"] },
   "tombi"  : { "command": ["tombi", "lsp"], "extensions": [".toml"] },
-  "oxlint" : {
-    "command"   : ["oxlint", "--lsp"],
-    "extensions": [
-      ".astro",   ".css",     ".graphql", ".gql",     ".html",    ".js",      ".jsx",     ".json",    ".jsonc",
-      ".ts",      ".tsx",     ".vue"
-    ]
-  },
-  "oxfmt"  : {
-    "command"   : ["oxfmt", "--lsp"],
+  "biome"  : {
+    "command"   : ["biome", "lsp-proxy"],
     "extensions": [
       ".astro",   ".css",     ".graphql", ".gql",     ".html",    ".js",      ".jsx",     ".json",    ".jsonc",
       ".ts",      ".tsx",     ".vue"
