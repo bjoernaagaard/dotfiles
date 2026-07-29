@@ -15,7 +15,7 @@ return {
         }
     },
     bar = {
-        height = 26,
+        height = 28,
         padding = {
             x = 8,
             y = 0
@@ -24,7 +24,7 @@ return {
     },
     items = {
         height = 22,
-        gap = 4,
+        gap = 5,
         padding = {
             right = 16,
             left = 12,
@@ -39,9 +39,9 @@ return {
         end,
         colors = {
             background = colors.transparent,
-            selected = colors.selection
+            selected = 0x405b6074
         },
-        corner_radius = 5
+        corner_radius = 6
     },
 
     icons = "sketchybar-app-font:Regular:16.0", -- alternatively available: NerdFont

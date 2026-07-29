@@ -12,8 +12,8 @@ return {
     selection = 0x18ffffff,
 
     bar = {
-        bg = 0x12000000,
-        border = 0x00000000
+        bg = 0xd014151b,
+        border = 0x30383b4a
     },
     popup = {
         bg = 0xc02c2e34,
@@ -21,6 +21,8 @@ return {
     },
     bg1 = 0x00000000,
     bg2 = 0x18ffffff,
+    group = 0x20262a35,
+    group_border = 0x384b5266,
 
     rainbow = {0xffff007c, 0xffc53b53, 0xffff757f, 0xff41a6b5, 0xff4fd6be, 0xffc3e88d, 0xffffc777, 0xff9d7cd8,
                0xffff9e64, 0xffbb9af7, 0xff7dcfff, 0xff7aa2f7},

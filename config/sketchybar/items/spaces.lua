@@ -5,6 +5,7 @@ local app_icons = require("helpers.app_icons")
 local workspace_names = get_workspaces()
 local focused_workspace = get_current_workspace()
 local spaces = {}
+local workspace_items = {}
 
 local function shell_quote(value)
     return "'" .. tostring(value):gsub("'", "'\\''") .. "'"
@@ -34,7 +35,8 @@ local function set_focused_workspace(workspace_name)
             background = {
                 drawing = true,
                 color = selected and settings.items.colors.selected or colors.transparent,
-                border_width = 0
+                border_width = selected and 1 or 0,
+                border_color = colors.with_alpha(colors.blue, 0.65)
             }
         })
     end
@@ -125,6 +127,7 @@ for index, workspace_name in ipairs(workspace_names) do
         popup = popup
     }
     table.insert(spaces, entry)
+    table.insert(workspace_items, space.name)
 
     space:subscribe("mouse.clicked", function(env)
         if env.BUTTON == "other" then
@@ -146,6 +149,19 @@ for index, workspace_name in ipairs(workspace_names) do
         })
     end)
 end
+
+sbar.add("bracket", "workspace.group", workspace_items, {
+    background = {
+        drawing = true,
+        color = colors.group,
+        border_color = colors.group_border,
+        border_width = 1,
+        corner_radius = 7,
+        height = 24
+    },
+    padding_left = 3,
+    padding_right = 3
+})
 
 local workspace_observer = sbar.add("item", "workspace.observer", {
     drawing = false,

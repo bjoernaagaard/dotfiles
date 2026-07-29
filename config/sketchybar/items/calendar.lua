@@ -2,7 +2,7 @@ local settings = require("settings")
 local colors = require("colors")
 
 local function clock_string()
-    return (os.date("%a %I:%M %p"):gsub(" 0", " "))
+    return os.date("%Y-%m-%d %H:%M")
 end
 
 local clock = sbar.add("item", "clock", {
