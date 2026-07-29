@@ -115,6 +115,7 @@ lua = "latest"
 "~/.factory/skills" = { source = "~/.dotfiles/skills", mode = "symlink" }
 "~/.pi/agent/skills" = { source = "~/.dotfiles/skills", mode = "symlink" }
 "~/.pi/agent/AGENTS.md" = { source = "~/.dotfiles/pi/AGENTS.md", mode = "symlink" }
+"~/.pi/agent/APPEND_SYSTEM.md" = { source = "~/.dotfiles/pi/APPEND_SYSTEM.md", mode = "symlink" }
 "~/.pi/agent/prompts" = { source = "~/.dotfiles/pi/prompts", mode = "symlink" }
 "~/.pi/agent/extensions" = { source = "~/.dotfiles/pi/extensions", mode = "symlink" }
 "~/.pi/agent/settings.json" = { source = "~/.dotfiles/pi/settings.json", mode = "symlink" }
