@@ -16,7 +16,8 @@
   "packages": [
     "npm:@ogulcancelik/pi-ssh-tools",
     "npm:@narumitw/pi-lsp",
-    "npm:@howaboua/pi-ask"
+    "npm:@howaboua/pi-ask",
+    "npm:pi-fabric"
   ],
   "quietStartup": true,
   "showHardwareCursor": true,
@@ -27,14 +28,7 @@
   },
   "showCacheMissNotices": true,
   "collapseChangelog": true,
-  "skills": [
-    "-skills/ast-grep/SKILL.md",
-    "-skills/ast-grep-outline/SKILL.md",
-    "-skills/codegraph-ast-grep/SKILL.md",
-    "-skills/herdr/SKILL.md",
-    "-skills/dagster/SKILL.md",
-    "-skills/python-development/SKILL.md"
-  ],
+  "skills": [],
   "compaction": {
     "enabled": true
   },
