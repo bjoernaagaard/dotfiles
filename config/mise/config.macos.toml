@@ -3,7 +3,6 @@
 "brew:gnu-getopt" = "latest"
 "brew:gnu-tar" = "latest"
 "brew:htop" = "latest"
-"brew:mosh" = "latest"
 "brew:openssh" = "latest"
 "brew:pinentry-mac" = "latest"
 "brew:wakeonlan" = "latest"
@@ -13,12 +12,10 @@
 "brew:glow" = "latest"
 "brew:git-delta" = "latest"
 "brew:zsh" = "latest"
-"brew:cloudflared" = "latest"
 "brew:rage" = "latest"
 
 "brew-cask:font-maple-mono-nf" = "latest"
 "brew-cask:font-maple-mono" = "latest"
-"brew-cask:font-hack-nerd-font" = "latest"
 "brew-cask:ghostty" = "latest"
 "brew-cask:bitwarden" = "latest"
 "brew-cask:alacritty" = "latest"
@@ -34,11 +31,9 @@
 "brew-cask:rectangle-pro" = "latest"
 "brew-cask:karabiner-elements" = "latest"
 "brew-cask:zed" = "latest"
-"brew-cask:zen" = "latest"
 "brew-cask:libreoffice" = "latest"
 "brew-cask:qbittorrent" = "latest"
 "brew-cask:raycast" = "latest"
-"brew:fontforge" = "latest"
 
 [bootstrap.macos.keyboard]
 key_repeat = 1
