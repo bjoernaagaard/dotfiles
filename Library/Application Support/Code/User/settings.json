@@ -89,7 +89,6 @@
   "python.analysis.includeAliasesFromUserFiles": true,
   "python.analysis.inlayHints.functionReturnTypes": false,
   "python.analysis.autoImportCompletions": true,
-  "ty.disableLanguageServices": true,
   "ty.completions.autoImport": true,
   "ty.diagnosticMode": "openFilesOnly",
   "ty.inlayHints.callArgumentNames": false,
@@ -236,7 +235,17 @@
   "js/ts.updateImportsOnFileMove.enabled": "always",
   "editor.accessibilitySupport": "off",
   "git.autofetchPeriod": 15,
-  "json.schemaDownload.trustedDomains": {"*": true},
+  "json.schemaDownload.trustedDomains": {
+    "https://schemastore.azurewebsites.net/"               : true,
+    "https://raw.githubusercontent.com/microsoft/vscode/"  : true,
+    "https://raw.githubusercontent.com/devcontainers/spec/": true,
+    "https://www.schemastore.org/"                         : true,
+    "https://json.schemastore.org/"                        : true,
+    "https://json-schema.org/"                             : true,
+    "https://developer.microsoft.com/json-schemas/"        : true,
+    "*"                                                    : true,
+    "https://biomejs.dev"                                  : true
+  },
   "evenBetterToml.schema.links": true,
   "evenBetterToml.schema.associations": {},
   "evenBetterToml.formatter.alignComments": true,
@@ -265,5 +274,6 @@
   "workbench.colorTheme": "Gruvbox Dark Soft",
   "extensions.experimental.deferredStartupFinishedActivation": true,
   "extensions.ignoreRecommendations": true,
-  "dsStoreRemover.enabled": false
+  "dsStoreRemover.enabled": false,
+  "workbench.editor.markdownDefaultEditorInAgentsWindow": true
 }
