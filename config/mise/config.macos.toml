@@ -35,6 +35,9 @@
 "brew-cask:karabiner-elements" = "latest"
 "brew-cask:zed" = "latest"
 "brew-cask:zen" = "latest"
+"brew-cask:libreoffice" = "latest"
+"brew-cask:qbittorrent" = "latest"
+"brew-cask:raycast" = "latest"
 "brew:fontforge" = "latest"
 
 [bootstrap.macos.keyboard]
