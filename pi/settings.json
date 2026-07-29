@@ -1,13 +1,11 @@
 {
   "autocompleteMaxVisible": 20,
-  "defaultModel": "gpt-5.6-luna",
+  "defaultModel": "gpt-5.6-sol",
   "defaultProjectTrust": "trust",
   "defaultProvider": "openai-codex",
   "defaultThinkingLevel": "high",
   "enabledModels": [
-    "openai-codex/gpt-5.3-codex-spark",
-    "openai-codex/gpt-5.6-sol",
-    "xai/grok-4.5",
+    "openai-codex/gpt-5.3-codex-spark", "openai-codex/gpt-5.6-sol",         "xai/grok-4.5",
     "openai-codex/gpt-5.6-luna"
   ],
   "extensions": [
@@ -20,43 +18,22 @@
     "/Users/bsa/projects/pidex/src/index.ts"
   ],
   "hideThinkingBlock": true,
-  "lastChangelogVersion": "0.81.1",
+  "lastChangelogVersion": "0.82.0",
   "packages": [
     "npm:@ogulcancelik/pi-ssh-tools",
     "npm:@narumitw/pi-lsp",
     "npm:@howaboua/pi-ask",
-    {
-      "source": "npm:@howaboua/pi-codex-conversion",
-      "extensions": [
-        "+dist/index.js"
-      ]
-    },
-    {
-      "source": "npm:@howaboua/pi-explore-subagents",
-      "extensions": [
-        "+index.ts"
-      ]
-    },
-    {
-      "source": "npm:@narumitw/pi-statusline",
-      "extensions": [
-        "+src/statusline.ts"
-      ]
-    },
-    {
-      "source": "npm:@howaboua/pi-cache-hit-predictor",
-      "extensions": [
-        "+index.ts"
-      ]
-    }
+    { "source": "npm:@howaboua/pi-codex-conversion", "extensions": ["-dist/index.js"] },
+    { "source": "npm:@howaboua/pi-explore-subagents", "extensions": ["-index.ts"] },
+    { "source": "npm:@narumitw/pi-statusline", "extensions": ["-src/statusline.ts"] },
+    { "source": "npm:@howaboua/pi-cache-hit-predictor", "extensions": ["-index.ts"] },
+    "npm:pi-chrome"
   ],
   "quietStartup": true,
   "showHardwareCursor": true,
   "theme": "dark/dark",
   "transport": "auto",
-  "warnings": {
-    "anthropicExtraUsage": true
-  },
+  "warnings": {"anthropicExtraUsage": true},
   "showCacheMissNotices": true,
   "collapseChangelog": true,
   "skills": [
@@ -67,10 +44,6 @@
     "-skills/dagster/SKILL.md",
     "-skills/python-development/SKILL.md"
   ],
-  "compaction": {
-    "enabled": true
-  },
-  "retry": {
-    "enabled": true
-  }
+  "compaction": {"enabled": true},
+  "retry": {"enabled": true}
 }

@@ -47,7 +47,7 @@ return {
     icons = "sketchybar-app-font:Regular:16.0", -- alternatively available: NerdFont
 
     font = {
-        text = "SF Pro", -- Used for text
+        text = "SF Pro",    -- Used for text
         numbers = "SF Pro", -- Used for numbers
         style_map = {
             ["Regular"] = "Regular",
