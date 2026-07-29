@@ -265,5 +265,5 @@
   "workbench.colorTheme": "Gruvbox Dark Soft",
   "extensions.experimental.deferredStartupFinishedActivation": true,
   "extensions.ignoreRecommendations": true,
-  "scm.repositories.selectionMode": "single"
+  "dsStoreRemover.enabled": false
 }

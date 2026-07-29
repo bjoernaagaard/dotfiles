@@ -114,6 +114,8 @@ node = "lts"
 "~/.claude/skills" = { source = "~/.dotfiles/skills", mode = "symlink" }
 "~/.omp/agent/skills" = { source = "~/.dotfiles/skills", mode = "symlink" }
 "~/.factory/skills" = { source = "~/.dotfiles/skills", mode = "symlink" }
+"~/.jcode/skills" = { source = "~/.dotfiles/skills", mode = "symlink" }
+"~/.codex/AGENTS.md" = { source = "~/.dotfiles/pi/AGENTS.md", mode = "symlink" }
 "~/.pi/agent/skills" = { source = "~/.dotfiles/skills", mode = "symlink" }
 "~/.pi/agent/AGENTS.md" = { source = "~/.dotfiles/pi/AGENTS.md", mode = "symlink" }
 "~/.pi/agent/APPEND_SYSTEM.md" = { source = "~/.dotfiles/pi/APPEND_SYSTEM.md", mode = "symlink" }
