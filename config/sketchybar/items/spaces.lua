@@ -44,46 +44,60 @@ local function refresh_workspace_apps()
     for _, entry in ipairs(spaces) do
         local current_entry = entry
         sbar.exec("aerospace list-windows --workspace " .. shell_quote(current_entry.workspace) ..
-                      " --format '%{app-name}' --json",
-                  function(apps)
-            current_entry.popup:set({
-                label = {
-                    string = app_icon_line(apps)
-                }
-            })
-        end)
+            " --format '%{app-name}' --json",
+            function(apps)
+                current_entry.popup:set({
+                    label = {
+                        string = app_icon_line(apps)
+                    }
+                })
+            end)
     end
 end
 
 for index, workspace_name in ipairs(workspace_names) do
     local selected = workspace_name == focused_workspace
+    local workspace_width = 24
+
     local space = sbar.add("item", "space." .. index, {
         position = "left",
-        width = 24,
+        width = workspace_width,
         padding_left = 1,
         padding_right = 1,
+
         icon = {
+            width = workspace_width, -- this fixes uneven centering
             align = "center",
+            padding_left = 0,
+            padding_right = 0,
+            y_offset = 0,
+
             font = {
                 family = settings.font.numbers,
                 style = settings.font.style_map["Semibold"],
                 size = 12.0
             },
+
             string = workspace_name,
-            color = selected and colors.white or colors.grey,
-            padding_left = 0,
-            padding_right = 0
+            color = selected and colors.white or colors.grey
         },
+
         label = {
             drawing = false
         },
+
         background = {
             drawing = true,
             height = 20,
-            corner_radius = settings.items.corner_radius,
-            color = selected and settings.items.colors.selected or colors.transparent,
+            corner_radius = 5,
+            x_offset = 0,
+            y_offset = 0,
+            color = selected
+                and settings.items.colors.selected
+                or colors.transparent,
             border_width = 0
         },
+
         popup = {
             align = "center"
         }
@@ -143,7 +157,7 @@ workspace_observer:subscribe("aerospace_workspace_change", function(env)
     refresh_workspace_apps()
 end)
 
-workspace_observer:subscribe({"aerospace_focus_change", "space_windows_change"}, function()
+workspace_observer:subscribe({ "aerospace_focus_change", "space_windows_change" }, function()
     refresh_workspace_apps()
 end)
 
