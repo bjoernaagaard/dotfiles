@@ -45,7 +45,6 @@ caddy = "latest"
 "cargo:mergiraf" = "latest"
 deno = "latest"
 doggo = "latest"
-node = "lts"
 oha = "latest"
 pnpm = "latest"
 rust = "latest"
@@ -64,6 +63,7 @@ rtk = "latest"
 "npm:@llamaindex/liteparse" = "latest"
 "npm:@tobilu/qmd" = "latest"
 "npm:droid" = { version = "latest", npm_args = "--ignore-scripts=true" }
+"npm:@earendil-works/pi-coding-agent" = { version = "latest", npm_args = "--ignore-scripts=true" }
 "pipx:pyrefly" = "latest"
 "pipx:ty" = "latest"
 "pipx:ruff" = "latest"
@@ -82,6 +82,7 @@ rtk = "latest"
 "npm:fjson-fmt" = "latest"
 carapace = "latest"
 lua = "latest"
+node = "lts"
 
 [dotfiles]
 # mise self-config
