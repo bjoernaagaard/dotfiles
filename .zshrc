@@ -12,3 +12,9 @@ source "$_zsh_conf/aliases.zsh"
 # Keep Mise activation last so later shell integrations cannot put their own
 # bin directories ahead of Mise-managed tool paths.
 eval "$(mise activate zsh)"
+
+# >>> grok installer >>>
+export PATH="$HOME/.grok/bin:$PATH"
+fpath=(~/.grok/completions/zsh $fpath)
+autoload -Uz compinit && compinit -C
+# <<< grok installer <<<

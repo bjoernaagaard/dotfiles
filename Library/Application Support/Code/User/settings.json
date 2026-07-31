@@ -73,7 +73,7 @@
   "python.analysis.indexing": false,
   "python.analysis.importFormat": "absolute",
   "python.analysis.inlayHints.callArgumentNames": "off",
-  "python.languageServer": "Default",
+  "python.languageServer": "None",
   "python.analysis.diagnosticMode": "openFilesOnly",
   "python.analysis.typeCheckingMode": "off",
   "python.analysis.languageServerMode": "default",

@@ -113,10 +113,10 @@ ctrl-shift-s = "layout v_accordion"
 ctrl-shift-r = "mode resize"
 
 [mode.resize.binding]
-h = "resize width -50"
-j = "resize height +50"
-k = "resize height -50"
-l = "resize width +50"
+left = "resize width -50"
+up = "resize height +50"
+down = "resize height -50"
+right = "resize width +50"
 enter = "mode main"
 esc = "mode main"
 
