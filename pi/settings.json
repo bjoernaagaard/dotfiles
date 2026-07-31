@@ -5,9 +5,7 @@
   "defaultProvider": "xai",
   "defaultThinkingLevel": "high",
   "enabledModels": [
-    "openai-codex/gpt-5.3-codex-spark",
-    "openai-codex/gpt-5.6-sol",
-    "xai/grok-4.5",
+    "openai-codex/gpt-5.3-codex-spark", "openai-codex/gpt-5.6-sol",         "xai/grok-4.5",
     "openai-codex/gpt-5.6-luna"
   ],
   "extensions": [
@@ -17,23 +15,15 @@
   ],
   "hideThinkingBlock": true,
   "lastChangelogVersion": "0.82.1",
-  "packages": [
-    "npm:pi-fabric"
-  ],
+  "packages": ["npm:pi-fabric"],
   "quietStartup": true,
   "showHardwareCursor": true,
   "theme": "dark/dark",
   "transport": "auto",
-  "warnings": {
-    "anthropicExtraUsage": true
-  },
+  "warnings": {"anthropicExtraUsage": true},
   "showCacheMissNotices": true,
   "collapseChangelog": true,
   "skills": [],
-  "compaction": {
-    "enabled": true
-  },
-  "retry": {
-    "enabled": true
-  }
+  "compaction": {"enabled": true},
+  "retry": {"enabled": true}
 }
