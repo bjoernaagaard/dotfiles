@@ -1,5 +1,5 @@
 config-version = 2
-start-at-login = true
+start-at-login = false
 auto-reload-config = true
 
 on-window-detected = [

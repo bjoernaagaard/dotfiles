@@ -31,8 +31,6 @@
 "brew-cask:rectangle-pro" = "latest"
 "brew-cask:karabiner-elements" = "latest"
 "brew-cask:zed" = "latest"
-"brew-cask:libreoffice" = "latest"
-"brew-cask:qbittorrent" = "latest"
 
 [bootstrap.macos.keyboard]
 key_repeat = 1
@@ -45,17 +43,23 @@ args = ["property", "--set", '{"CapsLockDelayOverride":0}']
 run_at_load = true
 kickstart = true
 
+[bootstrap.macos.launchd.agents.deepseek-tool-proxy]
+# Rewrites Droid's BYOK Responses-API custom tool name ApplyPatch -> apply_patch
+# (DeepSeek rejects any other name with 400) before forwarding to api.deepseek.com.
+program = "/usr/bin/python3"
+args = ["/Users/bsa/.factory/bin/deepseek-tool-proxy.py"]
+run_at_load = true
+kickstart = true
+
 [bootstrap.brew.taps]
 "nikitabobko/tap" = "https://github.com/nikitabobko/homebrew-tap.git"
 "FelixKratz/formulae" = "https://github.com/FelixKratz/homebrew-formulae.git"
 
 [tasks.bootstrap]
-description = "Install AeroSpace, SketchyBar, and Borders"
+description = "Ensure Homebrew taps for optional window-manager tools"
 run = """
-brew list --cask aerospace >/dev/null 2>&1 || brew install --cask nikitabobko/tap/aerospace
+brew tap nikitabobko/tap
 brew tap FelixKratz/formulae
-brew list --formula sketchybar >/dev/null 2>&1 || brew install FelixKratz/formulae/sketchybar
-brew list --formula borders >/dev/null 2>&1 || brew install FelixKratz/formulae/borders
 """
 
 [dotfiles]

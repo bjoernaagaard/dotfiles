@@ -276,6 +276,5 @@
   "extensions.experimental.deferredStartupFinishedActivation": true,
   "extensions.ignoreRecommendations": true,
   "dsStoreRemover.enabled": true,
-  "workbench.editor.markdownDefaultEditorInAgentsWindow": true,
-  "scm.repositories.selectionMode": "single"
+  "workbench.editor.markdownDefaultEditorInAgentsWindow": true
 }

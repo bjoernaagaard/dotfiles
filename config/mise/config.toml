@@ -99,10 +99,5 @@ node = "latest"
 "~/.agents/skills" = { source = "~/.dotfiles/skills", mode = "symlink" }
 "~/.omp/agent/skills" = { source = "~/.dotfiles/skills", mode = "symlink" }
 "~/.factory/skills" = { source = "~/.dotfiles/skills", mode = "symlink" }
-"~/.codex/AGENTS.md" = { source = "~/.dotfiles/pi/AGENTS.md", mode = "symlink" }
 "~/.pi/agent/skills" = { source = "~/.dotfiles/skills", mode = "symlink" }
-"~/.pi/agent/AGENTS.md" = { source = "~/.dotfiles/pi/AGENTS.md", mode = "symlink" }
 "~/.pi/agent/prompts" = { source = "~/.dotfiles/pi/prompts", mode = "symlink" }
-"~/.pi/agent/extensions" = { source = "~/.dotfiles/pi/extensions", mode = "symlink" }
-"~/.pi/agent/settings.json" = { source = "~/.dotfiles/pi/settings.json", mode = "symlink" }
-"~/.pi/agent/pi-lsp.json" = { source = "~/.dotfiles/pi/pi-lsp.json", mode = "symlink" }
