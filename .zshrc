@@ -13,6 +13,13 @@ source "$_zsh_conf/aliases.zsh"
 # bin directories ahead of Mise-managed tool paths.
 eval "$(mise activate zsh)"
 
+# WezTerm shell integration is scoped to WezTerm sessions; Ghostty and other
+# terminals keep their existing behavior. The script supplies OSC 7/133 and
+# title/user-var hooks for local panes without changing remote machines.
+if [[ "${TERM_PROGRAM:-}" == "WezTerm" && -r "/Applications/WezTerm.app/Contents/Resources/wezterm.sh" ]]; then
+  source "/Applications/WezTerm.app/Contents/Resources/wezterm.sh"
+fi
+
 # >>> grok installer >>>
 export PATH="$HOME/.grok/bin:$PATH"
 fpath=(~/.grok/completions/zsh $fpath)

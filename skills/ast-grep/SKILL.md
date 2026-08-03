@@ -321,3 +321,23 @@ Contains detailed documentation for ast-grep rule syntax:
 - `rule_reference.md`: Comprehensive ast-grep rule documentation covering atomic rules, relational rules, composite rules, and metavariables
 
 Load these references when detailed rule syntax information is needed.
+
+## Pi extension integration
+
+When the **pi-ast-grep** extension is loaded, use its tools instead of
+shelling out to the CLI:
+
+- `ast_grep_run` — structural pattern/kind search with meta variables (the
+  shell examples above map directly: `ast-grep run --pattern X` becomes
+  `ast_grep_run pattern="X"`, `--lang` becomes `lang`, paths become `path`).
+- `ast_grep_scan` — inline YAML rules (`rule_yaml`), rule files
+  (`rule_file`), or the project's `sgconfig.yml` rules.
+- `ast_grep_rewrite` — structural rewrites; always preview with
+  `apply=false` first, then `apply=true` for the same arguments.
+- `ast_grep_debug_query` — when a pattern fails to match, dump the node
+  kinds first (`pattern`, `lang`, `format="cst"|"ast"|"pattern"|"sexp"`).
+- `ast_grep_languages` — check supported language aliases before a query.
+
+Trigger the tools for exactly the situations this skill covers: structural
+queries, relational/composite rules, and language-specific constructs.
+Outline-before-reading is covered by the **ast-grep-outline** skill.

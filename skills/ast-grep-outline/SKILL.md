@@ -80,3 +80,22 @@ types, follow re-export chains, or build a call graph. Use `ast-grep run`,
 `rg`, or compiler-backed tools for those questions, then outline the candidate
 files they surface.
 ````
+
+## Pi extension integration
+
+When the **pi-ast-grep** extension is loaded, `ast_grep_outline` wraps this
+CLI as a Pi tool — prefer it over shelling out:
+
+- `ast_grep_outline path="<file-or-dir>"` — defaults: `structure` items for
+  a file, `exports` for a directory.
+- `ast_grep_outline path="src" items="exports" view="names"` — map a
+  directory's public surface.
+- `ast_grep_outline path="<file>" view="signatures"` — one line per item
+  with its signature and line number.
+- `ast_grep_outline path="<dir>" match="<regex>" type="class,function"` —
+  zoom into known symbols.
+- `outline_rules` / `no_default_outline_rules` mirror the CLI flags for
+  custom outline rule files.
+
+Use the tool before reading an unfamiliar file or directory, exactly as this
+skill describes.

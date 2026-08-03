@@ -1,4 +1,5 @@
 {
+  "terminal.integrated.enableImages": true,
   "window.nativeTabs": false,
   "editor.formatOnSave": false,
   "[json]": {
@@ -274,6 +275,7 @@
   "workbench.colorTheme": "Gruvbox Dark Soft",
   "extensions.experimental.deferredStartupFinishedActivation": true,
   "extensions.ignoreRecommendations": true,
-  "dsStoreRemover.enabled": false,
-  "workbench.editor.markdownDefaultEditorInAgentsWindow": true
+  "dsStoreRemover.enabled": true,
+  "workbench.editor.markdownDefaultEditorInAgentsWindow": true,
+  "scm.repositories.selectionMode": "single"
 }

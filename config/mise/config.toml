@@ -60,8 +60,6 @@ protobuf = "latest"
 "pipx:pyrefly" = "latest"
 "pipx:ty" = "latest"
 "pipx:ruff" = "latest"
-"npm:oxlint" = "latest"
-"npm:oxfmt" = "latest"
 "pipx:tombi" = "latest"
 "npm:beautiful-mermaid-cli" = "latest"
 "npm:pi-acp" = "latest"
@@ -70,7 +68,6 @@ protobuf = "latest"
 carapace = "latest"
 lua = "latest"
 node = "latest"
-"npm:biome" = "latest"
 
 [dotfiles]
 # mise self-config
@@ -96,6 +93,7 @@ node = "latest"
 "~/.config/fnox/config.toml" = { source = "~/.dotfiles/config/fnox/config.toml", mode = "symlink" }
 "~/.config/herdr/config.toml" = { source = "~/.dotfiles/config/herdr/config.toml", mode = "symlink" }
 "~/.config/ghostty/config" = { source = "~/.dotfiles/config/ghostty/config", mode = "symlink" }
+"~/.config/wezterm/wezterm.lua" = { source = "~/.dotfiles/config/wezterm/wezterm.lua", mode = "symlink" }
 
 # agent skills (one source, many targets)
 "~/.agents/skills" = { source = "~/.dotfiles/skills", mode = "symlink" }
