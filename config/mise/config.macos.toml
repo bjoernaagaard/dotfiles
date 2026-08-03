@@ -46,9 +46,17 @@ kickstart = true
 [bootstrap.macos.launchd.agents.deepseek-tool-proxy]
 # Rewrites Droid's BYOK Responses-API custom tool name ApplyPatch -> apply_patch
 # (DeepSeek rejects any other name with 400) before forwarding to api.deepseek.com.
-program = "/usr/bin/python3"
-args = ["/Users/bsa/.factory/bin/deepseek-tool-proxy.py"]
+# Script lives in ~/.dotfiles/bin (provisioned via [dotfiles] symlink below);
+# /bin/sh -c expands $HOME because launchd does not expand ~ or env vars in plists.
+program = "/bin/sh"
+args = [
+  "-c",
+  "exec /usr/bin/python3 \"$HOME/.factory/bin/deepseek-tool-proxy.py\""
+]
 run_at_load = true
+keep_alive = true
+stdout_path = "~/.factory/logs/deepseek-tool-proxy.log"
+stderr_path = "~/.factory/logs/deepseek-tool-proxy.log"
 kickstart = true
 
 [bootstrap.brew.taps]
@@ -68,5 +76,6 @@ brew tap FelixKratz/formulae
 "~/.config/borders/bordersrc" = { source = "~/.dotfiles/config/borders/bordersrc", mode = "symlink" }
 "~/.config/karabiner/karabiner.json" = { source = "~/.dotfiles/config/karabiner/karabiner.json", mode = "symlink" }
 "~/.config/karabiner/karabiner-old.json" = { source = "~/.dotfiles/config/karabiner/karabiner-old.json", mode = "symlink" }
+"~/.factory/bin/deepseek-tool-proxy.py" = { source = "~/.dotfiles/bin/deepseek-tool-proxy.py", mode = "symlink" }
 "~/Library/Application Support/Code/User/settings.json" = { source = "~/.dotfiles/Library/Application Support/Code/User/settings.json", mode = "symlink" }
 "~/Library/Application Support/Code/User/keybindings.json" = { source = "~/.dotfiles/Library/Application Support/Code/User/keybindings.json", mode = "symlink" }
