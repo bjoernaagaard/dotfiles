@@ -6,6 +6,7 @@ format = """\
 $directory\
 $mise\
 $git_branch\
+$git_status\
 $hostname\
 $character"""
 
@@ -28,7 +29,7 @@ format = "[$branch]($style)"
 style = "bright-black"
 
 [git_status]
-format = "[[(*$conflicted$untracked$modified$staged$renamed$deleted)](218) ($ahead_behind$stashed)]($style)"
+format = "[[(*$conflicted$untracked$modified$staged$renamed$deleted)](218)( $ahead_behind$stashed)]($style) "
 style = "cyan"
 
 [cmd_duration]
@@ -55,7 +56,7 @@ format = "[$hostname]($style) "
 ssh_only = true
 
 [mise]
-disabled = false
+disabled = true
 
 [time]
 format = "[$time]($style) "
