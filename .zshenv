@@ -16,7 +16,8 @@ _zsh_cache_eval() {
   local cache="$dir/$name"
   local tmp="$cache.tmp.$$"
   mkdir -p "$dir"
-  if [[ ! -f "$cache" ]] || [[ -n "$cache"(#qN.mh+24) ]]; then
+  if [[ ! -f "$cache" ]] || [[ -n "$cache"(#qN.mh+24) ]] \
+     || [[ "$XDG_CONFIG_HOME/sheldon/plugins.toml" -nt "$cache" ]]; then
     if command -v "$cmd" >/dev/null 2>&1 && "$cmd" "$@" >| "$tmp" 2>/dev/null; then
       mv -f "$tmp" "$cache"
     else

@@ -1,5 +1,12 @@
 shell = "zsh"
 
+[plugins.fzf-tab]
+github = "Aloxaf/fzf-tab"
+profiles = ["post-compinit"]
+
+# fzf-tab must load before plugins that wrap widgets (zsh-autosuggestions,
+# fast-syntax-highlighting) but after compinit, so it stays at the top of
+# the post-compinit group.
 [plugins.zsh-autosuggestions]
 github = "zsh-users/zsh-autosuggestions"
 profiles = ["post-compinit"]
@@ -22,6 +29,11 @@ use = ["forgit.plugin.zsh"]
 apply = ["source"]
 profiles = ["post-compinit"]
 
-[plugins.zsh-syntax-highlighting]
-github = "zsh-users/zsh-syntax-highlighting"
+[plugins.zsh-autopair]
+github = "hlissner/zsh-autopair"
+profiles = ["post-compinit"]
+
+# fast-syntax-highlighting replaces zsh-syntax-highlighting. Never load both.
+[plugins.fast-syntax-highlighting]
+github = "zdharma-continuum/fast-syntax-highlighting"
 profiles = ["post-compinit"]
