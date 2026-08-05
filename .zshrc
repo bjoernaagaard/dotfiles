@@ -9,6 +9,12 @@ source "$_zsh_conf/keybindings.zsh"
 source "$_zsh_conf/functions.zsh"
 source "$_zsh_conf/aliases.zsh"
 
+# >>> grok installer >>>
+export PATH="$HOME/.grok/bin:$PATH"
+fpath=(~/.grok/completions/zsh $fpath)
+autoload -Uz compinit && compinit -C
+# <<< grok installer <<<
+
 # Keep Mise activation last so later shell integrations cannot put their own
 # bin directories ahead of Mise-managed tool paths.
 eval "$(mise activate zsh)"
@@ -19,9 +25,3 @@ eval "$(mise activate zsh)"
 if [[ "${TERM_PROGRAM:-}" == "WezTerm" && -r "/Applications/WezTerm.app/Contents/Resources/wezterm.sh" ]]; then
   source "/Applications/WezTerm.app/Contents/Resources/wezterm.sh"
 fi
-
-# >>> grok installer >>>
-export PATH="$HOME/.grok/bin:$PATH"
-fpath=(~/.grok/completions/zsh $fpath)
-autoload -Uz compinit && compinit -C
-# <<< grok installer <<<

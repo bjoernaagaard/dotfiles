@@ -2,10 +2,7 @@
 experimental = true
 activate_aggressive = true
 python.uv_venv_auto = "create|source"
-env_shell_expand = true
 minimum_release_age = "0s"
-dotfiles.root = "~/.dotfiles"
-dotfiles.default_mode = "symlink"
 
 [settings.node]
 corepack = true
@@ -67,7 +64,8 @@ protobuf = "latest"
 "cargo:eza" = "latest"
 carapace = "latest"
 lua = "latest"
-node = "latest"
+node = "lts"
+"cargo:pdf-inspector" = "latest"
 
 [dotfiles]
 # mise self-config

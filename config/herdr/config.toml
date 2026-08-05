@@ -6,30 +6,31 @@ new_cwd = "follow"
 
 [keys]
 prefix = "ctrl+space"
-toggle_sidebar = "option+shift+b"
-detach = "option+shift+q"
-reload_config = "option+shift+e"
-remote_image_paste = "option+shift+v"
+toggle_sidebar = "ctrl+b"
+detach = "ctrl+q"
+reload_config = "ctrl+e"
+remote_image_paste = "ctrl+v"
 
-focus_pane_left = ["option+shift+left"]
-focus_pane_down = ["option+shift+down"]
-focus_pane_up = ["option+shift+up"]
-focus_pane_right = ["option+shift+right"]
+focus_pane_left = ["ctrl+left"]
+focus_pane_down = ["ctrl+down"]
+focus_pane_up = ["ctrl+up"]
+focus_pane_right = ["ctrl+right"]
 
-split_vertical = ["option+shift+d"]
-split_horizontal = ["option+shift+c"]
-close_pane = ["option+shift+x"]
-resize_mode = "option+shift+r"
+split_vertical = ["ctrl+d"]
+split_horizontal = ["ctrl+c"]
+close_pane = ["ctrl+x"]
+resize_mode = "ctrl+r"
 
-new_tab = ["option+shift+t"]
-previous_tab = ["option+shift+comma"]
-next_tab = ["option+shift+period"]
-close_tab = ["option+shift+w"]
+new_tab = ["ctrl+t"]
+previous_tab = ["ctrl+comma"]
+next_tab = ["ctrl+period"]
+close_tab = ["ctrl+w"]
 
 last_pane = ["prefix+tab"]
 
 [ui]
 prompt_new_tab_name = false
+agent_panel_sort = "spaces"
 
 [ui.toast]
 delivery = "herdr"
@@ -50,9 +51,6 @@ scrollback_limit_bytes = 10000000
 
 [session]
 resume_agents_on_restore = true
-
-[update]
-channel = "preview"
 
 [experimental]
 switch_ascii_input_source_in_prefix = true

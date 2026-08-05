@@ -272,7 +272,7 @@
   "evenBetterToml.formatter.columnWidth": 2,
   "evenBetterToml.formatter.allowedBlankLines": 2,
   "evenBetterToml.formatter.indentEntries": true,
-  "workbench.colorTheme": "Gruvbox Dark Soft",
+  "workbench.colorTheme": "Gruvbox Dark Hard",
   "extensions.experimental.deferredStartupFinishedActivation": true,
   "extensions.ignoreRecommendations": true,
   "dsStoreRemover.enabled": true,
