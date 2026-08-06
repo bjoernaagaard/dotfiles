@@ -1,5 +1,7 @@
 # ~/.config/zsh/aliases.zsh — shell aliases
 
+alias ci='code-insiders'
+
 alias c='clear'
 alias h='history'
 alias cp='cp -i'
