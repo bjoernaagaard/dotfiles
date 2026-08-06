@@ -91,7 +91,6 @@ node = "lts"
 "~/.config/fnox/config.toml" = { source = "~/.dotfiles/config/fnox/config.toml", mode = "symlink" }
 "~/.config/herdr/config.toml" = { source = "~/.dotfiles/config/herdr/config.toml", mode = "symlink" }
 "~/.config/ghostty/config" = { source = "~/.dotfiles/config/ghostty/config", mode = "symlink" }
-"~/.config/wezterm/wezterm.lua" = { source = "~/.dotfiles/config/wezterm/wezterm.lua", mode = "symlink" }
 
 # agent skills (one source, many targets)
 "~/.agents/skills" = { source = "~/.dotfiles/skills", mode = "symlink" }

@@ -13,25 +13,6 @@
 "brew:zsh" = "latest"
 "brew:rage" = "latest"
 
-"brew-cask:font-maple-mono-nf" = "latest"
-"brew-cask:font-maple-mono" = "latest"
-"brew-cask:ghostty" = "latest"
-"brew-cask:bitwarden" = "latest"
-"brew-cask:alacritty" = "latest"
-"brew-cask:visual-studio-code" = "latest"
-"brew-cask:telegram" = "latest"
-"brew-cask:signal" = "latest"
-"brew-cask:spotify" = "latest"
-"brew-cask:stats" = "latest"
-"brew-cask:handy" = "latest"
-"brew-cask:alt-tab" = "latest"
-"brew-cask:bettermouse" = "latest"
-"brew-cask:chatgpt" = "latest"
-"brew-cask:codex" = "latest"
-"brew-cask:rectangle-pro" = "latest"
-"brew-cask:karabiner-elements" = "latest"
-"brew-cask:zed" = "latest"
-
 [bootstrap.macos.keyboard]
 key_repeat = 1
 initial_key_repeat = 10

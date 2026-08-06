@@ -40,6 +40,9 @@ export PATH="$HOME/.cache/.bun/bin:$PATH"
 # mise shims (available to interactive and non-interactive shells)
 _zsh_cache_eval mise ~/.local/bin/mise activate zsh --shims
 
+# grok CLI (available to interactive and non-interactive shells)
+export PATH="$HOME/.grok/bin:$PATH"
+
 export FNOX_PROFILE="default"
 export FNOX_SHELL_OUTPUT=none
 export FNOX_AGE_KEY_FILE="$HOME/.local/state/fnox/yubikey-yk-usb-a.identity"
