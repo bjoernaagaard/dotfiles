@@ -37,7 +37,7 @@ osc52 = "CopyPaste"
 size = 14.0
 
 [font.normal]
-family = "MesloLGS NF"
+family = "Maple Mono NF"
 
 [mouse]
 hide_when_typing = false

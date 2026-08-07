@@ -1,0 +1,63 @@
+#!/usr/bin/env bash
+# record-artifact — capture terminal artifacts without manual fiddling.
+#
+#   record-artifact video [seconds]   Pixel-level screen recording → .mp4.
+#                                     Reproduce the artifact anywhere on screen, then:
+#                                       - press Ctrl+C here to stop (plain terminals), or
+#                                       - pass a fixed [seconds] duration (safer inside
+#                                         herdr panes, where ctrl+c may be bound to
+#                                         split_horizontal and never reach this shell).
+#   record-artifact tty [name]        Byte-level recording of THIS shell: every key/escape
+#                                     sequence typed and every byte of output, with timing
+#                                     → .typescript. Reproduce the artifact in this shell,
+#                                     then stop with: exit
+#   record-artifact replay <file>     Replay a .typescript in real time; opens an .mp4.
+#   record-artifact list              List saved recordings.
+#
+# Storage: $ARTIFACT_DIR (default: ~/terminal-artifacts)
+set -uo pipefail
+
+DIR="${ARTIFACT_DIR:-$HOME/terminal-artifacts}"
+mkdir -p "$DIR"
+
+stamp() { date +%Y-%m-%dT%H-%M-%S; }
+
+case "${1:-help}" in
+  video)
+    file="$DIR/$(stamp).mp4"
+    if [[ -n "${2:-}" ]]; then
+      echo "Recording screen for ${2}s... reproduce the artifact now."
+      screencapture -v -V "$2" "$file" || true
+    else
+      echo "Recording screen - reproduce the artifact, then press Ctrl+C here to stop."
+      echo "  (Inside a herdr pane ctrl+c may split instead of stopping;"
+      echo "   if so, use: record-artifact video <seconds>)"
+      screencapture -v "$file" || true
+    fi
+    echo "Saved: $file"
+    ;;
+  tty)
+    name="${2:-$(stamp)}"
+    file="$DIR/$name.typescript"
+    echo "Recording this shell (keys + output bytes, with timing)."
+    echo "Reproduce the artifact here, then stop with: exit"
+    script -r -q "$file" || true
+    echo "Saved: $file"
+    echo "Replay: record-artifact replay $file"
+    ;;
+  replay)
+    file="${2:-}"
+    [[ -n "$file" ]] || { echo "usage: record-artifact replay <file>" >&2; exit 2; }
+    case "$file" in
+      *.mp4) open "$file" ;;
+      *) script -p "$file" ;;
+    esac
+    ;;
+  list)
+    ls -lht "$DIR"
+    ;;
+  *)
+    sed -n '2,22p' "$0"
+    exit 2
+    ;;
+esac

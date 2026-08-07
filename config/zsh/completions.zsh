@@ -9,9 +9,19 @@ else
   compinit -C -d "$zcompdump"
 fi
 
-# Carapace provides the completion registry and bridges other shell formats.
-export CARAPACE_BRIDGES="${CARAPACE_BRIDGES:-zsh,fish,bash,inshellisense}"
-_zsh_cache_eval carapace carapace _carapace zsh
+# CLI-generated completions (cached like other shell integrations; each
+# script self-registers via compdef when sourced after compinit).
+_zsh_cache_eval gh gh completion -s zsh
+_zsh_cache_eval glab glab completion -s zsh
+_zsh_cache_eval bun bun completions zsh
+_zsh_cache_eval pnpm pnpm completion zsh
+_zsh_cache_eval starship-completions starship completions zsh
+_zsh_cache_eval ruff ruff generate-shell-completion zsh
+_zsh_cache_eval rustup rustup completions zsh
+_zsh_cache_eval lazygit lazygit completion zsh
+_zsh_cache_eval yq yq shell-completion zsh
+_zsh_cache_eval ast-grep ast-grep completions zsh
+_zsh_cache_eval uv uv generate-shell-completion zsh
 
 # Load the remaining interactive plugins after compinit.
 _zsh_cache_eval sheldon-postcompinit-clean sheldon --profile post-compinit source
