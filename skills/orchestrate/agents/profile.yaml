@@ -1,0 +1,23 @@
+version: 1
+# Prompt-level policy for Pi Fabric calls; Fabric does not enforce this file.
+approvedModels:
+  - openai-codex/gpt-5.6-luna
+  - openai-codex/gpt-5.6-terra
+  - xai/grok-4.5
+  - deepseek-responses/deepseek-v4-flash
+roles:
+  scout:
+    thinking: low
+    tools: [read, grep, find, ls]
+    extensions: false
+    recursive: false
+  builder:
+    thinking: medium
+    tools: [read, grep, find, ls, edit, write, bash]
+    extensions: false
+    recursive: false
+  reviewer:
+    thinking: high
+    tools: [read, grep, find, ls]
+    extensions: false
+    recursive: false

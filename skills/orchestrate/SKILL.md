@@ -1,6 +1,6 @@
 ---
 name: orchestrate
-description: Orchestrate when the user explicitly invokes this skill, or when work benefits from independent parallel scouting, disjoint implementation ownership, context partitioning, multi-part research, broad separable changes, or parallel reviews.
+description: Orchestrate when the user explicitly invokes this skill, or when work requires independent parallel scouting, disjoint implementation ownership, context partitioning, multi-part research, broad separable changes, or parallel reviews.
 ---
 
 # Orchestrate
@@ -47,4 +47,4 @@ Verify the user workflow in the target environment with real data and required p
 
 ## Runtime adapter
 
-When Pi Fabric agent APIs are available, read [the Pi Fabric adapter](references/pi-fabric.md) before dispatch. On other harnesses, map the same concepts—worker, handle, isolation, steering, lifecycle, and proof—to native primitives without changing this protocol.
+When Pi Fabric agent APIs are available, first follow [Pi Fabric onboarding](references/onboarding.md), then read [the Pi Fabric adapter](references/pi-fabric.md) and [topology map](references/topology.md) before dispatch. Advanced Fabric skills are user-invoked only: recommend them with their exact `/skill:<name>` command and await the user's invocation. On other harnesses, map the same concepts—worker, handle, isolation, steering, lifecycle, and proof—to native primitives without changing this protocol.
