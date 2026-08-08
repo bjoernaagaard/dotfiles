@@ -1,6 +1,6 @@
 # Pi Fabric topology map
 
-Use the core protocol for finite work. Map it to Fabric primitives as follows, applying the bounded role defaults in `../agents/profile.yaml` and explicit models described in [pi-fabric.md](pi-fabric.md).
+Use core Fabric primitives directly for finite specialist, scout fan-out, owned implementation slices, pipeline, and simple independent-reviewer work, applying the bounded role defaults in `../agents/profile.yaml` and explicit models described in [pi-fabric.md](pi-fabric.md). Persistent teams and recursive partitions must instead recommend `/skill:fabric-swarm` or `/skill:fabric-rlm`, respectively, and await the user's explicit invocation; do not launch that advanced machinery directly.
 
 | Arrangement | Core Fabric mapping |
 | --- | --- |
@@ -9,10 +9,10 @@ Use the core protocol for finite work. Map it to Fabric primitives as follows, a
 | Owned implementation slices | one builder per disjoint path; use `worktree: true` when isolation is needed, then integrate and `agents.cleanup({ id })` |
 | Pipeline | `pipeline()` stages per item, with bounded cross-item concurrency |
 | Independent reviewers | read-only reviewer calls, then Main reconciles evidence |
-| Persistent team | `agents.create()`, `agents.tell()`, lifecycle operations, and mesh task claims |
-| Recursive partition | an explicitly assigned Pi `agents.run({ recursive: true })` or `rlm.query()` only for oversized context |
+| Persistent team | recommend `/skill:fabric-swarm` and await user invocation |
+| Recursive partition | recommend `/skill:fabric-rlm` and await user invocation |
 
-Use `agents.spawn()` plus `agents.wait({ id })` when Main can do useful work before a result is needed; otherwise use `agents.run()`. Each `fabric_exec` `agentBudget` must cover its number of launches. `tokenBudget` meters `agent()`, `workflow.agent()`, council, and rlm after observed usage; it is neither a hard concurrent ceiling nor a limit on bare `agents.run()` / `agents.spawn()` batches. Read-only tool allowlists provide scout/reviewer access; `extensions: false` and `recursive: false` keep ordinary leaves non-recursive.
+Use `agents.spawn()` plus `agents.wait({ id })` when Main can do useful work before a result is needed; otherwise use `agents.run()`. For execution-budget semantics, see [pi-fabric.md](pi-fabric.md). Read-only tool allowlists provide scout/reviewer access; `extensions: false` and `recursive: false` keep ordinary leaves non-recursive.
 
 For a named advanced pattern, use Fabric Guide as the recommendation source of truth. Recommend the exact command and await the user's explicit invocation; never load or auto-invoke it:
 

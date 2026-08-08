@@ -6,7 +6,7 @@ Use this reference only when Pi Fabric provides the agent runtime. Treat install
 
 [`../agents/profile.yaml`](../agents/profile.yaml) is the authoritative deliberate policy for approved model keys and bounded `scout`, `builder`, and `reviewer` defaults. Follow [first-use onboarding](onboarding.md) before dispatch.
 
-For every delegated groundwork call, choose an available approved profile key and pass it explicitly as `model`. This includes `agents.run()`, `agents.spawn()`, and every `agent()` / `workflow.agent()` call used by `parallel()` or `pipeline()`. Apply the selected role's `thinking`, `tools`, `extensions`, and `recursive` defaults. The profile is prompt-level policy mapped to existing APIs, not native Fabric enforcement.
+For every delegated groundwork call, choose an available approved model key and pass it explicitly as `model`. This includes `agents.run()`, `agents.spawn()`, and every `agent()` / `workflow.agent()` call used by `parallel()` or `pipeline()`. Apply the selected role's `thinking`, `tools`, `extensions`, and `recursive` defaults. The profile is prompt-level policy mapped to existing APIs, not native Fabric enforcement.
 
 An omitted model can inherit Main's expensive model. Setting `agents.model` is only an additional default, never a substitute for an explicit dispatch model. If no approved model is available for an item, return control to the user before dispatch; use another model only with explicit user approval.
 

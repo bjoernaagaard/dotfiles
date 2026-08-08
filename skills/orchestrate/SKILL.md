@@ -1,6 +1,6 @@
 ---
 name: orchestrate
-description: Orchestrate when the user explicitly invokes this skill, or when work requires independent parallel scouting, disjoint implementation ownership, context partitioning, multi-part research, broad separable changes, or parallel reviews.
+description: "Orchestrate when the user explicitly invokes this skill, or when work requires parallel decomposition: independent scouting, disjoint implementation ownership, independent review, or context partitioning."
 ---
 
 # Orchestrate
