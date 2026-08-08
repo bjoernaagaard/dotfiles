@@ -14,3 +14,10 @@ source "$_zsh_conf/aliases.zsh"
 # bin directories ahead of Mise-managed tool paths.
 eval "$(mise activate zsh)"
 
+# >>> dory cli >>>
+DORY_CLI_BIN="/Users/bsa/.dory/bin"
+case ":$PATH:" in
+  *":$DORY_CLI_BIN:"*) ;;
+  *) export PATH="$DORY_CLI_BIN:$PATH" ;;
+esac
+# <<< dory cli <<<

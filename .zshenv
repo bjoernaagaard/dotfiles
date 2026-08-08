@@ -43,6 +43,18 @@ _zsh_cache_eval mise ~/.local/bin/mise activate zsh --shims
 # grok CLI (available to interactive and non-interactive shells)
 export PATH="$HOME/.grok/bin:$PATH"
 
+# dory CLI — docker shims and Dory helpers (available to interactive and non-interactive shells)
+export PATH="$HOME/.dory/bin:$PATH"
+
+# bb CLI (bundled with the bb.app desktop app; guard keeps this harmless without the app)
+BB_CLI_BIN="/Applications/bb.app/Contents/Resources/app.asar.unpacked/node_modules/bb-app/host-daemon/dist"
+if [[ -x "$BB_CLI_BIN/bb" ]]; then
+  case ":$PATH:" in
+    *":$BB_CLI_BIN:"*) ;;
+    *) export PATH="$BB_CLI_BIN:$PATH" ;;
+  esac
+fi
+
 export FNOX_PROFILE="default"
 export FNOX_SHELL_OUTPUT=none
 export FNOX_AGE_KEY_FILE="$HOME/.local/state/fnox/yubikey-yk-usb-a.identity"

@@ -22,6 +22,7 @@ _zsh_cache_eval lazygit lazygit completion zsh
 _zsh_cache_eval yq yq shell-completion zsh
 _zsh_cache_eval ast-grep ast-grep completions zsh
 _zsh_cache_eval uv uv generate-shell-completion zsh
+_zsh_cache_eval docker docker completion zsh
 
 # Load the remaining interactive plugins after compinit.
 _zsh_cache_eval sheldon-postcompinit-clean sheldon --profile post-compinit source
