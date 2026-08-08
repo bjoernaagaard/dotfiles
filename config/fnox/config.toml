@@ -10,4 +10,5 @@ recipients = ["age1yubikey1qfwe5x48pwvd08z8jd7a2dgp0knrkkut7c46mzt2qse63ymwjj9jv
 type = "bitwarden"
 
 [secrets]
+BW_SESSION= { provider = "age", value = "YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IHBpdi1wMjU2IFdndnAzUSBBdDlPenlEOWxCRHpETlg3NWNHNWdybWhsVm9lQUtxWmg5Mm5uTk50R3dnNgpxMU9ObkkxTzVJVkRSMm5DNERjNnBUMEt0WjM0dWlaOUVNd0lpSUxJcVpFCi0+IDpoLWdyZWFzZSBuKHZHdW8kICdSUWogVEttcXoKWnpJSTZTN1hRNUVqZGdpR2k5VUk5ZzlQYkNWRzhrc0ZJYS9ZMzBOaURKdmhUU0VlUGJEWUEyZjV3bjJsSzh2QQpWNUVZQlEKLS0tIHlhUDFrbUp5TW12b1JsKzJhdWZKS2xTM3haWHhobFZmcDZodzNEeDAyOGcKpHNqKNVvsziBlpUkSC7lFg2PUc6KLnAWxJCO5RvNbKObuZTvprqr9lWjdSfX9OXRILeFUZzOJlxUJbLKrY70BWK7fV/eKvbFFYJKZZJbHRdBiQ1U0Z00gdfhBPxUpURIMVtoZNRVhv3/FHUHm+qmrOBXGbpa5P1/" }
 # BW_SESSION set in Phase 3 via: fnox set BW_SESSION "$(bw unlock --raw)" --provider age
