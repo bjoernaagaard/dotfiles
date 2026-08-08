@@ -1,6 +1,8 @@
-# ~/.config/zsh/options.zsh — history and shell behaviour options
-
-# ── History ─────────────────────────────────────────
+# =============================================================================
+# options.zsh — history and shell options
+# =============================================================================
+#
+# This file contains the history options and the shell behaviour options.
 
 HISTFILE="${XDG_STATE_HOME:-$HOME/.local/state}/zsh/history"
 HISTSIZE=100000
@@ -17,8 +19,6 @@ setopt HIST_FIND_NO_DUPS
 setopt HIST_EXPIRE_DUPS_FIRST
 setopt HIST_FCNTL_LOCK
 setopt SHARE_HISTORY
-
-# ── Shell behaviour ─────────────────────────────────
 
 setopt AUTOCD
 setopt AUTO_PUSHD

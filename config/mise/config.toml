@@ -73,6 +73,7 @@ node = "lts"
 "cargo:pdf-inspector" = "latest"
 "npm:@monotykamary/localterm" = "latest"
 eza = "latest"
+"npm:@firecrawl/anydoc" = "latest"
 
 [dotfiles]
 # mise self-config

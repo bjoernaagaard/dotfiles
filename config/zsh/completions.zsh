@@ -1,10 +1,27 @@
-# ~/.config/zsh/completions.zsh — compinit and completions
+# =============================================================================
+# completions.zsh — completion setup
+# =============================================================================
+#
+# Build the dump again when a completion source changed. An old dump
+# prevents new completions from being loaded for up to 24 h.
+#
+# zoxide init runs in tools.zsh before compinit. Therefore, zoxide's
+# completion is not registered. Register z after compinit.
+#
+# Generated completions: each tool prints a completion script.
+# _zsh_cache_eval caches the script for 24 h and sources it after compinit.
+# Cache keys must be unique. The key fnox-completions does not interfere
+# with the fnox key in tools.zsh.
+#
+# bw's script does not register the completion. Register _bw explicitly.
+#
+# Static completion files: _sheldon, _ya, and _yazi register themselves
+# when loaded. _bat, _fd, _rg, _fastfetch, _eza, and _localterm load from
+# fpath through compinit. No extra configuration is needed.
 
 autoload -Uz compinit
 local zcompdump="$XDG_CACHE_HOME/zsh/zcompdump-carapace"
 mkdir -p "${zcompdump:h}"
-# Rebuild the dump when a completion source changed; compinit -C would
-# otherwise reuse a stale dump for up to 24 h and hide new completions.
 if [[ ! -f "$zcompdump" ]] || [[ -n "$zcompdump"(#qN.mh+24) ]] \
    || [[ ~/.config/zsh/completions -nt "$zcompdump" ]] \
    || [[ /opt/homebrew/share/zsh/site-functions -nt "$zcompdump" ]]; then
@@ -13,20 +30,7 @@ else
   compinit -C -d "$zcompdump"
 fi
 
-# ── zoxide ──────────────────────────────────────────
-# zoxide init zsh (tools.zsh) registers its compdef only if compdef already
-# exists. It runs before compinit, so registration was silently skipped.
-# Register here, after compinit. The guard keeps this harmless if a future
-# zoxide version renames the completion function.
 (( ${+functions[__zoxide_z_complete]} )) && compdef __zoxide_z_complete z
-
-# ── Self-generating completions ──────────────────────
-# Each tool outputs a compdef script on stdout. _zsh_cache_eval caches the
-# output (24h) and sources it after compinit so compdef registers the function.
-# Cache keys must be unique — a collision between tools.zsh ("fnox" for
-# activate) and here ("fnox" for completion) caused the completion to never
-# be generated because tools.zsh wins the race and writes the activate script
-# first. The key below is "fnox-completions" to avoid that collision.
 
 _zsh_cache_eval gh gh completion -s zsh
 _zsh_cache_eval glab glab completion -s zsh
@@ -47,34 +51,11 @@ _zsh_cache_eval glow glow completion zsh
 _zsh_cache_eval tailscale tailscale completion zsh
 _zsh_cache_eval fnox-completions fnox completion zsh
 _zsh_cache_eval bw bw completion --shell zsh
-# bw's script defines _bw but does not self-register; _normal's fallback is
-# not reliable here, so register explicitly.
 (( ${+functions[_bw]} )) && compdef _bw bw
 _zsh_cache_eval reasonix reasonix completion zsh
-
-# ── Static completion files ──────────────────────────
-# These 3 files ship in mise installs with no `completion` subcommand. They
-# have an explicit compdef guard at the bottom, so sourcing them registers
-# the function immediately — no fpath needed.
-#
-#   _sheldon   ← sheldon/<ver>/completions/sheldon.zsh
-#   _ya        ← yazi/<ver>/completions/_ya
-#   _yazi      ← yazi/<ver>/completions/_yazi
 
 [[ -f ~/.config/zsh/completions/_sheldon ]] && source ~/.config/zsh/completions/_sheldon
 [[ -f ~/.config/zsh/completions/_ya ]] && source ~/.config/zsh/completions/_ya
 [[ -f ~/.config/zsh/completions/_yazi ]] && source ~/.config/zsh/completions/_yazi
 
-# _bat, _fastfetch, _fd, and _rg also lack a `completion` subcommand, but
-# their files use the old-style #compdef tag (no explicit compdef guard) and
-# auto-execute at the bottom when sourced. They rely on compinit discovering
-# them via fpath (plugins.zsh adds ~/.config/zsh/completions to fpath). The
-# compinit dump includes them — no extra config needed.
-#
-#   _bat       ← bat/<ver>/.../autocomplete/bat.zsh
-#   _fastfetch ← fastfetch/<ver>/.../share/zsh/site-functions/_fastfetch
-#   _fd        ← fd/<ver>/.../autocomplete/_fd
-#   _rg        ← rg/<ver>/.../complete/_rg
-
-# ── Sheldon post-compinit plugins ────────────────────
 _zsh_cache_eval sheldon-postcompinit-clean sheldon --profile post-compinit source

@@ -1,13 +1,15 @@
-# ~/.config/zsh/keybindings.zsh — interactive keybindings
+# =============================================================================
+# keybindings.zsh — interactive keybindings
+# =============================================================================
+#
+# The up/down arrow keys use the zsh-history-substring-search widget.
+#
+# zsh 5.9 removes the ESC[1 prefix of modified cursor keys. Because of this,
+# bind the full sequences so that zle recognizes them.
 
-# zsh-history-substring-search
 bindkey '^[[A' history-substring-search-up
 bindkey '^[[B' history-substring-search-down
 
-# zsh 5.9's line editor mangles modified cursor-key sequences:
-# Shift+Arrow sends ^[[1;2X, Ctrl+Arrow sends ^[[1;5X - zle eats the
-# leading ESC[1 and types the tail (e.g. ";2D") as literal text.
-# Binding the full sequences makes zle recognize them.
 bindkey '^[[1;2A' history-substring-search-up
 bindkey '^[[1;2B' history-substring-search-down
 bindkey '^[[1;2C' forward-char
