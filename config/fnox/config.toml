@@ -1,14 +1,15 @@
+#:schema https://fnox.jdx.dev/schema.json
+
 [daemon]
 enabled = true
 idle_timeout = "8h"
 
-[providers.age]
-type = "age"
-recipients = ["age1yubikey1qfwe5x48pwvd08z8jd7a2dgp0knrkkut7c46mzt2qse63ymwjj9jv2675dj"]
-
-[providers.bitwarden]
-type = "bitwarden"
+[providers]
+bitwarden = { type = "bitwarden" }
+age = { type = "age", recipients = [
+  "age1yubikey1qfwe5x48pwvd08z8jd7a2dgp0knrkkut7c46mzt2qse63ymwjj9jv2675dj"
+] }
 
 [secrets]
-BW_SESSION= { provider = "age", value = "YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IHBpdi1wMjU2IFdndnAzUSBBdDlPenlEOWxCRHpETlg3NWNHNWdybWhsVm9lQUtxWmg5Mm5uTk50R3dnNgpxMU9ObkkxTzVJVkRSMm5DNERjNnBUMEt0WjM0dWlaOUVNd0lpSUxJcVpFCi0+IDpoLWdyZWFzZSBuKHZHdW8kICdSUWogVEttcXoKWnpJSTZTN1hRNUVqZGdpR2k5VUk5ZzlQYkNWRzhrc0ZJYS9ZMzBOaURKdmhUU0VlUGJEWUEyZjV3bjJsSzh2QQpWNUVZQlEKLS0tIHlhUDFrbUp5TW12b1JsKzJhdWZKS2xTM3haWHhobFZmcDZodzNEeDAyOGcKpHNqKNVvsziBlpUkSC7lFg2PUc6KLnAWxJCO5RvNbKObuZTvprqr9lWjdSfX9OXRILeFUZzOJlxUJbLKrY70BWK7fV/eKvbFFYJKZZJbHRdBiQ1U0Z00gdfhBPxUpURIMVtoZNRVhv3/FHUHm+qmrOBXGbpa5P1/" }
+BW_SESSION = { provider = "age", value = "YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IHBpdi1wMjU2IFdndnAzUSBBd214R1ZYbS9vZnFtcjF0aGFmWnh6Y2xHcGlNcmJmU0JIdlN5MTEySEcvOQpoOTgvcnlMbkoreTVwbkxGeWlNRjF4Q2xXeVMvNDFoeHZLbEVVTG80UzJnCi0+IHo4SzFqSS1ncmVhc2UgTStjIFpPLE0gQ0AKWWFmVEZIdDV2aXM0NGx2M1puY05uTTBueUI5UU14NmhyNUR6Q1lzRURMSmhkZENrL1VNMW4yVy9pN3JhNUNTOQp1MmhZc3NHaGQwbUwrVTcvZWRIb0d5UGk5V05tQ3EzWmVidVlyT2sKLS0tIFJrQlF6VmlOTmJlbW82TENCRytOeENaUjVWMEdrek0xUWcrT3FWT1gycXMKKDAJTXGiiVLibImH3OYZKau3ZT9dJqWX4VCYoWEXrT/UqljOQ9/a/kf3d9nb4k2UagtII81cpf9HEpct7DFYivRuBnbkRgtlWLG30tq4jajKxGybUxpAm356e3i5pevC0Yh6/d77A7xzMhVhuvEq707Kv5UOLT5C" }
 # BW_SESSION set in Phase 3 via: fnox set BW_SESSION "$(bw unlock --raw)" --provider age

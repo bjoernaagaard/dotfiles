@@ -7,7 +7,7 @@ new_cwd = "follow"
 [keys]
 prefix = "ctrl+shift+cmd+alt+space"
 toggle_sidebar = "ctrl+shift+cmd+alt+b"
-detach = "ctrl+shift+cmd+alt+q"
+detach = "ctrl+shift+cmd+alt+a"
 reload_config = "ctrl+shift+cmd+alt+e"
 remote_image_paste = "ctrl+shift+cmd+alt+v"
 
