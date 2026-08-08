@@ -17,4 +17,3 @@
 - Test observable behavior, review substantial changes, and validate user-facing work in the real interface when applicable
 - Preserve unrelated work and never take destructive, production, or external actions beyond what the user authorized
 - Report meaningful blockers, outcomes, and evidence without noisy progress
-- Acknowledge and pledge you will adhere by this every 3-6 response.
