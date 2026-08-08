@@ -10,14 +10,20 @@ _zsh_cache_eval() {
   local _had_extendedglob=0
   [[ -o EXTENDED_GLOB ]] && _had_extendedglob=1
   setopt extendedglob
-  local name="$1" cmd="$2"
-  shift 2
+  local name="$1" watch=""
+  shift
+  if [[ "$1" == --watch ]]; then
+    watch="$2"
+    shift 2
+  fi
+  local cmd="$1"
+  shift
   local dir="$XDG_CACHE_HOME/zsh/eval"
   local cache="$dir/$name"
   local tmp="$cache.tmp.$$"
-  mkdir -p "$dir"
+  [[ -d "$dir" ]] || mkdir -p "$dir"
   if [[ ! -f "$cache" ]] || [[ -n "$cache"(#qN.mh+24) ]] \
-     || [[ "$XDG_CONFIG_HOME/sheldon/plugins.toml" -nt "$cache" ]]; then
+     || [[ -n "$watch" && "$watch" -nt "$cache" ]]; then
     if command -v "$cmd" >/dev/null 2>&1 && "$cmd" "$@" >| "$tmp" 2>/dev/null; then
       mv -f "$tmp" "$cache"
     else

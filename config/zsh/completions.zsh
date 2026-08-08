@@ -58,4 +58,4 @@ _zsh_cache_eval reasonix reasonix completion zsh
 [[ -f ~/.config/zsh/completions/_ya ]] && source ~/.config/zsh/completions/_ya
 [[ -f ~/.config/zsh/completions/_yazi ]] && source ~/.config/zsh/completions/_yazi
 
-_zsh_cache_eval sheldon-postcompinit-clean sheldon --profile post-compinit source
+_zsh_cache_eval sheldon-postcompinit-clean --watch "$XDG_CONFIG_HOME/sheldon/plugins.toml" sheldon --profile post-compinit source

@@ -4,7 +4,6 @@ add_newline = true
 
 format = """\
 $directory\
-$mise\
 $git_branch\
 $git_status\
 $hostname\
