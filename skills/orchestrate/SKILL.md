@@ -41,9 +41,9 @@ Integrate completed evidence and change sets. Resolve conflicts. Record disagree
 
 ## 5. Prove
 
-Verify the integrated state, not only worker reports. Run the checks that demonstrate the original outcome. Present decisions that require user approval to the user. Report residual gaps or risks.
+Verify the user workflow in the target environment with real data and required providers. Tests, mocks, and worker reports are not final proof. If required access, authentication, or verification is unavailable, stop and tell the user.
 
-**Done:** the requested outcome is covered by current evidence and every unresolved gap is disclosed.
+**Done:** the real workflow succeeds, or missing access is reported as a blocker.
 
 ## Runtime adapter
 
