@@ -37,3 +37,8 @@ profiles = ["post-compinit"]
 [plugins.fast-syntax-highlighting]
 github = "zdharma-continuum/fast-syntax-highlighting"
 profiles = ["post-compinit"]
+
+# Load last so Shift-modified movement selects text instead of being wrapped.
+[plugins.zsh-shift-select]
+github = "jirutka/zsh-shift-select"
+profiles = ["post-compinit"]
