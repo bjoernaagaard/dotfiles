@@ -40,6 +40,10 @@ export PATH="$HOME/.cache/.bun/bin:$PATH"
 # mise shims (available to interactive and non-interactive shells)
 _zsh_cache_eval mise ~/.local/bin/mise activate zsh --shims
 
+# ~/.local/bin must stay ahead of mise shims — wrappers like
+# age-plugin-yubikey (locale guard) need to win over mise's symlink.
+export PATH="$HOME/.local/bin:$PATH"
+
 # grok CLI (available to interactive and non-interactive shells)
 export PATH="$HOME/.grok/bin:$PATH"
 

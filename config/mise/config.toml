@@ -12,6 +12,13 @@ login_shell = "/bin/zsh"
 
 [bootstrap.packages]
 
+[env]
+# age-plugin-yubikey panics without these — mise injects them into every
+# shim invocation so subprocesses (fnox → rage → age-plugin-yubikey)
+# inherit them through the process tree.
+LANG = "en_US.UTF-8"
+LC_ALL = "en_US.UTF-8"
+
 [tools]
 bat = "latest"
 fzf = "latest"
