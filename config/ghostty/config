@@ -3,7 +3,7 @@ font-family = Maple Mono NF
 font-size = 14
 theme = Cursor Dark
 
-keybind = cmd+shift+period=reload_config
+keybind = cmd+shift+comma=reload_config
 
 keybind = alt+backspace=text:\x1b\x7f
 keybind = alt+¨=text:\x7e

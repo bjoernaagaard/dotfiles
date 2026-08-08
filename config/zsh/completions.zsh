@@ -9,6 +9,13 @@ else
   compinit -C -d "$zcompdump"
 fi
 
+# ── zoxide ──────────────────────────────────────────
+# zoxide init zsh (tools.zsh) registers its compdef only if compdef already
+# exists. It runs before compinit, so registration was silently skipped.
+# Register here, after compinit. The guard keeps this harmless if a future
+# zoxide version renames the completion function.
+(( ${+functions[__zoxide_z_complete]} )) && compdef __zoxide_z_complete z
+
 # ── Self-generating completions ──────────────────────
 # Each tool outputs a compdef script on stdout. _zsh_cache_eval caches the
 # output (24h) and sources it after compinit so compdef registers the function.
