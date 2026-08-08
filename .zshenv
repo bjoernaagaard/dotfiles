@@ -49,3 +49,5 @@ export FNOX_AGE_KEY_FILE="$HOME/.local/state/fnox/yubikey-yk-usb-a.identity"
 export UV_VENV_CLEAR=1
 export HOMEBREW_NO_ENV_HINTS=1
 export HOMEBREW_NO_INSTALL_CLEANUP=0
+
+[ -f "$HOME/.zshenv.private" ] && source "$HOME/.zshenv.private"

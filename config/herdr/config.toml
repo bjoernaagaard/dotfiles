@@ -11,22 +11,22 @@ detach = "ctrl+q"
 reload_config = "ctrl+e"
 remote_image_paste = "ctrl+v"
 
-focus_pane_left = ["ctrl+left"]
-focus_pane_down = ["ctrl+down"]
-focus_pane_up = ["ctrl+up"]
-focus_pane_right = ["ctrl+right"]
+focus_pane_left = "ctrl+left"
+focus_pane_down = "ctrl+down"
+focus_pane_up = "ctrl+up"
+focus_pane_right = "ctrl+right"
 
-split_vertical = ["ctrl+d"]
-split_horizontal = ["ctrl+c"]
-close_pane = ["ctrl+x"]
+split_vertical = "ctrl+d"
+split_horizontal = "ctrl+c"
+close_pane = "ctrl+x"
 resize_mode = "ctrl+r"
 
-new_tab = ["ctrl+t"]
-previous_tab = ["ctrl+comma"]
-next_tab = ["ctrl+period"]
-close_tab = ["ctrl+w"]
+new_tab = "ctrl+t"
+previous_tab = "ctrl+comma"
+next_tab = "ctrl+period"
+close_tab = "ctrl+w"
 
-last_pane = ["prefix+tab"]
+last_pane = "prefix+tab"
 
 [ui]
 prompt_new_tab_name = false
