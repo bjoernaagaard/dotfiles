@@ -3,26 +3,35 @@
 # =============================================================================
 #
 # Build the dump again when a completion source changed. An old dump
-# prevents new completions from being loaded for up to 24 h.
+# prevents new completions from being loaded for up to 24 h. The variable
+# ZSH_FORCE_REFRESH=1 forces a rebuild. The background refresher uses it.
 #
 # zoxide init runs in tools.zsh before compinit. Therefore, zoxide's
 # completion is not registered. Register z after compinit.
 #
 # Generated completions: each tool prints a completion script.
-# _zsh_cache_eval caches the script for 24 h and sources it after compinit.
-# Cache keys must be unique. The key fnox-completions does not interfere
-# with the fnox key in tools.zsh.
+# _zsh_cache_eval caches the script for 24 h and sources it after
+# compinit. Cache keys must be unique. The key fnox-completions does not
+# conflict with the fnox key in tools.zsh.
 #
 # bw's script does not register the completion. Register _bw explicitly.
 #
 # Static completion files: _sheldon, _ya, and _yazi register themselves
 # when loaded. _bat, _fd, _rg, _fastfetch, _eza, and _localterm load from
 # fpath through compinit. No extra configuration is needed.
+#
+# Plugin compilation
+# ------------------
+# The background refresh (ZSH_FORCE_REFRESH=1) compiles the sourced
+# plugin files again. The source command then loads their compiled
+# variants (.zwc). zsh ignores a compiled variant that is out of date.
+# A plugin update falls back to the plain file until the next refresh.
 
 autoload -Uz compinit
 local zcompdump="$XDG_CACHE_HOME/zsh/zcompdump-carapace"
 mkdir -p "${zcompdump:h}"
-if [[ ! -f "$zcompdump" ]] || [[ -n "$zcompdump"(#qN.mh+24) ]] \
+if [[ ! -f "$zcompdump" ]] || [[ -n "$ZSH_FORCE_REFRESH" ]] \
+   || [[ -n "$zcompdump"(#qN.mh+24) ]] \
    || [[ ~/.config/zsh/completions -nt "$zcompdump" ]] \
    || [[ /opt/homebrew/share/zsh/site-functions -nt "$zcompdump" ]]; then
   compinit -d "$zcompdump"
@@ -59,3 +68,10 @@ _zsh_cache_eval reasonix reasonix completion zsh
 [[ -f ~/.config/zsh/completions/_yazi ]] && source ~/.config/zsh/completions/_yazi
 
 _zsh_cache_eval sheldon-postcompinit-clean --watch "$XDG_CONFIG_HOME/sheldon/plugins.toml" sheldon --profile post-compinit source
+
+if [[ -n "$ZSH_FORCE_REFRESH" ]]; then
+  for _f in ~/.local/share/sheldon/repos/github.com/*/*/*.zsh(N); do
+    [[ -f "$_f.zwc" && "$_f.zwc" -nt "$_f" ]] || zcompile "$_f" 2>/dev/null
+  done
+  unset _f
+fi

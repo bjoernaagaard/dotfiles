@@ -5,7 +5,7 @@
 # The up/down arrow keys use the zsh-history-substring-search widget.
 # zsh-shift-select owns Shift-modified movement keys.
 #
-# zsh 5.9 removes the ESC[1 prefix of modified cursor keys. Because of this,
+# zsh 5.9 removes the ESC[1 prefix of modified cursor keys. Therefore,
 # bind the full sequences so that zle recognizes them.
 
 bindkey '^[[A' history-substring-search-up

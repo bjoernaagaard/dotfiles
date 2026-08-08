@@ -1,12 +1,46 @@
 # ~/.zshenv — runs for EVERY shell (interactive + non-interactive)
+#
+# Cache and evaluation
+# --------------------
+# The function _zsh_cache_eval caches the output of static eval commands,
+# for example: eval "$(brew shellenv)". The function sources the cached
+# file instead of running the command. Shell startup remains fast and the
+# tool maintains its behavior.
+# - Refresh the cache every 24 hours. Refresh also when the cache file is
+#   missing.
+# - Set ZSH_FORCE_REFRESH=1 to force a refresh. The background refresher
+#   uses this variable.
+# - Compile the cache with zcompile after generation. The source command
+#   loads the compiled file (.zwc) when it is newer. A compiled file
+#   loads faster.
+# - An old cache file is still useful. When the cache is old, do not
+#   remove the file. Refresh it in the background. The next shell uses
+#   the new file. Only one refresher runs at a time. The lock file is
+#   .refreshing. A lock older than 10 minutes comes from a stopped
+#   refresher; replace it.
+# - Glob qualifiers need EXTENDED_GLOB. Do not use localoptions: it would
+#   undo option changes made by sourced files, for example starship's
+#   setopt promptsubst. Save and restore EXTENDED_GLOB manually so that
+#   option changes from sourced files remain.
+#
+# PATH order
+# ----------
+# ~/.local/bin remains ahead of mise shims. Wrappers such as
+# age-plugin-yubikey (locale guard) must win over the mise symlink.
+# These directories are available to interactive and non-interactive
+# shells: mise shims, grok CLI, dory CLI (docker shims and Dory helpers),
+# and bb CLI. The bb CLI is part of the bb.app desktop application. The
+# guard does not change PATH when the application is absent.
+#
+# Environment
+# -----------
+# - Locale guard: age-plugin-yubikey panics without LANG/LC_ALL.
+# - SSH agent: the Bitwarden desktop agent serves keys from the vault,
+#   not from disk.
+# - FNOX and Homebrew environment variables.
+# - Source ~/.zshenv.private when it exists.
 
-# Cache the output of static `eval "$(cmd ...)"` invocations and source the
-# cached file. Refresh every 24 hours or when the cache is missing so shell
-# startup stays fast without losing the tool's behaviour.
 _zsh_cache_eval() {
-  # Glob qualifiers need EXTENDED_GLOB, but `localoptions` would undo option
-  # changes made by the files we source (e.g., starship's `setopt promptsubst`).
-  # Save/restore only EXTENDED_GLOB manually so sourced side-effects persist.
   local _had_extendedglob=0
   [[ -o EXTENDED_GLOB ]] && _had_extendedglob=1
   setopt extendedglob
@@ -22,10 +56,23 @@ _zsh_cache_eval() {
   local cache="$dir/$name"
   local tmp="$cache.tmp.$$"
   [[ -d "$dir" ]] || mkdir -p "$dir"
-  if [[ ! -f "$cache" ]] || [[ -n "$cache"(#qN.mh+24) ]] \
-     || [[ -n "$watch" && "$watch" -nt "$cache" ]]; then
+  local refresh=0
+  if [[ ! -f "$cache" ]] || [[ -n "$ZSH_FORCE_REFRESH" ]]; then
+    refresh=1
+  elif [[ -n "$cache"(#qN.mh+24) ]] \
+       || [[ -n "$watch" && "$watch" -nt "$cache" ]]; then
+    refresh=2
+  fi
+  if [[ $refresh -eq 2 ]]; then
+    local lock="$dir/.refreshing"
+    if mkdir "$lock" 2>/dev/null || [[ -n "$lock"(#qN.mh+10) ]]; then
+      ( ZSH_FORCE_REFRESH=1 zsh -i -c exit >/dev/null 2>&1; rmdir "$lock" 2>/dev/null ) &!
+    fi
+  elif [[ $refresh -eq 1 ]]; then
     if command -v "$cmd" >/dev/null 2>&1 && "$cmd" "$@" >| "$tmp" 2>/dev/null; then
       mv -f "$tmp" "$cache"
+      zcompile "$cache" 2>/dev/null
+      rm -f "$tmp"
     else
       rm -f "$tmp"
     fi
@@ -43,20 +90,14 @@ _zsh_cache_eval brew /opt/homebrew/bin/brew shellenv
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/.cache/.bun/bin:$PATH"
 
-# mise shims (available to interactive and non-interactive shells)
 _zsh_cache_eval mise ~/.local/bin/mise activate zsh --shims
 
-# ~/.local/bin must stay ahead of mise shims — wrappers like
-# age-plugin-yubikey (locale guard) need to win over mise's symlink.
 export PATH="$HOME/.local/bin:$PATH"
 
-# grok CLI (available to interactive and non-interactive shells)
 export PATH="$HOME/.grok/bin:$PATH"
 
-# dory CLI — docker shims and Dory helpers (available to interactive and non-interactive shells)
 export PATH="$HOME/.dory/bin:$PATH"
 
-# bb CLI (bundled with the bb.app desktop app; guard keeps this harmless without the app)
 BB_CLI_BIN="/Applications/bb.app/Contents/Resources/app.asar.unpacked/node_modules/bb-app/host-daemon/dist"
 if [[ -x "$BB_CLI_BIN/bb" ]]; then
   case ":$PATH:" in
@@ -65,11 +106,9 @@ if [[ -x "$BB_CLI_BIN/bb" ]]; then
   esac
 fi
 
-# Locale guard — age-plugin-yubikey panics without LANG/LC_ALL
 export LANG="${LANG:-en_US.UTF-8}"
 export LC_ALL="${LC_ALL:-en_US.UTF-8}"
 
-# Bitwarden desktop SSH agent — keys served from vault, not disk
 export SSH_AUTH_SOCK="$HOME/.bitwarden-ssh-agent.sock"
 
 export FNOX_PROFILE="default"

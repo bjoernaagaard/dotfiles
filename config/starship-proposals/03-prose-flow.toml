@@ -1,0 +1,116 @@
+# Proposal 03 — Prose Flow
+# A contextual sentence on the first line and a quiet input marker below it.
+
+"$schema" = "https://starship.rs/config-schema.json"
+
+add_newline = true
+palette = "prose"
+
+format = """\
+$directory\
+$git_branch\
+$git_commit\
+$git_state\
+$git_status\
+$username\
+$hostname\
+$cmd_duration\
+$python\
+$jobs\
+$status
+$character"""
+
+right_format = "$time"
+
+[palettes.prose]
+text = "#d4d4d4"
+path = "#87a6c4"
+vcs = "#88c0d0"
+attention = "#f1b467"
+error = "#fc6b83"
+env = "#b48ead"
+success = "#70b489"
+muted = "#8f969e"
+
+[directory]
+format = "at [$path](fg:path)[$read_only]($read_only_style)"
+truncation_length = 2
+truncation_symbol = "…/"
+truncate_to_repo = true
+read_only = " (read only)"
+read_only_style = "fg:error"
+
+[git_branch]
+format = " on [$branch](fg:vcs)"
+symbol = ""
+truncation_length = 32
+truncation_symbol = "…"
+only_attached = true
+
+[git_commit]
+format = " on detached [$hash](fg:vcs)"
+only_detached = true
+commit_hash_length = 7
+
+[git_state]
+format = ", [$state( $progress_current/$progress_total)](fg:attention)"
+
+[git_status]
+format = "[$conflicted](fg:error)[$staged$modified$untracked$renamed$deleted$stashed$ahead_behind](fg:vcs)"
+conflicted = ", $count conflicts"
+staged = ", $count staged"
+modified = ", $count modified"
+untracked = ", $count untracked"
+renamed = ", $count renamed"
+deleted = ", $count deleted"
+stashed = ", $count stashed"
+ahead = ", $count ahead"
+behind = ", $count behind"
+diverged = ", diverged $ahead_count ahead and $behind_count behind"
+up_to_date = ""
+
+[username]
+show_always = false
+format = " as [$user]($style)"
+style_user = "fg:attention"
+style_root = "fg:error"
+
+[hostname]
+ssh_only = true
+format = "[@$hostname](fg:attention)"
+ssh_symbol = ""
+trim_at = "."
+
+[cmd_duration]
+format = ", took [$duration](fg:attention)"
+min_time = 2000
+show_milliseconds = false
+
+[python]
+format = " via [$virtualenv](fg:env)"
+detect_extensions = []
+detect_files = []
+detect_folders = []
+detect_env_vars = ["VIRTUAL_ENV"]
+python_binary = [["mise", "exec", "--", "python"]]
+
+[jobs]
+threshold = 1
+format = " with [$number jobs](fg:attention)"
+
+[status]
+disabled = false
+format = ", exited [$status](fg:error)"
+symbol = ""
+success_symbol = ""
+map_symbol = false
+recognize_signal_code = true
+
+[character]
+success_symbol = "[>](fg:success)"
+error_symbol = "[>](fg:error)"
+
+[time]
+disabled = false
+format = "[$time](fg:muted)"
+time_format = "%H:%M"

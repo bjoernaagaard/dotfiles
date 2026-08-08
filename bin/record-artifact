@@ -1,20 +1,25 @@
 #!/usr/bin/env bash
-# record-artifact — capture terminal artifacts without manual fiddling.
+# record-artifact — record terminal artifacts.
 #
-#   record-artifact video [seconds]   Pixel-level screen recording → .mp4.
-#                                     Reproduce the artifact anywhere on screen, then:
-#                                       - press Ctrl+C here to stop (plain terminals), or
-#                                       - pass a fixed [seconds] duration (safer inside
-#                                         herdr panes, where ctrl+c may be bound to
-#                                         split_horizontal and never reach this shell).
-#   record-artifact tty [name]        Byte-level recording of THIS shell: every key/escape
-#                                     sequence typed and every byte of output, with timing
-#                                     → .typescript. Reproduce the artifact in this shell,
-#                                     then stop with: exit
-#   record-artifact replay <file>     Replay a .typescript in real time; opens an .mp4.
-#   record-artifact list              List saved recordings.
+# Usage:
+#   record-artifact video [seconds]   Record the screen to an .mp4 file.
+#                                     Reproduce the artifact on screen.
+#                                     Stop with Ctrl+C (plain terminals).
+#                                     Use a fixed duration inside herdr
+#                                     panes, where Ctrl+C can split the
+#                                     pane instead of stopping.
+#   record-artifact tty [name]        Record this shell (keys and output
+#                                     bytes, with timing) to a
+#                                     .typescript file. Reproduce the
+#                                     artifact in this shell. Stop with:
+#                                     exit
+#   record-artifact replay <file>     Replay a .typescript file in real
+#                                     time. An .mp4 file opens in the
+#                                     default viewer.
+#   record-artifact list              List the saved recordings.
 #
 # Storage: $ARTIFACT_DIR (default: ~/terminal-artifacts)
+#
 set -uo pipefail
 
 DIR="${ARTIFACT_DIR:-$HOME/terminal-artifacts}"
@@ -57,7 +62,7 @@ case "${1:-help}" in
     ls -lht "$DIR"
     ;;
   *)
-    sed -n '2,22p' "$0"
+    sed -n '2,21p' "$0"
     exit 2
     ;;
 esac

@@ -2,7 +2,7 @@
 # options.zsh — history and shell options
 # =============================================================================
 #
-# This file contains the history options and the shell behaviour options.
+# This file contains the history options and the shell behavior options.
 
 HISTFILE="${XDG_STATE_HOME:-$HOME/.local/state}/zsh/history"
 HISTSIZE=100000
