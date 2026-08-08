@@ -1,10 +1,13 @@
-[providers.bitwarden]
-type = "bitwarden"
+[daemon]
+enabled = true
+idle_timeout = "8h"
 
 [providers.age]
 type = "age"
-recipients = [
-  "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOBc1KWo4iBvD7dDrDGSfs6Y8JDfJjiy0Urh6xp+bg80 aagaardbs@gmail.com",
-]
+recipients = ["age1yubikey1qfwe5x48pwvd08z8jd7a2dgp0knrkkut7c46mzt2qse63ymwjj9jv2675dj"]
+
+[providers.bitwarden]
+type = "bitwarden"
 
 [secrets]
+# BW_SESSION set in Phase 3 via: fnox set BW_SESSION "$(bw unlock --raw)" --provider age

@@ -55,9 +55,13 @@ if [[ -x "$BB_CLI_BIN/bb" ]]; then
   esac
 fi
 
+# Locale guard — age-plugin-yubikey panics without LANG/LC_ALL
+export LANG="${LANG:-en_US.UTF-8}"
+export LC_ALL="${LC_ALL:-en_US.UTF-8}"
+
 export FNOX_PROFILE="default"
 export FNOX_SHELL_OUTPUT=none
-export FNOX_AGE_KEY_FILE="$HOME/.local/state/fnox/yubikey-yk-usb-a.identity"
+export FNOX_AGE_KEY_FILE="$HOME/.local/state/fnox/yubikey.identity"
 export UV_VENV_CLEAR=1
 export HOMEBREW_NO_ENV_HINTS=1
 export HOMEBREW_NO_INSTALL_CLEANUP=0
