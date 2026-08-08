@@ -1,11 +1,11 @@
 # Shared SSH routing managed by mise.
-# Private keys, resident credentials, and machine-specific overrides stay out
-# of the repository.
+# Private keys and machine-specific overrides stay out of the repository.
+# SSH keys are served by the Bitwarden desktop SSH agent.
 Include ~/.ssh/config.local
 
+# --- Tailnet hosts ---
 Host ws
   HostName workstation
-  HostKeyAlias 100.101.5.114
   User bsaa
   ForwardX11 yes
 
@@ -15,12 +15,9 @@ Host router
 
 Host nas
   HostName dunewest
-  HostKeyAlias 192.168.1.209
   User bsaa
 
+# --- Defaults ---
 Host *
-  AddKeysToAgent yes
-  IdentityFile ~/.ssh/id_ed25519
-  IdentitiesOnly yes
   ServerAliveInterval 60
   ServerAliveCountMax 5

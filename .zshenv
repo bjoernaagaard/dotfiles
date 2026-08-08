@@ -63,6 +63,9 @@ fi
 export LANG="${LANG:-en_US.UTF-8}"
 export LC_ALL="${LC_ALL:-en_US.UTF-8}"
 
+# Bitwarden desktop SSH agent — keys served from vault, not disk
+export SSH_AUTH_SOCK="$HOME/.bitwarden-ssh-agent.sock"
+
 export FNOX_PROFILE="default"
 export FNOX_SHELL_OUTPUT=none
 export FNOX_AGE_KEY_FILE="$HOME/.local/state/fnox/yubikey.identity"
