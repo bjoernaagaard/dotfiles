@@ -72,6 +72,7 @@ protobuf = "latest"
 lua = "latest"
 node = "lts"
 "cargo:pdf-inspector" = "latest"
+"npm:@monotykamary/localterm" = "latest"
 
 [dotfiles]
 # mise self-config

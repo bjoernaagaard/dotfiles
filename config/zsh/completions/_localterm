@@ -1,0 +1,24 @@
+#compdef localterm
+local candidates=""
+local port; port=$(cat "${HOME}/.localterm/server.port" 2>/dev/null)
+if [[ -n $port ]]; then
+  local host; host=$(cat "${HOME}/.localterm/server.host" 2>/dev/null)
+  host=${host:-127.0.0.1}
+  local -a args=()
+  local w
+  for w in "${words[@]}"; do args+=(--data-urlencode "argv=$w"); done
+  local curlStatus
+  candidates=$(curl -fs -G --max-time 0.3 "http://${host}:${port}/api/completion" "${args[@]}" 2>/dev/null)
+  curlStatus=$?
+  if [[ $curlStatus -ne 0 ]]; then
+    candidates=$(localterm _completion -- "${words[@]}" 2>/dev/null)
+  fi
+else
+  candidates=$(localterm _completion -- "${words[@]}" 2>/dev/null)
+fi
+if [[ -n $candidates ]]; then
+  compadd -- ${(f)candidates}
+else
+  _files
+fi
+return 0
