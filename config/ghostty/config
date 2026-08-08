@@ -1,30 +1,35 @@
 auto-update-channel = tip
-
 font-family = Maple Mono NF
 font-size = 14
-theme = Material Design Colors
+theme = Cursor Dark
+
+keybind = cmd+shift+period=reload_config
+
 keybind = alt+backspace=text:\x1b\x7f
 keybind = alt+¨=text:\x7e
 keybind = alt+BracketRight=text:\x7e
 keybind = alt+'=text:\x40
 keybind = alt+Quote=text:\x40
 
-# Herdr-mirror bindings
-keybind = ctrl+shift+super+alt+b=toggle_command_palette
-keybind = ctrl+shift+super+alt+d=new_split:right
-keybind = ctrl+shift+super+alt+c=new_split:down
-keybind = ctrl+shift+super+alt+left=goto_split:left
-keybind = ctrl+shift+super+alt+down=goto_split:down
-keybind = ctrl+shift+super+alt+up=goto_split:up
-keybind = ctrl+shift+super+alt+right=goto_split:right
-keybind = ctrl+shift+super+alt+x=close_surface
-keybind = ctrl+shift+super+alt+t=new_tab
-keybind = ctrl+shift+super+alt+comma=previous_tab
-keybind = ctrl+shift+super+alt+period=next_tab
-keybind = ctrl+shift+super+alt+w=close_tab:this
-keybind = ctrl+shift+super+alt+tab=goto_split:previous
-keybind = ctrl+shift+super+alt+r=equalize_splits
-keybind = ctrl+shift+super+alt+e=reload_config
+keybind = cmd+shift+p=toggle_command_palette
+keybind = cmd+d=new_split:right
+keybind = cmd+c=new_split:down
+keybind = cmd+x=close_surface
+
+keybind = cmd+left=goto_split:left
+keybind = cmd+down=goto_split:down
+keybind = cmd+up=goto_split:up
+keybind = cmd+right=goto_split:right
+keybind = cmd+r=equalize_splits
+
+keybind = cmd+t=new_tab
+keybind = cmd+w=close_tab:this
+keybind = cmd+tab=next_tab
+keybind = cmd+shift+tab=previous_tab
+
+keybind = cmd+shift+enter=toggle_quick_terminal
+
+focus-follows-mouse = true
 
 background-opacity = 0.98
 background-blur = true
@@ -34,6 +39,8 @@ window-padding-balance = true
 window-width = 160
 window-height = 80
 window-decoration = true
+macos-titlebar-style = tabs
+window-save-state = always
 window-step-resize = true
 
 cursor-style = bar
@@ -49,3 +56,4 @@ macos-option-as-alt = true
 
 shell-integration = detect
 shell-integration-features = cursor,no-sudo,title,ssh-env,ssh-terminfo,path
+notify-on-command-finish = unfocused
