@@ -68,11 +68,11 @@ protobuf = "latest"
 "npm:beautiful-mermaid-cli" = "latest"
 "npm:pi-acp" = "latest"
 "npm:vscode-langservers-extracted" = "latest"
-"cargo:eza" = "latest"
 lua = "latest"
 node = "lts"
 "cargo:pdf-inspector" = "latest"
 "npm:@monotykamary/localterm" = "latest"
+eza = "latest"
 
 [dotfiles]
 # mise self-config

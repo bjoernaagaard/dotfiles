@@ -3,7 +3,11 @@
 autoload -Uz compinit
 local zcompdump="$XDG_CACHE_HOME/zsh/zcompdump-carapace"
 mkdir -p "${zcompdump:h}"
-if [[ ! -f "$zcompdump" ]] || [[ -n "$zcompdump"(#qN.mh+24) ]]; then
+# Rebuild the dump when a completion source changed; compinit -C would
+# otherwise reuse a stale dump for up to 24 h and hide new completions.
+if [[ ! -f "$zcompdump" ]] || [[ -n "$zcompdump"(#qN.mh+24) ]] \
+   || [[ ~/.config/zsh/completions -nt "$zcompdump" ]] \
+   || [[ /opt/homebrew/share/zsh/site-functions -nt "$zcompdump" ]]; then
   compinit -d "$zcompdump"
 else
   compinit -C -d "$zcompdump"
@@ -42,6 +46,11 @@ _zsh_cache_eval rclone rclone completion zsh -
 _zsh_cache_eval glow glow completion zsh
 _zsh_cache_eval tailscale tailscale completion zsh
 _zsh_cache_eval fnox-completions fnox completion zsh
+_zsh_cache_eval bw bw completion --shell zsh
+# bw's script defines _bw but does not self-register; _normal's fallback is
+# not reliable here, so register explicitly.
+(( ${+functions[_bw]} )) && compdef _bw bw
+_zsh_cache_eval reasonix reasonix completion zsh
 
 # ── Static completion files ──────────────────────────
 # These 3 files ship in mise installs with no `completion` subcommand. They
