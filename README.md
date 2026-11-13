@@ -1,4 +1,4 @@
-# zsh setup
+# dotfiles
 
 The installer sets up zsh with Prezto, the starship prompt, and a set of command line tools on macOS or Linux. You can run it again at any time to update everything.
 
@@ -7,8 +7,8 @@ The installer sets up zsh with Prezto, the starship prompt, and a set of command
 Clone the repository and run the installer from the clone.
 
 ```sh
-git clone <repository url> ~/zsh-setup
-~/zsh-setup/install.sh
+git clone https://github.com/bjoernaagaard/dotfiles.git ~/dotfiles
+~/dotfiles/install.sh
 exec zsh
 ```
 
