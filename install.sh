@@ -1,4 +1,6 @@
 #!/bin/sh
+# The package lists split on spaces on purpose.
+# shellcheck disable=SC2086
 # Sets up zsh with Prezto, starship, and the command line tools that the config uses.
 # Run it again at any time to update. Each run backs up files it replaces.
 set -eu
@@ -47,7 +49,6 @@ install_mise() {
     curl -fsSL https://mise.run | sh
   fi
   say "Installing $tools"
-  # shellcheck disable=SC2086
   mise use -g --yes $tools
 }
 
