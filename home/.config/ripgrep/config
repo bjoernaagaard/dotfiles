@@ -1,0 +1,3 @@
+# Search dotfiles such as .env.example, but never the .git folder.
+--hidden
+--glob=!.git/
