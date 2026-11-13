@@ -19,5 +19,5 @@ export HOMEBREW_NO_ENV_HINTS=1
 # Ubuntu's /etc/zsh/zshrc runs compinit unless this is set. Prezto's completion module runs it instead.
 skip_global_compinit=1
 
-# Settings for this computer only. The installer never overwrites this file.
-[[ -r "$HOME/.zshenv.local" ]] && source "$HOME/.zshenv.local"
+# Settings for this computer only. The installer only adds to this file, and only when it keeps settings from an old setup.
+[[ -r "${ZDOTDIR:-$HOME}/.zshenv.local" ]] && source "${ZDOTDIR:-$HOME}/.zshenv.local"

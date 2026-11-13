@@ -80,5 +80,5 @@ pwd() {
   fi
 }
 
-# Settings for this computer only. The installer never overwrites this file.
-[[ -r "$HOME/.zshrc.local" ]] && source "$HOME/.zshrc.local"
+# Settings for this computer only. The installer only adds to this file, and only when it keeps settings from an old setup.
+[[ -r "${ZDOTDIR:-$HOME}/.zshrc.local" ]] && source "${ZDOTDIR:-$HOME}/.zshrc.local"
